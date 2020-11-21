@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.core.Ghosts;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -17,7 +18,7 @@ public class GamePresenter implements Presenter {
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         ghostPresenters = new LinkedList<GhostPresenter>();
-        for (Ghost ghost : game.getGhosts()) {
+        for (Ghost ghost : game.getGhostsLeveled()) {
             ghostPresenters.add(new GhostPresenter(ghost));
         }
     }

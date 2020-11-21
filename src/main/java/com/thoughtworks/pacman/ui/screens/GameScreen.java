@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.ui.screens;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.GameRunner;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
@@ -15,6 +16,10 @@ public class GameScreen implements Screen {
 
     public GameScreen() throws Exception {
         this(new Game());
+    }
+
+    public GameScreen(int level) throws Exception {
+        this(new Game(level));
     }
 
     private GameScreen(Game game) {
@@ -39,7 +44,8 @@ public class GameScreen implements Screen {
 
     public Screen getNextScreen() {
         if (game.won()) {
-            return new WinScreen(game);
+            game.LevelUp();
+            return new LevelScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);
         }

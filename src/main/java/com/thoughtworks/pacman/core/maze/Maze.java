@@ -13,6 +13,7 @@ public class Maze {
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
+    private int score;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;

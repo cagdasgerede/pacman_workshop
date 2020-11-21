@@ -4,7 +4,7 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
 public abstract class Actor {
-    private static final int SPEED = 100;
+    private int SPEED = 100;
 
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
@@ -66,5 +66,13 @@ public abstract class Actor {
     private TileCoordinate getNextTile(TileCoordinate currentTile) {
         Direction nextDirection = movementStrategy.getNextDirection(currentTile);
         return currentTile.add(nextDirection.tileDelta());
+    }
+
+    public void SPEEDIncrease() {//each engame level actors speed increases
+        SPEED = SPEED + 20;
+    }
+
+    public void SPEEDIncreaseBy(int endgame) {//each engame level actors speed increases
+        SPEED = SPEED + 20*endgame;
     }
 }

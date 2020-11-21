@@ -12,8 +12,23 @@ public class Ghosts {
     private Ghost clyde;
 
     public Ghosts(Game game) {
-        this(new Ghost(game, GhostType.BLINKY), new Ghost(game, GhostType.PINKY), new Ghost(game, GhostType.INKY),
-                new Ghost(game, GhostType.CLYDE));
+        int level = game.getLevel();
+        if (game.getLevel() <= 7){
+            this.blinky = new Ghost(game, GhostType.BLINKY);
+            this.pinky = new Ghost(game, GhostType.PINKY);
+            this.clyde = new Ghost(game, GhostType.CLYDE);
+            this.inky = new Ghost(game, GhostType.INKY);
+        }else{
+            this.blinky = new Ghost(game, GhostType.BLINKY);
+            this.blinky.SPEEDIncreaseBy(level-7);
+            this.pinky = new Ghost(game, GhostType.PINKY);
+            this.pinky.SPEEDIncreaseBy(level-7);
+            this.clyde = new Ghost(game, GhostType.CLYDE);
+            this.clyde.SPEEDIncreaseBy(level-7);
+            this.inky = new Ghost(game, GhostType.INKY);
+            this.inky.SPEEDIncreaseBy(level-7);
+        }
+
     }
 
     Ghosts(Ghost blinky, Ghost pinky, Ghost inky, Ghost clyde) {
@@ -40,26 +55,54 @@ public class Ghosts {
     }
 
     public void freeGhostsBasedOnScore(int score) {
-        if (blinky.isTrapped()) {
+        if (blinky != null && blinky.isTrapped()) {
             blinky.free();
-        } else if (pinky.isTrapped()) {
+        } else if (pinky != null && pinky.isTrapped()) {
             pinky.free();
-        } else if (inky.isTrapped() && score > 300) {
+        } else if (inky != null && inky.isTrapped() && score > 300) {
             inky.free();
-        } else if (clyde.isTrapped() && score > 600) {
+        } else if (clyde != null && clyde.isTrapped() && score > 600) {
             clyde.free();
         }        
     }
 
+    public void freeGhostsBasedOnScoreAndLevel(int score, int level) {
+        if (blinky != null && blinky.isTrapped()) {
+            blinky.free();
+        } else if (pinky != null && pinky.isTrapped() && level > 2 && score > 150) {
+            pinky.free();
+        } else if (inky != null && inky.isTrapped() && level > 4 && score > 300) {
+            inky.free();
+        } else if (clyde != null && clyde.isTrapped() && level > 6 && score > 600) {
+            clyde.free();
+        }
+    }
+
     public void advance(long timeDeltaInMillis) {
-        blinky.advance(timeDeltaInMillis);
-        pinky.advance(timeDeltaInMillis);
-        inky.advance(timeDeltaInMillis);
-        clyde.advance(timeDeltaInMillis);
+        if (blinky != null){
+            blinky.advance(timeDeltaInMillis);
+        }
+        if (pinky != null) {
+            pinky.advance(timeDeltaInMillis);
+        }
+        if (inky != null) {
+            inky.advance(timeDeltaInMillis);
+        }
+        if (clyde != null) {
+            clyde.advance(timeDeltaInMillis);
+        }
     }
 
     public boolean killed(Pacman pacman) {
-        return pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky)
-                || pacman.collidesWith(clyde);
+        if(blinky != null && pacman.collidesWith(blinky)){
+            return true;
+        }else if(pinky != null && pacman.collidesWith(pinky)){
+            return true;
+        }else if(inky != null && pacman.collidesWith(inky)){
+            return true;
+        }else if(clyde != null && pacman.collidesWith(clyde)){
+            return true;
+        }
+        return false;
     }
 }

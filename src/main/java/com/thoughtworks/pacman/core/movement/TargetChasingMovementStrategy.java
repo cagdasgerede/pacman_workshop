@@ -6,8 +6,7 @@ import com.thoughtworks.pacman.core.maze.Maze;
 
 public class TargetChasingMovementStrategy implements MovementStrategy {
 
-    public TargetChasingMovementStrategy(Maze maze, TargetStrategy targetStrategy) {
-    }
+    public TargetChasingMovementStrategy(Maze maze, TargetStrategy targetStrategy) {}
 
     public Direction getNextDirection(TileCoordinate currentTile) {
         return null;
