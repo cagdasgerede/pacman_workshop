@@ -56,3 +56,4 @@ This implementation was written by Danilo Sato and Mariana Bravo for educational
 ```cd build\libs```
 
 ```java -jar pacman_workshop.jar```
+"test" 
