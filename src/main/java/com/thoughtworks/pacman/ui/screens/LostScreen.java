@@ -135,7 +135,7 @@ public class LostScreen extends JPanel implements Screen {
         return this;
     }
 
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) { //bunlar silinebilir
         startGame = true;
     }
 
