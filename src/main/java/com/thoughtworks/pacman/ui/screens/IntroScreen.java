@@ -10,8 +10,6 @@ import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
@@ -175,42 +173,9 @@ public class IntroScreen extends JPanel implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        startGame = true; //buralari silebilirsin
     }
 
-    
-
-    /*public void mouseClicked(MouseEvent e) {  
-        
-         //if play buttonin clickboxin daysa
-    }  */
-    /*public void mouseEntered(MouseEvent e) {  
-          
-    }  
-    public void mouseExited(MouseEvent e) {  
-         
-    }  */
-    /*public void mouseMoved(MouseEvent e) {
-		if(playClickBox.contains(e.getPoint())){
-            currentStatePLAY = State.HOVER_PLAY;
-		}
-		else{
-			currentStatePLAY = State.RELEASED__PLAY;
-        }
-        
-        if(settingsClickBox.contains(e.getPoint())){
-			currentStateSETTINGS = State.HOVER_SETTINGS;
-		}
-		else{
-			currentStateSETTINGS = State.RELEASED__SETTINGS;
-        }
-        if(exitClickBox.contains(e.getPoint())){
-			currentStateQUIT = State.HOVER_QUIT;
-		}
-		else{
-			currentStateQUIT = State.RELEASED__QUIT;
-		}
-	}*/
 
     private enum State{
 		HOVER_PLAY, RELEASED__PLAY,HOVER_SETTINGS, RELEASED__SETTINGS,HOVER_QUIT, RELEASED__QUIT
