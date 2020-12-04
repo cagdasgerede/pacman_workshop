@@ -9,11 +9,15 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
+
+
+
 import com.thoughtworks.pacman.ui.ImageLoader;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
 import javax.swing.JPanel;
+import javax.swing.text.AttributeSet.ColorAttribute;
 
 
 public class GameScreen extends JPanel implements Screen {
@@ -33,6 +37,14 @@ public class GameScreen extends JPanel implements Screen {
     private State currentStateRESUME = State.RELEASED__RESUME;
     private State currentStateRETURN = State.RELEASED__RETURN;
 
+    private boolean areClickBoxesVisible=false; //visible degil ise pressed kontrollerini yapmasin hic ve yanlislikla main menuya gitme olayi da engellenir
+    private boolean returnIntroScreen = false;
+
+    private int clickCounter =0;
+    private int escapePressedCounter = 0;
+
+    
+
     public GameScreen() throws Exception {
         this(new Game());
     }
@@ -40,7 +52,7 @@ public class GameScreen extends JPanel implements Screen {
     private GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
-    //CLICK COUNT, SCORE, STOP THE GAME ON ESCAPE,
+    // SCORE, STOP THE GAME ON ESCAPE and clicking on the button, resume button click edildiginde doldurulmadi
 
     GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
@@ -56,14 +68,24 @@ public class GameScreen extends JPanel implements Screen {
         resumeClickBox = new Rectangle(170,340,100,30);
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+
+
             @Override
             public void eventDispatched(AWTEvent event) {
                 if (event instanceof MouseEvent) {
                     
                     MouseEvent e = (MouseEvent) event;
-                    if(imageClickBox.contains(e.getPoint()) && e.getClickCount()==1){ //global click count tutatbilirsin dene olmazsa
-                        currentStateSETTINGS = State.SETTINGS_PRESSED; 
-
+              
+                    if(imageClickBox.contains(e.getPoint()) && e.getID()== MouseEvent.MOUSE_CLICKED){
+                        if(clickCounter==0 || clickCounter%2==0) {//ilk defa click ediyo settingse
+                            currentStateSETTINGS = State.SETTINGS_PRESSED;
+                            clickCounter++;
+                            
+                        }else { //click etmis ve acik menu suan
+                            currentStateSETTINGS = State.SETTINGS_GONE;
+                            clickCounter++;
+                            
+                        }
                     }
                     if(returnClickBox.contains(e.getPoint())){
                         currentStateRETURN = State.HOVER_RETURN;
@@ -76,6 +98,12 @@ public class GameScreen extends JPanel implements Screen {
                     }
                     else{
                         currentStateRESUME = State.RELEASED__RESUME;
+                    }
+
+                    if(areClickBoxesVisible && returnClickBox.contains(e.getPoint()) && e.getID()== MouseEvent.MOUSE_CLICKED){
+                        currentStateRETURN = State.HOVER_RETURN;
+                        returnIntroScreen =true;
+
                     }
                     
                 }           
@@ -101,6 +129,7 @@ public class GameScreen extends JPanel implements Screen {
             //graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,  0.8f));
             graphics.setColor(new Color(0, 0, 0,230));
             graphics.fill(settingsBlock);
+            areClickBoxesVisible =true;
             
             if(currentStateRETURN == State.RELEASED__RETURN){
                 graphics.setColor(main);
@@ -138,7 +167,6 @@ public class GameScreen extends JPanel implements Screen {
                 int textHeight = (int) tl.getBounds().getHeight();
                 graphics.drawString("RESUME",  resumeClickBox.x + resumeClickBox.width / 2  - textWidth / 2,resumeClickBox.y + resumeClickBox.height / 2  + textHeight / 2 );
             }
-    
             if(currentStateRESUME == State.HOVER_RESUME){
                 graphics.setColor(hover);
                 graphics.fill(resumeClickBox);
@@ -153,6 +181,13 @@ public class GameScreen extends JPanel implements Screen {
             }
     
             
+        }else if(clickCounter!=0 && currentStateSETTINGS == State.SETTINGS_GONE ){ // yani onceden click edilmis menunun kapanmasini istiyoruz
+            graphics.setColor(new Color(0, 0, 0,0));
+            graphics.fill(settingsBlock);//setting block clear
+            graphics.fill(returnClickBox);//return to main menu clear
+            graphics.fill(resumeClickBox);//resume clear
+            areClickBoxesVisible =false;
+
         }
 
 
@@ -164,7 +199,8 @@ public class GameScreen extends JPanel implements Screen {
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);
-        }
+        }else if(returnIntroScreen)
+            return new IntroScreen(game);
         return this;
     }
 
@@ -183,7 +219,12 @@ public class GameScreen extends JPanel implements Screen {
             game.getPacman().setNextDirection(Direction.DOWN);
             break;
         case KeyEvent.VK_ESCAPE:
-            currentStateSETTINGS = State.SETTINGS_PRESSED; 
+            if(escapePressedCounter==0 || escapePressedCounter%2==0){
+                currentStateSETTINGS = State.SETTINGS_PRESSED; 
+            }else{
+                currentStateSETTINGS = State.SETTINGS_GONE; 
+            }
+            escapePressedCounter++; 
             break;
         }
     }
