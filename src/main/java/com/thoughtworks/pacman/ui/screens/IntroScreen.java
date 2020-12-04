@@ -65,10 +65,10 @@ public class IntroScreen extends JPanel implements Screen {
                     else{
                         currentStateQUIT = State.RELEASED__QUIT;
                     }       
-                    if(playClickBox.contains(e.getPoint()) && e.getClickCount()==1){
+                    if(playClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
                         startGame=true;
                     }
-                    if(exitClickBox.contains(e.getPoint()) && e.getClickCount()==1){
+                    if(exitClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
                         System.exit(0);
                     }
                     

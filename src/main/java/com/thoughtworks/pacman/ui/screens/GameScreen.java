@@ -10,7 +10,7 @@ import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
-
+import com.thoughtworks.pacman.core.maze.Maze;
 
 import com.thoughtworks.pacman.ui.ImageLoader;
 import java.awt.Graphics2D;
@@ -21,29 +21,35 @@ import javax.swing.text.AttributeSet.ColorAttribute;
 
 
 public class GameScreen extends JPanel implements Screen {
+
     static final Image SETTINGS_IMAGE = ImageLoader.loadImage(Screen.class, "settings.png");
-    private Rectangle imageClickBox;
+
+    private Rectangle imageClickBox;    //cannot click on images so this imageclick box is a invisible rectangle taht has the same height and width as the image
     private Rectangle settingsBlock;
     private Rectangle returnClickBox;
     private Rectangle resumeClickBox;
-    private Color main;
-	private Color hover;
+
+    private Color main; // main color theme
+    private Color hover; // when on hover color theme
+    
     private final Game game;
+    
  
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
 
-    private State currentStateSETTINGS = State.SETTINGS_GONE;
+    //the current States
+    private State currentStateSETTINGS = State.SETTINGS_GONE;   
     private State currentStateRESUME = State.RELEASED__RESUME;
     private State currentStateRETURN = State.RELEASED__RETURN;
 
-    private boolean areClickBoxesVisible=false; //visible degil ise pressed kontrollerini yapmasin hic ve yanlislikla main menuya gitme olayi da engellenir
-    private boolean returnIntroScreen = false;
+    private boolean areClickBoxesVisible=false; //to control the visibility of our blocks
+    private boolean returnIntroScreen = false;  //to control  when to return to the main screen 
 
+    //Counts the amount of clicks on pause menu and counts the amount od escape is pressed
     private int clickCounter =0;
     private int escapePressedCounter = 0;
 
-    
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -52,13 +58,14 @@ public class GameScreen extends JPanel implements Screen {
     private GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
-    // SCORE, STOP THE GAME ON ESCAPE and clicking on the button, resume button click edildiginde doldurulmadi
+    // STOP THE GAME ON ESCAPE and clicking on the button, resume button click edildiginde doldurulmadi
 
     GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
         this.gamePresenter = gamePresenter;
         this.lastFrameAt = System.currentTimeMillis();
 
+       
         main = new Color(255, 255, 0);
         hover = new Color(156, 156, 2);
 
@@ -130,15 +137,20 @@ public class GameScreen extends JPanel implements Screen {
             graphics.setColor(new Color(0, 0, 0,230));
             graphics.fill(settingsBlock);
             areClickBoxesVisible =true;
-            
+            graphics.setColor(Color.WHITE);
+            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 80));
+            int textWidth = (int)graphics.getFontMetrics().getStringBounds(""+game.Score, graphics).getWidth();
+            TextLayout tl = new TextLayout(""+game.Score,new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
+            int textHeight = (int) tl.getBounds().getHeight();
+            graphics.drawString(""+game.Score,  settingsBlock.x + settingsBlock.width / 2  - textWidth / 2,settingsBlock.y + settingsBlock.height / 2  + textHeight / 2 - 50 );
             if(currentStateRETURN == State.RELEASED__RETURN){
                 graphics.setColor(main);
                 graphics.fill(returnClickBox);
                 graphics.setColor(Color.BLACK);
                 graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-                int textWidth = (int)graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-                TextLayout tl = new TextLayout("RETURN TO MAIN MENU",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
-                int textHeight = (int) tl.getBounds().getHeight();
+                textWidth = (int)graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
+                tl = new TextLayout("RETURN TO MAIN MENU",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
+                textHeight = (int) tl.getBounds().getHeight();
                 graphics.drawString("RETURN TO MAIN MENU",  returnClickBox.x + returnClickBox.width / 2  - textWidth / 2,returnClickBox.y + returnClickBox.height / 2  + textHeight / 2 );
     
     
@@ -148,9 +160,9 @@ public class GameScreen extends JPanel implements Screen {
                 graphics.fill(returnClickBox);
                 graphics.setColor(Color.BLACK);
                 graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-                int textWidth = (int)graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-                TextLayout tl = new TextLayout("RETURN TO MAIN MENU",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
-                int textHeight = (int) tl.getBounds().getHeight();
+                textWidth = (int)graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
+                tl = new TextLayout("RETURN TO MAIN MENU",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
+                textHeight = (int) tl.getBounds().getHeight();
                 graphics.drawString("RETURN TO MAIN MENU",  returnClickBox.x + returnClickBox.width / 2  - textWidth / 2,returnClickBox.y + returnClickBox.height / 2  + textHeight / 2 );
     
     
@@ -162,9 +174,9 @@ public class GameScreen extends JPanel implements Screen {
                 graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
     
               
-                int textWidth = (int)graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
-                TextLayout tl = new TextLayout("RESUME",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
-                int textHeight = (int) tl.getBounds().getHeight();
+                textWidth = (int)graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
+                tl = new TextLayout("RESUME",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
+                textHeight = (int) tl.getBounds().getHeight();
                 graphics.drawString("RESUME",  resumeClickBox.x + resumeClickBox.width / 2  - textWidth / 2,resumeClickBox.y + resumeClickBox.height / 2  + textHeight / 2 );
             }
             if(currentStateRESUME == State.HOVER_RESUME){
@@ -174,9 +186,9 @@ public class GameScreen extends JPanel implements Screen {
                 graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
     
                 
-                int textWidth = (int)graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
-                TextLayout tl = new TextLayout("RESUME",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
-                int textHeight = (int) tl.getBounds().getHeight();
+                textWidth = (int)graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
+                tl = new TextLayout("RESUME",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
+                textHeight = (int) tl.getBounds().getHeight();
                 graphics.drawString("RESUME",  resumeClickBox.x + resumeClickBox.width / 2  - textWidth / 2,resumeClickBox.y + resumeClickBox.height / 2  + textHeight / 2 );
             }
     

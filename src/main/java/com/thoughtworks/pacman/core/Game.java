@@ -14,6 +14,8 @@ public class Game {
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
 
+    public int Score;
+
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
     }
@@ -56,7 +58,7 @@ public class Game {
         if (pacman.isDead()) {
             return;
         }
-
+        Score = maze.getScore();
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
         pacman.advance(timeDeltaInMillis);
