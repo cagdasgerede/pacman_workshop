@@ -2,6 +2,8 @@ package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
+ 
+
 
 public abstract class Actor {
     private static final int SPEED = 100;
@@ -10,6 +12,7 @@ public abstract class Actor {
     protected MovementStrategy movementStrategy;
     private SpacialCoordinate center;
 
+   
     public Actor(Maze maze, MovementStrategy movementStrategy, SpacialCoordinate center) {
         this.maze = maze;
         this.movementStrategy = movementStrategy;
@@ -29,8 +32,8 @@ public abstract class Actor {
         movementStrategy.jump(center.toTileCoordinate());
     }
 
-    public void advance(long timeDeltaInMillis) {
-        if (!isHalted()) {
+    public void advance(long timeDeltaInMillis, boolean isItStopped) {
+        if (!isHalted()  && !isItStopped ) {
             advanceDistance((int) (SPEED * timeDeltaInMillis / 1000));
         }
     }

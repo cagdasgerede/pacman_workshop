@@ -54,15 +54,15 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
-    public void advance(long timeDeltaInMillis) {
+    public void advance(long timeDeltaInMillis,boolean isItStopped) {
         if (pacman.isDead()) {
             return;
         }
         Score = maze.getScore();
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
-        pacman.advance(timeDeltaInMillis);
-        ghosts.advance(timeDeltaInMillis);
+        pacman.advance(timeDeltaInMillis,isItStopped);
+        ghosts.advance(timeDeltaInMillis,isItStopped);
 
         if (ghosts.killed(pacman)) {
             pacman.die();

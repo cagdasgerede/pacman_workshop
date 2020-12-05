@@ -3,7 +3,7 @@ package com.thoughtworks.pacman.core;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.actors.Pacman;
-import com.thoughtworks.pacman.core.maze.Maze;
+
 
 public class Ghosts {
     private Ghost blinky;
@@ -51,11 +51,11 @@ public class Ghosts {
         }        
     }
 
-    public void advance(long timeDeltaInMillis) {
-        blinky.advance(timeDeltaInMillis);
-        pinky.advance(timeDeltaInMillis);
-        inky.advance(timeDeltaInMillis);
-        clyde.advance(timeDeltaInMillis);
+    public void advance(long timeDeltaInMillis,boolean isItStopped) {
+        blinky.advance(timeDeltaInMillis,isItStopped);
+        pinky.advance(timeDeltaInMillis,isItStopped);
+        inky.advance(timeDeltaInMillis,isItStopped);
+        clyde.advance(timeDeltaInMillis,isItStopped);
     }
 
     public boolean killed(Pacman pacman) {

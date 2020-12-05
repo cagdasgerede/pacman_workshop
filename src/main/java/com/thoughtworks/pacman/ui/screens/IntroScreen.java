@@ -9,13 +9,13 @@ import java.awt.Rectangle;
 
 import java.awt.font.TextLayout;
 
-import javax.swing.JPanel;
+
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
 
-public class IntroScreen extends JPanel implements Screen {
+public class IntroScreen implements Screen {
     static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "deletedText.jpg");
 
     private final Dimension dimension;

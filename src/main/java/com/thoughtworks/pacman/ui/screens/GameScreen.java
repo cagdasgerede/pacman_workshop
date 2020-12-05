@@ -10,17 +10,17 @@ import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
-import com.thoughtworks.pacman.core.maze.Maze;
+
 
 import com.thoughtworks.pacman.ui.ImageLoader;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
-import javax.swing.JPanel;
-import javax.swing.text.AttributeSet.ColorAttribute;
 
 
-public class GameScreen extends JPanel implements Screen {
+
+
+public class GameScreen  implements Screen {
 
     static final Image SETTINGS_IMAGE = ImageLoader.loadImage(Screen.class, "settings.png");
 
@@ -45,11 +45,16 @@ public class GameScreen extends JPanel implements Screen {
 
     private boolean areClickBoxesVisible=false; //to control the visibility of our blocks
     private boolean returnIntroScreen = false;  //to control  when to return to the main screen 
+    private boolean stopTheGame =false;         //to pause the game while the pause menu is open 
 
     //Counts the amount of clicks on pause menu and counts the amount od escape is pressed
-    private int clickCounter =0;
-    private int escapePressedCounter = 0;
+    
+   
 
+   
+    public boolean getStopTheGame(){
+        return stopTheGame;
+    }
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -58,7 +63,6 @@ public class GameScreen extends JPanel implements Screen {
     private GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
-    // STOP THE GAME ON ESCAPE and clicking on the button, resume button click edildiginde doldurulmadi
 
     GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
@@ -84,13 +88,12 @@ public class GameScreen extends JPanel implements Screen {
                     MouseEvent e = (MouseEvent) event;
               
                     if(imageClickBox.contains(e.getPoint()) && e.getID()== MouseEvent.MOUSE_CLICKED){
-                        if(clickCounter==0 || clickCounter%2==0) {//ilk defa click ediyo settingse
+                        if(currentStateSETTINGS == State.SETTINGS_GONE) {//ilk defa click ediyo settingse
                             currentStateSETTINGS = State.SETTINGS_PRESSED;
-                            clickCounter++;
                             
                         }else { //click etmis ve acik menu suan
                             currentStateSETTINGS = State.SETTINGS_GONE;
-                            clickCounter++;
+                            
                             
                         }
                     }
@@ -112,6 +115,12 @@ public class GameScreen extends JPanel implements Screen {
                         returnIntroScreen =true;
 
                     }
+
+                    if(areClickBoxesVisible && resumeClickBox.contains(e.getPoint()) && e.getID()== MouseEvent.MOUSE_CLICKED){
+                        currentStateRESUME = State.HOVER_RESUME;
+                        currentStateSETTINGS = State.SETTINGS_GONE; 
+
+                    }
                     
                 }           
             }
@@ -120,23 +129,22 @@ public class GameScreen extends JPanel implements Screen {
     }
 
     public void draw(Graphics2D graphics) {
-        long currentFrameAt = System.currentTimeMillis();
-        long timeDelta = currentFrameAt - lastFrameAt;
-
-        game.advance(timeDelta);
+        
         gamePresenter.draw(graphics);
-
         graphics.drawImage(SETTINGS_IMAGE, 5, 5, 40, 40, null); 
         
         graphics.setColor(new Color(255, 255, 255,0));
         graphics.fill(imageClickBox);
+        long timeDelta;
+        long currentFrameAt;
         
         
         if(currentStateSETTINGS==State.SETTINGS_PRESSED){
-            //graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,  0.8f));
+            
             graphics.setColor(new Color(0, 0, 0,230));
             graphics.fill(settingsBlock);
             areClickBoxesVisible =true;
+            stopTheGame=true;
             graphics.setColor(Color.WHITE);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 80));
             int textWidth = (int)graphics.getFontMetrics().getStringBounds(""+game.Score, graphics).getWidth();
@@ -193,17 +201,28 @@ public class GameScreen extends JPanel implements Screen {
             }
     
             
-        }else if(clickCounter!=0 && currentStateSETTINGS == State.SETTINGS_GONE ){ // yani onceden click edilmis menunun kapanmasini istiyoruz
+        }else if(currentStateSETTINGS == State.SETTINGS_GONE ){ // yani onceden click edilmis menunun kapanmasini istiyoruz
             graphics.setColor(new Color(0, 0, 0,0));
-            graphics.fill(settingsBlock);//setting block clear
-            graphics.fill(returnClickBox);//return to main menu clear
-            graphics.fill(resumeClickBox);//resume clear
+            graphics.fill(settingsBlock);   //setting block clear
+            graphics.fill(returnClickBox);  //return to main menu clear
+            graphics.fill(resumeClickBox);  //resume clear
             areClickBoxesVisible =false;
+            stopTheGame=false;
+           
 
         }
+        
+        currentFrameAt = System.currentTimeMillis();
 
-
+        timeDelta = currentFrameAt - lastFrameAt;
+        
+        game.advance(timeDelta,stopTheGame);
+        
         lastFrameAt = currentFrameAt;
+        
+
+        
+        
     }
 
     public Screen getNextScreen() {
@@ -231,12 +250,12 @@ public class GameScreen extends JPanel implements Screen {
             game.getPacman().setNextDirection(Direction.DOWN);
             break;
         case KeyEvent.VK_ESCAPE:
-            if(escapePressedCounter==0 || escapePressedCounter%2==0){
+            if(currentStateSETTINGS == State.SETTINGS_GONE){
                 currentStateSETTINGS = State.SETTINGS_PRESSED; 
             }else{
                 currentStateSETTINGS = State.SETTINGS_GONE; 
             }
-            escapePressedCounter++; 
+            
             break;
         }
     }

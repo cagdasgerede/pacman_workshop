@@ -10,10 +10,10 @@ import java.awt.font.TextLayout;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
-import javax.swing.JPanel;
 
 
-public class LostScreen extends JPanel implements Screen {
+
+public class LostScreen  implements Screen {
     static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "EditedgameOver.jpg");
 
     private final Dimension dimension;
