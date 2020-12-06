@@ -33,8 +33,8 @@ public class WinScreen implements Screen {
         this.dimension = game.getDimension();
         main = new Color(255, 255, 0);
         hover = new Color(156, 156, 2);
-        returnClickBox = new Rectangle(40, 450, 200, 30);
-        exitClickBox = new Rectangle(290, 450, 100, 30);
+        returnClickBox = new Rectangle(130, 450, 200, 30);
+        exitClickBox = new Rectangle(180, 490, 100, 30);
         this.game = game;
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
