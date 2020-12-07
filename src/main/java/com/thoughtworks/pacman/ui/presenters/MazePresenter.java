@@ -36,9 +36,19 @@ public class MazePresenter implements Presenter {
         drawScore(graphics);
     }
 
+    public void drawNewCloneItem(Graphics2D graphics)
+    {
+        if(this.maze.isCloneItemPresent())
+            toPresenter(this.maze.getCloneItem()).draw(graphics);
+    }
+
     private void drawScore(Graphics2D graphics) {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
         graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+        graphics.setColor(Color.red);
+        graphics.drawString("Clone Items: ", Tile.SIZE * 17, Tile.SIZE * 2);
+        graphics.setColor(Color.white);
+        graphics.drawString(String.format("%2d", maze.getEatenCloneItemCount()), Tile.SIZE * 25, Tile.SIZE * 2);
     }
 }

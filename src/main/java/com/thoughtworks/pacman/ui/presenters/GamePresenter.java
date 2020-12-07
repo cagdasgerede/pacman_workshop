@@ -13,7 +13,12 @@ public class GamePresenter implements Presenter {
     private final PacmanPresenter pacmanPresenter;
     private final List<GhostPresenter> ghostPresenters;
 
+    private ClonePacmanPresenter clonePacmanPresenter;
+
+    private Game game;
+
     public GamePresenter(Game game) {
+        this.game = game;
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         ghostPresenters = new LinkedList<GhostPresenter>();
@@ -25,6 +30,17 @@ public class GamePresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
+        if(this.game.hasClonePacman())
+        {
+            if(this.clonePacmanPresenter == null)
+                this.clonePacmanPresenter = new ClonePacmanPresenter(game.getClonePacman());
+            this.clonePacmanPresenter.draw(graphics);
+        }
+        else
+        {
+            this.clonePacmanPresenter = null;
+        }
+        mazePresenter.drawNewCloneItem(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
                 ghostPresenter.draw(graphics);

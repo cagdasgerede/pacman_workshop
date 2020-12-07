@@ -4,10 +4,12 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
+import com.thoughtworks.pacman.core.tiles.CloneItem;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.presenters.DoorPresenter;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
+import com.thoughtworks.pacman.ui.presenters.CloneItemPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 
@@ -19,6 +21,11 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
 
     public Presenter visit(Dot dot) {
         return new DotPresenter(dot);
+    }
+
+    public Presenter visit(CloneItem ci)
+    {
+        return new CloneItemPresenter(ci);
     }
 
     public Presenter visit(Wall wall) {

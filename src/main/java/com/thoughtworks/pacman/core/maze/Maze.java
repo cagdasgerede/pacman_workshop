@@ -9,10 +9,17 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
+import com.thoughtworks.pacman.core.tiles.CloneItem;
+
 public class Maze {
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
+
+    private TileCoordinate cloneItemCoordinate;
+    private Tile prevTile;
+    private int cloneItemEaten = 0;
+    private CloneItem activeCloneItem;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;
@@ -36,6 +43,11 @@ public class Maze {
         return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
 
+    public Tile getCloneItem()
+    {
+        return this.activeCloneItem;
+    }
+
     public int getScore() {
         ScoreTileVisitor scoreVisitor = new ScoreTileVisitor();
         int totalScore = 0;
@@ -43,6 +55,56 @@ public class Maze {
             totalScore += tile.visit(scoreVisitor);
         }
         return totalScore;
+    }
+
+    public void insertCloneItem(TileCoordinate cloneItemCoordinate)
+    {
+        this.activeCloneItem = new CloneItem(cloneItemCoordinate);
+        this.cloneItemCoordinate = cloneItemCoordinate;
+        this.prevTile = this.tiles.get(cloneItemCoordinate);
+        this.tiles.put(cloneItemCoordinate, this.activeCloneItem); 
+    }
+
+    public TileCoordinate getCloneItemCoordinate()
+    {
+        return this.cloneItemCoordinate;
+    }
+
+    public boolean isCloneItemPresent()
+    {
+        return this.activeCloneItem != null;
+    }
+
+    public void removeCloneItem()
+    {
+        this.tiles.replace(this.cloneItemCoordinate, this.prevTile);
+        this.prevTile = null;
+        this.cloneItemCoordinate = null;
+        this.cloneItemCoordinate = null;
+        this.activeCloneItem = null;
+    }
+
+    public void eatCloneItem()
+    {
+        if(this.activeCloneItem == null)
+            return;
+
+        this.activeCloneItem.eat();
+        this.cloneItemEaten++;
+        this.removeCloneItem();
+    }
+
+    public void useCloneItem()
+    {
+        if(this.cloneItemEaten == 0)
+            return;
+        
+        this.cloneItemEaten--;
+    }
+
+    public int getEatenCloneItemCount()
+    {
+        return this.cloneItemEaten;
     }
 
     public boolean hasDotsLeft() {

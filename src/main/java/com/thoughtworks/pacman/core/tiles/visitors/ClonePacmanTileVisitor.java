@@ -7,7 +7,7 @@ import com.thoughtworks.pacman.core.tiles.CloneItem;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class PacmanTileVisitor implements TileVisitor<Void> {
+public class ClonePacmanTileVisitor implements TileVisitor<Void> {
 
     public Void visit(Dot dot) {
         dot.eat();
