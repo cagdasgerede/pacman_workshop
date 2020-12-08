@@ -68,7 +68,7 @@ public class GameTest {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(true);
 
-        game.advance(10);
+        game.advance(10,false);
 
         verify(pacman).isDead();
         verifyNoMoreInteractions(pacman, ghosts);
@@ -79,11 +79,11 @@ public class GameTest {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
 
-        game.advance(10);
+        game.advance(10,false);
 
         verify(ghosts).freeGhostsBasedOnScore(0);
-        verify(pacman).advance(10);
-        verify(ghosts).advance(10);
+        verify(pacman).advance(10,false);
+        verify(ghosts).advance(10,false);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class GameTest {
         when(pacman.isDead()).thenReturn(false);
         when(ghosts.killed(pacman)).thenReturn(true);
 
-        game.advance(10);
+        game.advance(10,false);
 
         verify(pacman).die();
     }

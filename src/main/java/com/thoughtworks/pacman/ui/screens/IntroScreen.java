@@ -40,45 +40,7 @@ public class IntroScreen implements Screen {
         exitClickBox =new Rectangle(180, 390, 100, 30);
               
 
-        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
-            @Override
-            public void eventDispatched(AWTEvent event) {
-                if (event instanceof MouseEvent) {
-                    MouseEvent e = (MouseEvent) event;
-
-                    if(playClickBox.contains(e.getPoint())){
-                        currentStatePLAY = State.HOVER_PLAY;
-                    }
-                    else{
-                        currentStatePLAY = State.RELEASED__PLAY;
-                    }
-                    
-                    if(settingsClickBox.contains(e.getPoint())){
-                        currentStateSETTINGS = State.HOVER_SETTINGS;
-                    }
-                    else{
-                        currentStateSETTINGS = State.RELEASED__SETTINGS;
-                    }
-                    if(exitClickBox.contains(e.getPoint())){
-                        currentStateQUIT = State.HOVER_QUIT;
-                    }
-                    else{
-                        currentStateQUIT = State.RELEASED__QUIT;
-                    }       
-                    if(playClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
-                        startGame=true;
-                    }
-                    if(exitClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
-                        System.exit(0);
-                    }
-                    
-                }
-            
-                
-                
-            }
-        }, AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK);
-        
+       
         this.startGame = false;
 
         
@@ -172,14 +134,52 @@ public class IntroScreen implements Screen {
         return this;
     }
 
-    public void keyPressed(KeyEvent e) {
-        startGame = true; //buralari silebilirsin
+    public void keyPressed(KeyEvent e) { //hicbir sey yapmamali
+       // startGame = true; 
+    }
+
+    public void setStartGame(boolean bool){
+        this.startGame = bool;
     }
 
 
     private enum State{
 		HOVER_PLAY, RELEASED__PLAY,HOVER_SETTINGS, RELEASED__SETTINGS,HOVER_QUIT, RELEASED__QUIT
 	}
+
+    @Override
+    public void eventDispatcher(MouseEvent event) {
+        if (event instanceof MouseEvent) {
+            MouseEvent e = (MouseEvent) event;
+
+            if(playClickBox.contains(e.getPoint())){
+                currentStatePLAY = State.HOVER_PLAY;
+            }
+            else{
+                currentStatePLAY = State.RELEASED__PLAY;
+            }
+            
+            if(settingsClickBox.contains(e.getPoint())){
+                currentStateSETTINGS = State.HOVER_SETTINGS;
+            }
+            else{
+                currentStateSETTINGS = State.RELEASED__SETTINGS;
+            }
+            if(exitClickBox.contains(e.getPoint())){
+                currentStateQUIT = State.HOVER_QUIT;
+            }
+            else{
+                currentStateQUIT = State.RELEASED__QUIT;
+            }       
+            if(playClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
+                startGame=true;
+            }
+            if(exitClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
+                System.exit(0);
+            }
+            
+        }
+    }
    
     
 }

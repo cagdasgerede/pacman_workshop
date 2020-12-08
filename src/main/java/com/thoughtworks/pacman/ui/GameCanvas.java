@@ -3,6 +3,9 @@ package com.thoughtworks.pacman.ui;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.screens.IntroScreen;
 
+import java.awt.*;
+
+import java.awt.AWTEvent;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,9 +17,10 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JPanel;
+import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class GameCanvas extends Canvas implements KeyListener {
+public class GameCanvas extends Canvas implements KeyListener, AWTEventListener {
 
     private final Dimension dimension;
     private Screen currentScreen;
@@ -32,6 +36,7 @@ public class GameCanvas extends Canvas implements KeyListener {
         setIgnoreRepaint(true);
         createBufferStrategy(2);
         addKeyListener(this);
+        Toolkit.getDefaultToolkit().addAWTEventListener(this, AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK);
         requestFocus();
     }
 
@@ -51,11 +56,18 @@ public class GameCanvas extends Canvas implements KeyListener {
         strategy.show();
     }
 
-    public void keyTyped(KeyEvent e) { }
+    public void keyTyped(KeyEvent e) {
+    }
 
     public void keyPressed(KeyEvent e) {
         currentScreen.keyPressed(e);
     }
 
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void eventDispatched(AWTEvent event) {
+        currentScreen.eventDispatcher((MouseEvent)event);
+    }
 }
