@@ -41,7 +41,6 @@ public class WinScreen implements Screen {
 
     public void draw(Graphics2D graphics) {
         int height = WIN_SCREEN_IMAGE.getHeight(null) * dimension.width / WIN_SCREEN_IMAGE.getWidth(null);
-        System.out.println("height = " + height + " width = " + dimension.width);
         graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
         if (currentStateRETURN == State.RELEASED__RETURN) {
