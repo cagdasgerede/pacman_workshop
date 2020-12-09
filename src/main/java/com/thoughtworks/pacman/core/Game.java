@@ -83,7 +83,7 @@ public class Game {
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
-        pacman.advance(timeDeltaInMillis/*Ahmet*/,1/*Ahmet*/);
+        pacman.advance(timeDeltaInMillis/*Ahmet*/,levelA/*Ahmet*/);
         ghosts.advance(timeDeltaInMillis /*Ahmet*/,levelA/*Ahmet*/);
 
         if (ghosts.killed(pacman)) {

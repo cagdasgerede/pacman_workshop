@@ -10,7 +10,7 @@ import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
 public class WinScreen implements Screen {
-    static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "SSNExtLEvel.png");
+    static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "SSnext.png");
 
     private final Dimension dimension;
     private final Game game;
