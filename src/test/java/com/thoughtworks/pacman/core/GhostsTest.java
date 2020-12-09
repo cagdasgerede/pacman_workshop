@@ -93,12 +93,12 @@ public class GhostsTest {
         Ghost g4 = mock(Ghost.class);
         Ghosts ghosts = new Ghosts(g1, g2, g3, g4);
 
-        ghosts.advance(20);
+        ghosts.advance(20 /*Ahmet*/,1/*Ahmet*/);
 
-        verify(g1).advance(20);
-        verify(g2).advance(20);
-        verify(g3).advance(20);
-        verify(g4).advance(20);
+        verify(g1).advance(20/*Ahmet*/,1/*Ahmet*/);
+        verify(g2).advance(20/*Ahmet*/,1/*Ahmet*/);
+        verify(g3).advance(20/*Ahmet*/,1/*Ahmet*/);
+        verify(g4).advance(20/*Ahmet*/,1/*Ahmet*/);
     }
 
     @Test

@@ -39,6 +39,32 @@ public class MazePresenter implements Presenter {
     private void drawScore(Graphics2D graphics) {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
+
         graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+
+        //Ahmet
+        String level= "Level: "+ maze.getScore()/100;
+        graphics.drawString(level,Tile.SIZE * 10, Tile.SIZE * 2);
+        //Ahmet
     }
+    //Ahmet
+    public void draw(Graphics2D graphics,int levelA) {
+        for (Presenter tilePresenter : mazeTiles) {
+            tilePresenter.draw(graphics);
+        }
+        drawScore(graphics,levelA);
+    }
+
+    private void drawScore(Graphics2D graphics,int levelA) {
+        graphics.setColor(Color.white);
+        graphics.setFont(FONT);
+
+        graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+
+        //Ahmet
+        String level= "Level: "+ levelA;
+        graphics.drawString(level,Tile.SIZE * 10, Tile.SIZE * 2);
+        //Ahmet
+    }
+    //Ahmet
 }

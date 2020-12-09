@@ -48,7 +48,7 @@ public class GameScreenTest {
         Thread.sleep(1); // Some time for pacman to move
         gameScreen.draw(graphics);
 
-        verify(pacman).advance(gt(0L));
+        verify(pacman).advance(gt(0L) /*Ahmet*/,eq(1)/*Ahmet*/);
     }
 
     @Test

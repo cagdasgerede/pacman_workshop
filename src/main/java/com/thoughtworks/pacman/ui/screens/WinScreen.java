@@ -10,7 +10,7 @@ import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
 public class WinScreen implements Screen {
-    static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "winScreen.jpg");
+    static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "SSNExtLEvel.png");
 
     private final Dimension dimension;
     private final Game game;
@@ -27,9 +27,14 @@ public class WinScreen implements Screen {
         graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
-    public Screen getNextScreen() {
+    public Screen getNextScreen() throws Exception{
         if (startGame) {
-            return new IntroScreen(game);
+            //Ahmet
+            game.incrementLevelA();
+            return new GameScreen(game.getLevelA());
+            //Ahmet
+
+            //return new IntroScreen(game);
         }
         return this;
     }
