@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
+import java.io.IOException;
+import java.io.*;
 
 public class PacmanPresenter implements Presenter {
     static final int DIAMETER = 20;
@@ -21,13 +23,56 @@ public class PacmanPresenter implements Presenter {
     private final Pacman pacman;
     private long lastFrame;
     private int deadFrame;
+    private Color pacmanColor = Color.yellow;
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
+        
+        try {
+        File file=new File("config.txt");    //creates a new file instance  
+        FileReader fr=new FileReader(file);   //reads the file  
+        BufferedReader br=new BufferedReader(fr);  //creates a buffering character input stream  
+
+        String line=br.readLine();
+        line=br.readLine();
+        line=br.readLine();
+
+        switch(line) {
+            case "yellow":
+                pacmanColor = Color.yellow;; 
+                break;
+            case "red":
+                pacmanColor = Color.red;
+                break;
+            case "blue":
+                pacmanColor = Color.blue;
+                break;
+            case "green":
+                pacmanColor = Color.green;
+                break;
+            case "gold":
+                pacmanColor = new Color(255,204,51);   
+                break;
+            case "grey":
+                pacmanColor = new Color(153,153,153);
+                break;
+            case "brown":
+                pacmanColor = new Color(102,51,0);
+                break;
+            case "purple":
+                pacmanColor = new Color(102,0,153);
+                break;
+        }
+
+        }catch (IOException ioe){
+            ioe.printStackTrace();  
+        }
+        
+
     }
 
     public void draw(Graphics2D graphics) {
-        graphics.setColor(Color.yellow);
+        graphics.setColor(pacmanColor);
         Rectangle bounds = getBounds();
         graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
     }

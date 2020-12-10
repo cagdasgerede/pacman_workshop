@@ -1,7 +1,6 @@
-red
-high
 low
-triangle
+low
+brown
 UP KEY
 DOWN KEY
 LEFT KEY

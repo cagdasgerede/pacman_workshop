@@ -31,11 +31,6 @@ public class SettingsScreen extends JFrame implements ActionListener {
    SettingsScreen() {
 
 
-
-      //ghost color
-      ghost_color = new JLabel();
-      ghost_color.setText("Ghosts Color");
-
       //Player Speed
       speed_label = new JLabel();
       speed_label.setText("Player Speed");
@@ -46,7 +41,7 @@ public class SettingsScreen extends JFrame implements ActionListener {
 
       //Enter player shape
       pacman_label = new JLabel();
-      pacman_label.setText("Pacman Shape");
+      pacman_label.setText("Pacman Color");
 
       //Enter Key
       up_label    = new JLabel();
@@ -61,13 +56,12 @@ public class SettingsScreen extends JFrame implements ActionListener {
       right_label = new JLabel();
       right_label.setText("Right Key :");
 
-      String[] choices      = { "Num8","Num6", "Num2","Num4","UP KEY","RIGHT KEY","LEFT KEY","DOWN KEY"};
+      String[] choices      = { "UP KEY","DOWN KEY","LEFT KEY","RIGHT KEY","Num8","Num6", "Num2","Num4"};
 
-      String[] pacmanShapes = { "triangle", "square", "oval", "circle"};
+      String[] pacmanShapes = { "yellow", "red", "blue", "green", "gold", "grey", "brown", "purple"};
 
       String[] pacmanSpeed  = { "low", "medium", "high"};
 
-      String[] ghostColors  = { "red", "blue", "orange", "pink"};
 
 
       final JComboBox<String> cb_up = new JComboBox<String>(choices);
@@ -82,17 +76,11 @@ public class SettingsScreen extends JFrame implements ActionListener {
 
       final JComboBox<String> gSpeed = new JComboBox<String>(pacmanSpeed);
 
-      final JComboBox<String> gColor = new JComboBox<String>(ghostColors);
-
 
       // Submit
       submit = new JButton("SUBMIT");
       panel = new JPanel(new GridLayout(14, 3));
 
-
-      gColor.setVisible(true);
-      panel.add(ghost_color);
-      panel.add(gColor);
 
       gSpeed.setVisible(true);
       panel.add(ghostSpeed_label);

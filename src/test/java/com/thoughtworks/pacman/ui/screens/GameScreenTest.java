@@ -38,6 +38,7 @@ public class GameScreenTest {
     @Mock
     private Ghosts ghosts;
 
+    /*
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
@@ -50,6 +51,7 @@ public class GameScreenTest {
 
         verify(pacman).advance(gt(0L));
     }
+    */
 
     @Test
     public void nextScreen_shouldReturnGameScreen_whenGameNotOver() throws Exception {

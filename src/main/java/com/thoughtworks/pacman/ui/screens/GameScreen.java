@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import java.io.*;
-
 import java.io.IOException;
 
 public class GameScreen implements Screen {
@@ -34,9 +33,6 @@ public class GameScreen implements Screen {
         BufferedReader br=new BufferedReader(fr);  //creates a buffering character input stream  
 
         String line=br.readLine();
-
-        line=br.readLine();
-
         switch(line) {
             case "low":
                 timeDeltaGhost = 100; 
@@ -52,7 +48,6 @@ public class GameScreen implements Screen {
 
         line=br.readLine();
 
-
         switch(line) {
             case "low":
                 timeDeltaPacman = 100; 
@@ -64,7 +59,6 @@ public class GameScreen implements Screen {
                 timeDeltaPacman = 500;
                 break;
         }
-
 
         line=br.readLine();
         line=br.readLine();
