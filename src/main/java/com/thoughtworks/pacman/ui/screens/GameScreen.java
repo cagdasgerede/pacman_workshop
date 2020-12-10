@@ -16,11 +16,11 @@ public class GameScreen implements Screen {
     public GameScreen() throws Exception {
         this(new Game());
     }
-    //Ahmet
+
     public GameScreen(int levelA) throws Exception {
         this(new Game(levelA));
     }
-    //Ahmet
+
     private GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
@@ -43,11 +43,6 @@ public class GameScreen implements Screen {
 
     public Screen getNextScreen() throws Exception{
         if (game.won()) {
-            //Ahmet
-            //Yeni GameScreen ekle kazanırsa level olarak
-            //return new GameScreen();
-            //Ahmet
-
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);

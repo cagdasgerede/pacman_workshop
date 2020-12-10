@@ -31,9 +31,9 @@ public class GamePresenter implements Presenter {
             }
         }
     }
-    //Ahmet
-    public void draw(Graphics2D graphics,int levelA) {
-        mazePresenter.draw(graphics,levelA);
+
+    public void draw(Graphics2D graphics, int levelA) {
+        mazePresenter.draw(graphics, levelA);
         pacmanPresenter.draw(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
@@ -41,7 +41,6 @@ public class GamePresenter implements Presenter {
             }
         }
     }
-    //Ahmet
 
     public boolean isDying() {
         return pacmanPresenter.isDying();

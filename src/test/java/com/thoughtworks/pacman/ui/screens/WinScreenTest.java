@@ -42,10 +42,6 @@ public class WinScreenTest {
 
         winScreen.keyPressed(null);
 
-        //Ahmet
         assertThat(winScreen.getNextScreen(), instanceOf(GameScreen.class));
-        //Ahmet
-
-        //assertThat(winScreen.getNextScreen(), instanceOf(IntroScreen.class));
     }
 }

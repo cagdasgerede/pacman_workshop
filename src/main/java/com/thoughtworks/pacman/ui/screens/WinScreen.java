@@ -29,12 +29,8 @@ public class WinScreen implements Screen {
 
     public Screen getNextScreen() throws Exception{
         if (startGame) {
-            //Ahmet
             game.incrementLevelA();
             return new GameScreen(game.getLevelA());
-            //Ahmet
-
-            //return new IntroScreen(game);
         }
         return this;
     }
