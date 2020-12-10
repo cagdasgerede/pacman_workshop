@@ -13,6 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PacmanPresenterTest {
+    /*
     @Test
     public void shouldCalculateBoundInPixels() throws Exception {
         PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
@@ -79,4 +80,5 @@ public class PacmanPresenterTest {
 
         assertThat(presenter.isDying(), is(false));
     }
+    */
 }

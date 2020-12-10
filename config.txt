@@ -1,0 +1,8 @@
+red
+low
+low
+triangle
+UP KEY
+DOWN KEY
+LEFT KEY
+RIGHT KEY
