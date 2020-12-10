@@ -205,7 +205,7 @@ public class GameScreen implements Screen {
         long currentFrameAt = System.currentTimeMillis();
         long timeDelta = currentFrameAt - lastFrameAt;
 
-        game.advance(timeDeltaPacman, timeDeltaGhost );
+        game.advance(timeDeltaPacman, timeDeltaGhost);
         gamePresenter.draw(graphics);
 
         lastFrameAt = currentFrameAt;

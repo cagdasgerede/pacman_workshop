@@ -1,5 +1,5 @@
 red
-low
+high
 low
 triangle
 UP KEY
