@@ -66,3 +66,7 @@ This implementation was written by Danilo Sato and Mariana Bravo for educational
 ```cd build\libs```
 
 ```java -jar pacman_workshop.jar```
+
+```Press 's' for settings page```
+
+```Entered settings will remain for further playing```
