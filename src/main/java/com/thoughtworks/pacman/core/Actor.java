@@ -31,7 +31,7 @@ public abstract class Actor {
 
     public void advance(long timeDeltaInMillis , int levelA) {
         if (!isHalted()) {
-            advanceDistance((int) (levelA * SPEED * timeDeltaInMillis / 1000));
+            advanceDistance((int) ((SPEED + ((float) (levelA - 1) / (float) 2) * 50) * timeDeltaInMillis / 1000));
         }
     }
 
