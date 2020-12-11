@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.core;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -72,6 +73,15 @@ public class GameTest {
 
         verify(pacman).isDead();
         verifyNoMoreInteractions(pacman, ghosts);
+    }
+
+    @Test
+    public void advance_shouldDoNothing_whenOnPause() throws Exception {
+        Game game = new Game(maze, pacman, ghosts);
+
+        game.advance(10,true);
+        assertTrue(game.onPause());
+        
     }
 
     @Test

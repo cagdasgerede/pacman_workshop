@@ -14,6 +14,8 @@ public class Game {
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
 
+    private boolean isItOnPause;
+
     public int Score;
 
     public Game() throws Exception {
@@ -58,6 +60,7 @@ public class Game {
         if (pacman.isDead()) {
             return;
         }
+        isItOnPause =isItStopped;
         Score = maze.getScore();
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
@@ -78,5 +81,9 @@ public class Game {
 
     public boolean lost() {
         return pacman.isDead();
+    }
+
+    public boolean onPause(){
+        return isItOnPause;
     }
 }
