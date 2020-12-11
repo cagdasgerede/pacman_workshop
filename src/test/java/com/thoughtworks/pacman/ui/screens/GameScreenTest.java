@@ -20,10 +20,7 @@ import org.mockito.Mockito;
 import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
-
-
 import java.awt.*;
-
 import java.awt.Rectangle;
 
 import com.thoughtworks.pacman.core.Direction;
@@ -139,8 +136,6 @@ public class GameScreenTest {
         verify(pacman).setNextDirection(eq(Direction.DOWN));
     }
 
-    /******** */
-
     @Test
     public void keyPressed_haltTheGame() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
@@ -153,25 +148,4 @@ public class GameScreenTest {
         verify(pacman).setNextDirection(eq(Direction.NONE));
     }
 
-    /*@Test
-    public void settingsClicked_haltTheGame() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman, ghosts);
-        GameScreen gameScreen = new GameScreen(game, gamePresenter);
-        Rectangle imageClickBox = new Rectangle(5,5,40,40);
-        
-
-        //when(imageClickBox.contains( mouseEvent.getPoint())).thenReturn(true);
-       
-       
-        //when(imageClickBox.contains()).thenReturn(true);
-        
-        
-        when(imageClickBox.contains(Mockito.any(Point.class))).thenReturn(true);
-        when(mouseEvent.getID()).thenReturn(MouseEvent.MOUSE_CLICKED);
-        
-        
-
-        verify(pacman).setNextDirection(eq(Direction.NONE));
-    }*/
 }

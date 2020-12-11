@@ -11,30 +11,28 @@ import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
 public class LostScreen implements Screen {
-    static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "EditedgameOver.jpg");
+    static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "gameOver.jpg");
 
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
 
-    private Color main;
-    private Color hover;
+    private Color buttonMainColor; // main color theme: Yellow
+    private Color buttonOnHoverColor; // when on hover color theme:Darker Yellow
 
-    private State currentStateRETURN = State.RELEASED__RETURN;
-    private State currentStateQUIT = State.RELEASED__QUIT;
+    private State currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
+    private State currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
 
     private Rectangle returnClickBox;
     private Rectangle exitClickBox;
 
     public LostScreen(Game game) {
         this.dimension = game.getDimension();
-        main = new Color(255, 255, 0);
-        hover = new Color(156, 156, 2);
+        buttonMainColor = new Color(255, 255, 0);
+        buttonOnHoverColor = new Color(156, 156, 2);
         returnClickBox = new Rectangle(130, 350, 200, 30);
         exitClickBox = new Rectangle(180, 390, 100, 30);
         this.game = game;
-
-        
 
         this.startGame = false;
     }
@@ -43,8 +41,8 @@ public class LostScreen implements Screen {
         int height = LOST_SCREEN_IMAGE.getHeight(null) * dimension.width / LOST_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(LOST_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
-        if (currentStateRETURN == State.RELEASED__RETURN) {
-            graphics.setColor(main);
+        if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
+            graphics.setColor(buttonMainColor);
             graphics.fill(returnClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
@@ -56,8 +54,8 @@ public class LostScreen implements Screen {
                     returnClickBox.y + returnClickBox.height / 2 + textHeight / 2);
 
         }
-        if (currentStateRETURN == State.HOVER_RETURN) {
-            graphics.setColor(hover);
+        if (currentStateOfReturnButton == State.HOVER_ON_RETURN_BUTTON) {
+            graphics.setColor(buttonOnHoverColor);
             graphics.fill(returnClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
@@ -70,12 +68,11 @@ public class LostScreen implements Screen {
 
         }
 
-        if (currentStateQUIT == State.RELEASED__QUIT) {
-            graphics.setColor(main);
+        if (currentStateOfQuitButton == State.RELEASED_QUIT_BUTTON) {
+            graphics.setColor(buttonMainColor);
             graphics.fill(exitClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
             int textWidth = (int) graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
             TextLayout tl = new TextLayout("QUIT", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
                     graphics.getFontRenderContext());
@@ -84,12 +81,11 @@ public class LostScreen implements Screen {
                     exitClickBox.y + exitClickBox.height / 2 + textHeight / 2);
         }
 
-        if (currentStateQUIT == State.HOVER_QUIT) {
-            graphics.setColor(hover);
+        if (currentStateOfQuitButton == State.HOVER_ON_QUIT_BUTTON) {
+            graphics.setColor(buttonOnHoverColor);
             graphics.fill(exitClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
             int textWidth = (int) graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
             TextLayout tl = new TextLayout("QUIT", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
                     graphics.getFontRenderContext());
@@ -106,7 +102,7 @@ public class LostScreen implements Screen {
         return this;
     }
 
-    public void keyPressed(KeyEvent e) { // bunlar silinebilir
+    public void keyPressed(KeyEvent e) { 
         // startGame = true;
     }
 
@@ -115,7 +111,7 @@ public class LostScreen implements Screen {
     }
 
     private enum State {
-        HOVER_RETURN, RELEASED__RETURN, HOVER_QUIT, RELEASED__QUIT
+        HOVER_ON_RETURN_BUTTON, RELEASED_RETURN_BUTTON, HOVER_ON_QUIT_BUTTON, RELEASED_QUIT_BUTTON
     }
 
     @Override
@@ -124,14 +120,14 @@ public class LostScreen implements Screen {
             MouseEvent e = (MouseEvent) event;
 
             if (returnClickBox.contains(e.getPoint())) {
-                currentStateRETURN = State.HOVER_RETURN;
+                currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
             } else {
-                currentStateRETURN = State.RELEASED__RETURN;
+                currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
             }
             if (exitClickBox.contains(e.getPoint())) {
-                currentStateQUIT = State.HOVER_QUIT;
+                currentStateOfQuitButton = State.HOVER_ON_QUIT_BUTTON;
             } else {
-                currentStateQUIT = State.RELEASED__QUIT;
+                currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
             }
             if (returnClickBox.contains(e.getPoint()) && e.getClickCount() >= 1) {
                 startGame = true;

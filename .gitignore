@@ -9,3 +9,5 @@ bin
 build
 *~
 highScores.txt
+.pacman.ui.screens
+.project

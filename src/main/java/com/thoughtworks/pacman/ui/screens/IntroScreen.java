@@ -16,15 +16,15 @@ import com.thoughtworks.pacman.ui.Screen;
 
 
 public class IntroScreen implements Screen {
-    static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "deletedText.jpg");
+    static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "titleScreen.jpg");
 
     private final Dimension dimension;
     private boolean startGame;
-    private State currentStatePLAY = State.RELEASED__PLAY;
-    private State currentStateSETTINGS = State.RELEASED__SETTINGS;
-    private State currentStateQUIT = State.RELEASED__QUIT;
-    private Color main;
-	private Color hover;
+    private State currentStateofPlayButton = State.RELEASED_PLAY_BUTTON;
+    private State currentStateOfSettingsButton = State.RELEASED_SETTINGS_BUTTON;
+    private State currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
+    private Color buttonMainColor; // main color theme: Yellow
+    private Color buttonOnHoverColor; // when on hover color theme:Darker Yellow
     
     private Rectangle playClickBox;
     private Rectangle settingsClickBox;
@@ -33,25 +33,21 @@ public class IntroScreen implements Screen {
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
-        main = new Color(255, 255, 0);
-        hover = new Color(156, 156, 2);
+        buttonMainColor = new Color(255, 255, 0);
+        buttonOnHoverColor = new Color(156, 156, 2);
         playClickBox = new Rectangle(180, 310, 100, 30);
         settingsClickBox = new Rectangle(180, 350, 100, 30);
         exitClickBox =new Rectangle(180, 390, 100, 30);
-              
-
-       
         this.startGame = false;
 
-        
     }
 
     public void draw(Graphics2D graphics) {
         int height = TITLE_SCREEN_IMAGE.getHeight(null) * dimension.width / TITLE_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(TITLE_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
-        if(currentStatePLAY == State.RELEASED__PLAY){
-            graphics.setColor(main);
+        if(currentStateofPlayButton == State.RELEASED_PLAY_BUTTON){
+            graphics.setColor(buttonMainColor);
             graphics.fill(playClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
@@ -60,11 +56,9 @@ public class IntroScreen implements Screen {
             int textHeight = (int) tl.getBounds().getHeight();
             graphics.drawString("PLAY",  playClickBox.x + playClickBox.width / 2  - textWidth / 2,playClickBox.y + playClickBox.height / 2  + textHeight / 2 );
 
-
         }
-        
-        if(currentStateSETTINGS == State.RELEASED__SETTINGS){
-            graphics.setColor(main);
+        if(currentStateOfSettingsButton == State.RELEASED_SETTINGS_BUTTON){
+            graphics.setColor(buttonMainColor);
             graphics.fill(settingsClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
@@ -74,51 +68,41 @@ public class IntroScreen implements Screen {
             graphics.drawString("SETTINGS",  settingsClickBox.x + settingsClickBox.width / 2  - textWidth / 2,settingsClickBox.y + settingsClickBox.height / 2  + textHeight / 2 );
 
         }
-        if(currentStateQUIT == State.RELEASED__QUIT){
-            graphics.setColor(main);
+        if(currentStateOfQuitButton == State.RELEASED_QUIT_BUTTON){
+            graphics.setColor(buttonMainColor);
             graphics.fill(exitClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
-          
             int textWidth = (int)graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
             TextLayout tl = new TextLayout("QUIT",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
             int textHeight = (int) tl.getBounds().getHeight();
             graphics.drawString("QUIT",  exitClickBox.x + exitClickBox.width / 2  - textWidth / 2,exitClickBox.y + exitClickBox.height / 2  + textHeight / 2 );
 		}
-		
-		 if(currentStatePLAY == State.HOVER_PLAY){
-			graphics.setColor(hover);
+		if(currentStateofPlayButton == State.HOVER_ON_PLAY_BUTTON){
+			graphics.setColor(buttonOnHoverColor);
             graphics.fill(playClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
             int textWidth = (int)graphics.getFontMetrics().getStringBounds("PLAY", graphics).getWidth();
             TextLayout tl = new TextLayout("PLAY",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
             int textHeight = (int) tl.getBounds().getHeight();
             graphics.drawString("PLAY",  playClickBox.x + playClickBox.width / 2  - textWidth / 2,playClickBox.y + playClickBox.height / 2  + textHeight / 2 );
-
         }
-        if(currentStateSETTINGS == State.HOVER_SETTINGS){
-			graphics.setColor(hover);
+        if(currentStateOfSettingsButton == State.HOVER_ON_SETTINGS_BUTTON){
+			graphics.setColor(buttonOnHoverColor);
             graphics.fill(settingsClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
-            
             int textWidth = (int)graphics.getFontMetrics().getStringBounds("SETTINGS", graphics).getWidth();
             TextLayout tl = new TextLayout("SETTINGS",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
             int textHeight = (int) tl.getBounds().getHeight();
             graphics.drawString("SETTINGS",  settingsClickBox.x + settingsClickBox.width / 2  - textWidth / 2,settingsClickBox.y + settingsClickBox.height / 2  + textHeight / 2 );
         }
-
-        if(currentStateQUIT == State.HOVER_QUIT){
-			graphics.setColor(hover);
+        if(currentStateOfQuitButton == State.HOVER_ON_QUIT_BUTTON){
+			graphics.setColor(buttonOnHoverColor);
             graphics.fill(exitClickBox);
             graphics.setColor(Color.BLACK);
             graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
-            
             int textWidth = (int)graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
             TextLayout tl = new TextLayout("QUIT",new java.awt.Font("Yu Gothic UI Semibold", 1, 14), graphics.getFontRenderContext());
             int textHeight = (int) tl.getBounds().getHeight();
@@ -134,7 +118,7 @@ public class IntroScreen implements Screen {
         return this;
     }
 
-    public void keyPressed(KeyEvent e) { //hicbir sey yapmamali
+    public void keyPressed(KeyEvent e) {
        // startGame = true; 
     }
 
@@ -144,7 +128,7 @@ public class IntroScreen implements Screen {
 
 
     private enum State{
-		HOVER_PLAY, RELEASED__PLAY,HOVER_SETTINGS, RELEASED__SETTINGS,HOVER_QUIT, RELEASED__QUIT
+		HOVER_ON_PLAY_BUTTON, RELEASED_PLAY_BUTTON,HOVER_ON_SETTINGS_BUTTON, RELEASED_SETTINGS_BUTTON,HOVER_ON_QUIT_BUTTON, RELEASED_QUIT_BUTTON
 	}
 
     @Override
@@ -153,23 +137,23 @@ public class IntroScreen implements Screen {
             MouseEvent e = (MouseEvent) event;
 
             if(playClickBox.contains(e.getPoint())){
-                currentStatePLAY = State.HOVER_PLAY;
+                currentStateofPlayButton = State.HOVER_ON_PLAY_BUTTON;
             }
             else{
-                currentStatePLAY = State.RELEASED__PLAY;
+                currentStateofPlayButton = State.RELEASED_PLAY_BUTTON;
             }
             
             if(settingsClickBox.contains(e.getPoint())){
-                currentStateSETTINGS = State.HOVER_SETTINGS;
+                currentStateOfSettingsButton = State.HOVER_ON_SETTINGS_BUTTON;
             }
             else{
-                currentStateSETTINGS = State.RELEASED__SETTINGS;
+                currentStateOfSettingsButton = State.RELEASED_SETTINGS_BUTTON;
             }
             if(exitClickBox.contains(e.getPoint())){
-                currentStateQUIT = State.HOVER_QUIT;
+                currentStateOfQuitButton = State.HOVER_ON_QUIT_BUTTON;
             }
             else{
-                currentStateQUIT = State.RELEASED__QUIT;
+                currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
             }       
             if(playClickBox.contains(e.getPoint()) && e.getClickCount()>=1){
                 startGame=true;
