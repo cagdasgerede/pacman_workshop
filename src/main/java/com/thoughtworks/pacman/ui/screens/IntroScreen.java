@@ -33,6 +33,11 @@ public class IntroScreen implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        if(e.getKeyCode() == KeyEvent.VK_H){
+            new ScoreBoard();
+        }
+        else {
+            startGame = true;
+        }
     }
 }
