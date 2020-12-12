@@ -13,7 +13,7 @@ public class Game {
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
-    private int levelA = 1;
+    private int level = 1;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -23,26 +23,26 @@ public class Game {
         this(maze, new Pacman(maze));
     }
 
-    public Game(int levelA) throws Exception {
-        this(MazeBuilder.buildWalledMaze(), levelA);
+    public Game(int level) throws Exception {
+        this(MazeBuilder.buildWalledMaze(level), level);
     }
-    private Game(Maze maze, int levelA) {
-        this(maze, new Pacman(maze), levelA);
+    private Game(Maze maze, int level) {
+        this(maze, new Pacman(maze), level);
     }
-    private Game(Maze maze, Pacman pacman, int levelA) {
+    private Game(Maze maze, Pacman pacman, int level) {
         this.maze = maze;
         this.pacman = pacman;
         this.ghosts = new Ghosts(this);
         this.pacmanTileVisitor = new PacmanTileVisitor();
-        this.levelA = levelA;
+        this.level = level;
     }
 
-    public int getLevelA() {
-        return levelA;
+    public int getLevel() {
+        return level;
     }
 
-    public void incrementLevelA() {
-        this.levelA++;
+    public void incrementLevel() {
+        this.level++;
     }
 
     private Game(Maze maze, Pacman pacman) {
@@ -82,8 +82,8 @@ public class Game {
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
-        pacman.advance(timeDeltaInMillis, levelA);
-        ghosts.advance(timeDeltaInMillis, levelA);
+        pacman.advance(timeDeltaInMillis, level);
+        ghosts.advance(timeDeltaInMillis, level);
 
         if (ghosts.killed(pacman)) {
             pacman.die();

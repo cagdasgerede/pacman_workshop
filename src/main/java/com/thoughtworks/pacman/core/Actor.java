@@ -29,9 +29,9 @@ public abstract class Actor {
         movementStrategy.jump(center.toTileCoordinate());
     }
 
-    public void advance(long timeDeltaInMillis , int levelA) {
+    public void advance(long timeDeltaInMillis , int level) {
         if (!isHalted()) {
-            advanceDistance((int) ((SPEED + ((float) (levelA - 1) / (float) 2) * 50) * timeDeltaInMillis / 1000));
+            advanceDistance((int) ((SPEED + (level - 1)  * 25) * timeDeltaInMillis / 1000));
         }
     }
 

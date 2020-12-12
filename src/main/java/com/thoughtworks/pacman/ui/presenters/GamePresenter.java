@@ -32,8 +32,8 @@ public class GamePresenter implements Presenter {
         }
     }
 
-    public void draw(Graphics2D graphics, int levelA) {
-        mazePresenter.draw(graphics, levelA);
+    public void draw(Graphics2D graphics, int level) {
+        mazePresenter.draw(graphics, level);
         pacmanPresenter.draw(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {

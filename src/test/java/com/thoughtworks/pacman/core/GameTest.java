@@ -82,8 +82,8 @@ public class GameTest {
         game.advance(10);
 
         verify(ghosts).freeGhostsBasedOnScore(0);
-        verify(pacman).advance(10, game.getLevelA());
-        verify(ghosts).advance(10, game.getLevelA());
+        verify(pacman).advance(10, game.getLevel());
+        verify(ghosts).advance(10, game.getLevel());
     }
 
     @Test

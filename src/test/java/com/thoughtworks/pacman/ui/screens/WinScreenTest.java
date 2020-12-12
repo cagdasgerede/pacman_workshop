@@ -24,7 +24,7 @@ public class WinScreenTest {
 
         winScreen.draw(graphics);
 
-        verify(graphics).drawImage(WinScreen.WIN_SCREEN_IMAGE, 0, 0, 448, 448, null);
+        verify(graphics).drawImage(WinScreen.LEVEL_WAITING_SCREEN_IMAGE, 0, 0, 448, 448, null);
     }
 
     @Test

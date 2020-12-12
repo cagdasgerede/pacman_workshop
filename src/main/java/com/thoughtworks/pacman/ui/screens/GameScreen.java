@@ -17,8 +17,8 @@ public class GameScreen implements Screen {
         this(new Game());
     }
 
-    public GameScreen(int levelA) throws Exception {
-        this(new Game(levelA));
+    public GameScreen(int level) throws Exception {
+        this(new Game(level));
     }
 
     private GameScreen(Game game) {
@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
         long timeDelta = currentFrameAt - lastFrameAt;
 
         game.advance(timeDelta);
-        gamePresenter.draw(graphics, game.getLevelA());
+        gamePresenter.draw(graphics, game.getLevel());
 
         lastFrameAt = currentFrameAt;
     }
