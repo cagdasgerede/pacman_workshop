@@ -1,11 +1,17 @@
 package com.thoughtworks.pacman.ui.screens;
-import java.awt.event.*;
-import java.awt.font.TextLayout;
-import java.awt.*;
+
+import java.awt.Image;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
+import com.thoughtworks.pacman.ui.Button;
 import com.thoughtworks.pacman.ui.ImageLoader;
 
 public class GameScreen implements Screen {
@@ -24,6 +30,8 @@ public class GameScreen implements Screen {
 
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
+
+    private Button drawRectangle;
 
     private State currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
     private State currentStateOfResumeButton = State.RELEASED_RESUME_BUTTON;
@@ -49,15 +57,13 @@ public class GameScreen implements Screen {
         this.game = game;
         this.gamePresenter = gamePresenter;
         this.lastFrameAt = System.currentTimeMillis();
-
         buttonMainColor = new Color(255, 255, 0);
         buttonOnHoverColor = new Color(156, 156, 2);
-
         invisibleImageClickBox = new Rectangle(5, 5, 40, 40);
         settingsBlock = new Rectangle(70, 100, 300, 350);
         returnClickBox = new Rectangle(120, 300, 200, 30);
         resumeClickBox = new Rectangle(170, 340, 100, 30);
-
+        drawRectangle = new Button();
 
     }
 
@@ -71,70 +77,22 @@ public class GameScreen implements Screen {
         long currentFrameAt;
 
         if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_PRESSED) {
-            graphics.setColor(new Color(0, 0, 0, 230));
-            graphics.fill(settingsBlock);
+           
             areClickBoxesVisible = true;
             stopTheGame = true;
-            graphics.setColor(Color.WHITE);
-            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 80));
-            int textWidth = (int) graphics.getFontMetrics().getStringBounds("" + game.Score, graphics).getWidth();
-            TextLayout tl = new TextLayout("" + game.Score, new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                    graphics.getFontRenderContext());
-            int textHeight = (int) tl.getBounds().getHeight();
-            graphics.drawString("" + game.Score, settingsBlock.x + settingsBlock.width / 2 - textWidth / 2,
-                    settingsBlock.y + settingsBlock.height / 2 + textHeight / 2 - 50);
-
+            drawRectangle.draw("" + game.score, new Color(0, 0, 0, 230), settingsBlock, graphics);
             if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
-                graphics.setColor(buttonMainColor);
-                graphics.fill(returnClickBox);
-                graphics.setColor(Color.BLACK);
-                graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-                textWidth = (int) graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-                tl = new TextLayout("RETURN TO MAIN MENU", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                        graphics.getFontRenderContext());
-                textHeight = (int) tl.getBounds().getHeight();
-                graphics.drawString("RETURN TO MAIN MENU", returnClickBox.x + returnClickBox.width / 2 - textWidth / 2,
-                        returnClickBox.y + returnClickBox.height / 2 + textHeight / 2);
-
+                drawRectangle.draw("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
             }
             if (currentStateOfReturnButton == State.HOVER_ON_RETURN_BUTTON) {
-                graphics.setColor(buttonOnHoverColor);
-                graphics.fill(returnClickBox);
-                graphics.setColor(Color.BLACK);
-                graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-                textWidth = (int) graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-                tl = new TextLayout("RETURN TO MAIN MENU", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                        graphics.getFontRenderContext());
-                textHeight = (int) tl.getBounds().getHeight();
-                graphics.drawString("RETURN TO MAIN MENU", returnClickBox.x + returnClickBox.width / 2 - textWidth / 2,
-                        returnClickBox.y + returnClickBox.height / 2 + textHeight / 2);
-
+                drawRectangle.draw("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
             }
             if (currentStateOfResumeButton == State.RELEASED_RESUME_BUTTON) {
-                graphics.setColor(buttonMainColor);
-                graphics.fill(resumeClickBox);
-                graphics.setColor(Color.BLACK);
-                graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
+                drawRectangle.draw("RESUME", buttonMainColor, resumeClickBox, graphics);
 
-                textWidth = (int) graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
-                tl = new TextLayout("RESUME", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                        graphics.getFontRenderContext());
-                textHeight = (int) tl.getBounds().getHeight();
-                graphics.drawString("RESUME", resumeClickBox.x + resumeClickBox.width / 2 - textWidth / 2,
-                        resumeClickBox.y + resumeClickBox.height / 2 + textHeight / 2);
             }
             if (currentStateOfResumeButton == State.HOVER_ON_RESUME_BUTTON) {
-                graphics.setColor(buttonOnHoverColor);
-                graphics.fill(resumeClickBox);
-                graphics.setColor(Color.BLACK);
-                graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
-                textWidth = (int) graphics.getFontMetrics().getStringBounds("RESUME", graphics).getWidth();
-                tl = new TextLayout("RESUME", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                        graphics.getFontRenderContext());
-                textHeight = (int) tl.getBounds().getHeight();
-                graphics.drawString("RESUME", resumeClickBox.x + resumeClickBox.width / 2 - textWidth / 2,
-                        resumeClickBox.y + resumeClickBox.height / 2 + textHeight / 2);
+                drawRectangle.draw("RESUME", buttonOnHoverColor, resumeClickBox, graphics);
             }
 
         } else if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) { 
@@ -144,15 +102,11 @@ public class GameScreen implements Screen {
             graphics.fill(resumeClickBox); // clear resume button
             areClickBoxesVisible = false;
             stopTheGame = false;
-
         }
 
         currentFrameAt = System.currentTimeMillis();
-
         timeDelta = currentFrameAt - lastFrameAt;
-
         game.advance(timeDelta, stopTheGame);
-
         lastFrameAt = currentFrameAt;
 
     }
@@ -183,18 +137,21 @@ public class GameScreen implements Screen {
                 break;
             case KeyEvent.VK_ESCAPE:
                 if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) {
-                    game.getPacman().setNextDirection(Direction.NONE);
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_PRESSED;
                 } else {
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
                 }
-
                 break;
         }
     }
 
     private enum State {
-        HOVER_ON_RESUME_BUTTON, RELEASED_RESUME_BUTTON, HOVER_ON_RETURN_BUTTON, RELEASED_RETURN_BUTTON, SETTINGS_BUTTON_IS_PRESSED, SETTINGS_BUTTON_IS_NOT_PRESSED
+        HOVER_ON_RESUME_BUTTON,
+        RELEASED_RESUME_BUTTON,
+        HOVER_ON_RETURN_BUTTON, 
+        RELEASED_RETURN_BUTTON, 
+        SETTINGS_BUTTON_IS_PRESSED, 
+        SETTINGS_BUTTON_IS_NOT_PRESSED
     }
 
 	@Override
@@ -204,41 +161,29 @@ public class GameScreen implements Screen {
             
             if (invisibleImageClickBox.contains(e.getPoint()) && e.getID() == MouseEvent.MOUSE_CLICKED) {
                 if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) {
-                    game.getPacman().setNextDirection(Direction.NONE);
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_PRESSED;
-
                 } else { 
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
-
                 }
             }
-            if (returnClickBox.contains(e.getPoint())) {
+            if (areClickBoxesVisible && returnClickBox.contains(e.getPoint())) {
                 currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
-            } else {
-                currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
+                if(e.getID() == MouseEvent.MOUSE_CLICKED){
+                    currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
+                    returnToIntroScreen = true;
+                }
             }
-            if (resumeClickBox.contains(e.getPoint())) {
+            else if (areClickBoxesVisible && resumeClickBox.contains(e.getPoint())) {
                 currentStateOfResumeButton = State.HOVER_ON_RESUME_BUTTON;
-            } else {
+                if(e.getID() == MouseEvent.MOUSE_CLICKED){
+                    currentStateOfResumeButton = State.HOVER_ON_RESUME_BUTTON;
+                    currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
+                }
+            } 
+            else {
+                currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
                 currentStateOfResumeButton = State.RELEASED_RESUME_BUTTON;
             }
-
-            if (areClickBoxesVisible && returnClickBox.contains(e.getPoint()) && e.getID() == MouseEvent.MOUSE_CLICKED) {
-                currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
-                returnToIntroScreen = true;
-
-            }
-
-            if (areClickBoxesVisible && resumeClickBox.contains(e.getPoint()) && e.getID() == MouseEvent.MOUSE_CLICKED) {
-                currentStateOfResumeButton = State.HOVER_ON_RESUME_BUTTON;
-                currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
-
-            }
-
         }
-    
-		
 	}
-
-    
 }

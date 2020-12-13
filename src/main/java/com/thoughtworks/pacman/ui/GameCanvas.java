@@ -3,8 +3,7 @@ package com.thoughtworks.pacman.ui;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.screens.IntroScreen;
 
-import java.awt.*;
-
+import java.awt.Toolkit;
 import java.awt.AWTEvent;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -12,12 +11,13 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.AWTEventListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JPanel;
-import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas implements KeyListener, AWTEventListener {
@@ -68,6 +68,6 @@ public class GameCanvas extends Canvas implements KeyListener, AWTEventListener 
 
     @Override
     public void eventDispatched(AWTEvent event) {
-        currentScreen.eventDispatcher((MouseEvent)event);
+        currentScreen.eventDispatcher((MouseEvent) event);
     }
 }

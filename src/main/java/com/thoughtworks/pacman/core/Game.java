@@ -16,7 +16,7 @@ public class Game {
 
     private boolean isItOnPause;
 
-    public int Score;
+    public int score;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -56,16 +56,16 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
-    public void advance(long timeDeltaInMillis,boolean isItStopped) {
+    public void advance(long timeDeltaInMillis, boolean isItStopped) {
         if (pacman.isDead()) {
             return;
         }
-        isItOnPause =isItStopped;
-        Score = maze.getScore();
+        isItOnPause = isItStopped;
+        score = maze.getScore();
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
-        pacman.advance(timeDeltaInMillis,isItStopped);
-        ghosts.advance(timeDeltaInMillis,isItStopped);
+        pacman.advance(timeDeltaInMillis, isItStopped);
+        ghosts.advance(timeDeltaInMillis, isItStopped);
 
         if (ghosts.killed(pacman)) {
             pacman.die();

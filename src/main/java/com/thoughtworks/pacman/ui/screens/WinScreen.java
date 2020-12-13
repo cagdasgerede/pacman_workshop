@@ -3,10 +3,13 @@ package com.thoughtworks.pacman.ui.screens;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.TextLayout;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.Button;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
@@ -26,12 +29,15 @@ public class WinScreen implements Screen {
     private Rectangle returnClickBox;
     private Rectangle exitClickBox;
 
+    private Button drawRectangle;
+
     public WinScreen(Game game) {
         this.dimension = game.getDimension();
         buttonMainColor = new Color(255, 255, 0);
         buttonOnHoverColor = new Color(156, 156, 2);
         returnClickBox = new Rectangle(130, 450, 200, 30);
         exitClickBox = new Rectangle(180, 490, 100, 30);
+        drawRectangle = new Button();
         this.game = game;
         this.startGame = false;
     }
@@ -41,57 +47,18 @@ public class WinScreen implements Screen {
         graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
         if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
-            graphics.setColor(buttonMainColor);
-            graphics.fill(returnClickBox);
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-            int textWidth = (int) graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-            TextLayout tl = new TextLayout("RETURN TO MAIN MENU", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                    graphics.getFontRenderContext());
-            int textHeight = (int) tl.getBounds().getHeight();
-            graphics.drawString("RETURN TO MAIN MENU", returnClickBox.x + returnClickBox.width / 2 - textWidth / 2,
-                    returnClickBox.y + returnClickBox.height / 2 + textHeight / 2);
-
+            drawRectangle.draw("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
         }
         if (currentStateOfReturnButton == State.HOVER_ON_RETURN_BUTTON) {
-            graphics.setColor(buttonOnHoverColor);
-            graphics.fill(returnClickBox);
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-            int textWidth = (int) graphics.getFontMetrics().getStringBounds("RETURN TO MAIN MENU", graphics).getWidth();
-            TextLayout tl = new TextLayout("RETURN TO MAIN MENU", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                    graphics.getFontRenderContext());
-            int textHeight = (int) tl.getBounds().getHeight();
-            graphics.drawString("RETURN TO MAIN MENU", returnClickBox.x + returnClickBox.width / 2 - textWidth / 2,
-                    returnClickBox.y + returnClickBox.height / 2 + textHeight / 2);
-
+            drawRectangle.draw("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
         }
 
         if (currentStateOfQuitButton == State.RELEASED_QUIT_BUTTON) {
-            graphics.setColor(buttonMainColor);
-            graphics.fill(exitClickBox);
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-            int textWidth = (int) graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
-            TextLayout tl = new TextLayout("QUIT", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                    graphics.getFontRenderContext());
-            int textHeight = (int) tl.getBounds().getHeight();
-            graphics.drawString("QUIT", exitClickBox.x + exitClickBox.width / 2 - textWidth / 2,
-                    exitClickBox.y + exitClickBox.height / 2 + textHeight / 2);
+            drawRectangle.draw("QUIT", buttonMainColor, exitClickBox, graphics);
         }
 
         if (currentStateOfQuitButton == State.HOVER_ON_QUIT_BUTTON) {
-            graphics.setColor(buttonOnHoverColor);
-            graphics.fill(exitClickBox);
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14));
-
-            int textWidth = (int) graphics.getFontMetrics().getStringBounds("QUIT", graphics).getWidth();
-            TextLayout tl = new TextLayout("QUIT", new java.awt.Font("Yu Gothic UI Semibold", 1, 14),
-                    graphics.getFontRenderContext());
-            int textHeight = (int) tl.getBounds().getHeight();
-            graphics.drawString("QUIT", exitClickBox.x + exitClickBox.width / 2 - textWidth / 2,
-                    exitClickBox.y + exitClickBox.height / 2 + textHeight / 2);
+            drawRectangle.draw("QUIT", buttonOnHoverColor, exitClickBox, graphics);
         }
     }
 
@@ -111,7 +78,10 @@ public class WinScreen implements Screen {
     }
 
     private enum State {
-        HOVER_ON_RETURN_BUTTON, RELEASED_RETURN_BUTTON, HOVER_ON_QUIT_BUTTON, RELEASED_QUIT_BUTTON
+        HOVER_ON_RETURN_BUTTON,
+        RELEASED_RETURN_BUTTON, 
+        HOVER_ON_QUIT_BUTTON, 
+        RELEASED_QUIT_BUTTON
     }
 
     @Override
@@ -121,19 +91,17 @@ public class WinScreen implements Screen {
 
             if (returnClickBox.contains(e.getPoint())) {
                 currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
-            } else {
-                currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
+                if(e.getID() == MouseEvent.MOUSE_CLICKED)
+                    startGame = true;
             }
-            if (exitClickBox.contains(e.getPoint())) {
+            else if (exitClickBox.contains(e.getPoint())) {
                 currentStateOfQuitButton = State.HOVER_ON_QUIT_BUTTON;
-            } else {
+                if(e.getID() == MouseEvent.MOUSE_CLICKED)
+                    System.exit(0);
+            } 
+            else {
+                currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
                 currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
-            }
-            if (returnClickBox.contains(e.getPoint()) && e.getClickCount() >= 1) {
-                startGame = true;
-            }
-            if (exitClickBox.contains(e.getPoint()) && e.getClickCount() >= 1) {
-                System.exit(0);
             }
 
         }

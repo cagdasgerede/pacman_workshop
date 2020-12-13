@@ -4,7 +4,6 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.actors.Pacman;
 
-
 public class Ghosts {
     private Ghost blinky;
     private Ghost pinky;
@@ -51,11 +50,11 @@ public class Ghosts {
         }        
     }
 
-    public void advance(long timeDeltaInMillis,boolean isItStopped) {
-        blinky.advance(timeDeltaInMillis,isItStopped);
-        pinky.advance(timeDeltaInMillis,isItStopped);
-        inky.advance(timeDeltaInMillis,isItStopped);
-        clyde.advance(timeDeltaInMillis,isItStopped);
+    public void advance(long timeDeltaInMillis, boolean isItStopped) {
+        blinky.advance(timeDeltaInMillis, isItStopped);
+        pinky.advance(timeDeltaInMillis, isItStopped);
+        inky.advance(timeDeltaInMillis, isItStopped);
+        clyde.advance(timeDeltaInMillis, isItStopped);
     }
 
     public boolean killed(Pacman pacman) {
