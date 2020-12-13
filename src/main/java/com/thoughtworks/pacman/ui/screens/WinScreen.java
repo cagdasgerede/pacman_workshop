@@ -15,6 +15,7 @@ public class WinScreen implements Screen {
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
+    static final int maxLevel=3;
 
     public WinScreen(Game game) {
         this.dimension = game.getDimension();
@@ -35,7 +36,7 @@ public class WinScreen implements Screen {
 
     public Screen getNextScreen() throws Exception{
         if (startGame) {
-            if(game.getLevel() < 3) {
+            if(game.getLevel() < maxLevel) {
                 game.incrementLevel();
                 return new GameScreen(game.getLevel());
             }

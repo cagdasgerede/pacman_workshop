@@ -18,13 +18,23 @@ public class WinScreenTest {
     private Graphics2D graphics;
 
     @Test
-    public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
-        Game game = new Game();
-        WinScreen winScreen = new WinScreen(game);
+    public void draw_shouldDrawSplashImageAcrossWidthForLevelWaitingScreen() throws Exception {
+        Game gameLevelWaitingScreen = new Game();
+        WinScreen winScreenLevelWaitingScreen = new WinScreen(gameLevelWaitingScreen);
 
-        winScreen.draw(graphics);
+        winScreenLevelWaitingScreen.draw(graphics);
 
         verify(graphics).drawImage(WinScreen.LEVEL_WAITING_SCREEN_IMAGE, 0, 0, 448, 448, null);
+    }
+
+    @Test
+    public void draw_shouldDrawSplashImageAcrossWidthForWinScreenImage() throws Exception {
+        Game gameWinScreenImage = new Game(3);
+        WinScreen winScreenWinScreenImage = new WinScreen(gameWinScreenImage);
+
+        winScreenWinScreenImage.draw(graphics);
+
+        verify(graphics).drawImage(WinScreen.WIN_SCREEN_IMAGE, 0, 0, 448, 448, null);
     }
 
     @Test
