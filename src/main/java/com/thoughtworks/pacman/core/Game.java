@@ -75,6 +75,10 @@ public class Game {
     }
 
     public boolean lost() {
+        if(pacman.isDead()){
+            
+            maze.writeAchievements();
+        }
         return pacman.isDead();
     }
 }

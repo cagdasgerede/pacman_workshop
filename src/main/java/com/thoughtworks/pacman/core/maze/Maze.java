@@ -13,11 +13,16 @@ public class Maze {
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
+    private final long createdMillis = System.currentTimeMillis();
+    int totalItems;
+    Achievements achievement;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
+        totalItems = 245;
+        achievement = new Achievements();
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {
@@ -46,10 +51,19 @@ public class Maze {
     }
 
     public boolean hasDotsLeft() {
+        achievement.setTimeplayed(getAgeInSeconds());
         DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
         int dotsLeft = 0;
         for (Tile tile : tiles.values()) {
             dotsLeft += tile.visit(dotsLeftVisitor);
+        }
+        achievement.setItemsCollected(totalItems-dotsLeft);
+        
+
+        if(dotsLeft == 0){
+            achievement.setTimeFinished(getAgeInSeconds());
+            achievement.initializeAchievements();
+
         }
         return dotsLeft > 0;
     }
@@ -60,6 +74,20 @@ public class Maze {
         } else {
             return new EmptyTile(tileCoordinate);
         }
+    }
+
+
+    public  int getAgeInSeconds() {
+        long nowMillis = System.currentTimeMillis();
+        return (int)((nowMillis - this.createdMillis) / 1000);
+    }
+    public void writeAchievements(){
+        
+        achievement.initializeAchievements();
+    }
+    public void incrementDirections(){
+
+        achievement.incrementTurnsTook();
     }
 
     @Override

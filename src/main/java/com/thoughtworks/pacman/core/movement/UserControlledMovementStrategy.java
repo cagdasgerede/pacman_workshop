@@ -1,4 +1,5 @@
 package com.thoughtworks.pacman.core.movement;
+import java.util.concurrent.TimeUnit;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
@@ -9,6 +10,7 @@ public class UserControlledMovementStrategy implements MovementStrategy {
     private Direction desiredDirection;
     private Direction previousDirection;
     private Direction direction;
+    public static int movementNumber;
 
     public UserControlledMovementStrategy(Maze maze, Direction startDirection) {
         this.maze = maze;
@@ -18,8 +20,9 @@ public class UserControlledMovementStrategy implements MovementStrategy {
 
     public void setNextDirection(Direction nextDirection) {
         this.desiredDirection = nextDirection;
+        
     }
-
+    
     public Direction getDirection() {
         return isMoving() ? direction : previousDirection;
     }
