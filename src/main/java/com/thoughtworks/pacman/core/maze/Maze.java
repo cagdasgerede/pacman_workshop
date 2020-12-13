@@ -58,12 +58,11 @@ public class Maze {
             dotsLeft += tile.visit(dotsLeftVisitor);
         }
         achievement.setItemsCollected(totalItems-dotsLeft);
-        
 
         if(dotsLeft == 0){
             achievement.setTimeFinished(getAgeInSeconds());
+            achievement.setWon(true);
             achievement.initializeAchievements();
-
         }
         return dotsLeft > 0;
     }
@@ -74,6 +73,9 @@ public class Maze {
         } else {
             return new EmptyTile(tileCoordinate);
         }
+    }
+    public Achievements getAchievement(){
+        return this.achievement;
     }
 
 
@@ -86,8 +88,14 @@ public class Maze {
         achievement.initializeAchievements();
     }
     public void incrementDirections(){
-
         achievement.incrementTurnsTook();
+        System.out.println(achievement.turnsTook);
+    }
+    public void setTimePlayed(int time){
+        achievement.setTimeplayed(time);
+    }
+    public void resetAchievements(){
+        achievement.resetAchievements();
     }
 
     @Override

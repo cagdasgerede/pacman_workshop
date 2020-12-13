@@ -13,6 +13,7 @@ public class Game {
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
+    private final long createdMillis = System.currentTimeMillis();
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -71,14 +72,33 @@ public class Game {
     }
 
     public boolean won() {
+        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedFinished()){
+        }
+        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedPlayed()){
+        }
+        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedCollected()){
+        }
+        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedTook()){
+        }
         return !maze.hasDotsLeft();
     }
 
     public boolean lost() {
         if(pacman.isDead()){
             
+            if(this.getMaze().getAchievement().isNewlyAchievedPlayed()){
+            }
+            if(this.getMaze().getAchievement().isNewlyAchievedCollected()){
+            }
+            if(this.getMaze().getAchievement().isNewlyAchievedTook()){
+            }
+            maze.setTimePlayed(getAgeInSeconds());
             maze.writeAchievements();
         }
         return pacman.isDead();
+    }
+    public  int getAgeInSeconds() {
+        long nowMillis = System.currentTimeMillis();
+        return (int)((nowMillis - this.createdMillis) / 1000);
     }
 }

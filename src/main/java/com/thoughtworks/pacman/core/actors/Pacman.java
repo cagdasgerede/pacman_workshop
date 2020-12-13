@@ -4,13 +4,11 @@ import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
-import com.thoughtworks.pacman.core.maze.Achievements;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
 public class Pacman extends Actor {
     private boolean dead = false;
-    private final long createdMillis = System.currentTimeMillis();
     public Pacman(Maze maze) {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
     }
@@ -20,15 +18,11 @@ public class Pacman extends Actor {
     }
 
     public void die() {
-        System.out.println("dead ! total time:" + getAgeInSeconds());
-        Achievements.timePlayed = getAgeInSeconds();
+
         this.dead = true;
     }
 
-    public  int getAgeInSeconds() {
-        long nowMillis = System.currentTimeMillis();
-        return (int)((nowMillis - this.createdMillis) / 1000);
-    }
+    
     
     
 

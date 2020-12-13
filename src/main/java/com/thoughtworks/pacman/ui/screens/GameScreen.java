@@ -50,19 +50,26 @@ public class GameScreen implements Screen {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_LEFT:
             game.getPacman().setNextDirection(Direction.LEFT);
-            game.getMaze().incrementDirections();
+            if(game.getPacman().getDirection() != Direction.LEFT)
+                game.getMaze().incrementDirections();
             break;
         case KeyEvent.VK_RIGHT:
             game.getPacman().setNextDirection(Direction.RIGHT);
-            game.getMaze().incrementDirections();
+            if(game.getPacman().getDirection() != Direction.RIGHT)
+                game.getMaze().incrementDirections();
             break;
         case KeyEvent.VK_UP:
             game.getPacman().setNextDirection(Direction.UP);
-            game.getMaze().incrementDirections();
+            if(game.getPacman().getDirection() != Direction.UP)
+                game.getMaze().incrementDirections();
             break;
         case KeyEvent.VK_DOWN:
             game.getPacman().setNextDirection(Direction.DOWN);
-            game.getMaze().incrementDirections();
+            if(game.getPacman().getDirection() != Direction.DOWN)
+                game.getMaze().incrementDirections();
+            break;
+        case KeyEvent.VK_R:
+            game.getMaze().resetAchievements();
             break;
         }
     }
