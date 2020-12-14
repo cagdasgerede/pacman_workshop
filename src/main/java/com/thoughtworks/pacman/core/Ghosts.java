@@ -51,11 +51,11 @@ public class Ghosts {
         }        
     }
 
-    public void advance(long timeDeltaInMillis,/*Ahmet*/int levelA/*Ahmet*/) {
-        blinky.advance(timeDeltaInMillis,levelA);
-        pinky.advance(timeDeltaInMillis,levelA);
-        inky.advance(timeDeltaInMillis,levelA);
-        clyde.advance(timeDeltaInMillis,levelA);
+    public void advance(long timeDeltaInMillis, int level) {
+        blinky.advance(timeDeltaInMillis,level);
+        pinky.advance(timeDeltaInMillis,level);
+        inky.advance(timeDeltaInMillis,level);
+        clyde.advance(timeDeltaInMillis,level);
     }
 
     public boolean killed(Pacman pacman) {
