@@ -7,10 +7,11 @@ import java.io.FileWriter;
 import java.io.File;
 public class Achievements {
     boolean isFinished,isWon,isPlayed,isCollected,isTook;
-     int timeFinished;
-     public static int timePlayed;
-     int itemsCollected;
-     int turnsTook;
+    int timeFinished;
+    public static int timePlayed;
+    int itemsCollected;
+    int turnsTook;
+    boolean isReseted;
 
     public Achievements() {
 
@@ -19,9 +20,10 @@ public class Achievements {
         itemsCollected = 0;
         turnsTook = 0;
         isWon = false;
-        if(readFromFile()){
+        isReseted = false;
+        if(readFromFile());
 
-        }
+        
 
     }
 
@@ -112,14 +114,10 @@ public class Achievements {
             myWriter.close();
 
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
         
-        System.out.println("Time finished:" + timeFinished);
-        System.out.println("Time played:" + timePlayed);
-        System.out.println("items collected:" + itemsCollected);
-        System.out.println("turns took:" + turnsTook);
+        
 
 
 
@@ -170,7 +168,7 @@ public class Achievements {
           isPlayed = false;
           isCollected = false;
           isTook = false;
-
+          isReseted = true;
     }
     public boolean isNewlyAchievedFinished(){
         if(!isFinished && timeFinished <=120){
@@ -210,5 +208,12 @@ public class Achievements {
     public void setWon(boolean isWonTheGame){
         isWon = isWonTheGame;
     }
+    public void checkTurnsTook(){
+       if(this.turnsTook >= 150){
+           isTook = true;
+
+       } 
+    }
+    
 
 }

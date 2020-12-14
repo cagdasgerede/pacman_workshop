@@ -62,6 +62,14 @@ public class Maze {
         if(dotsLeft == 0){
             achievement.setTimeFinished(getAgeInSeconds());
             achievement.setWon(true);
+            if(achievement.isNewlyAchievedFinished());
+            
+            if(achievement.isNewlyAchievedPlayed());
+            
+            if(achievement.isNewlyAchievedCollected());
+            
+            if(achievement.isNewlyAchievedTook());
+            
             achievement.initializeAchievements();
         }
         return dotsLeft > 0;

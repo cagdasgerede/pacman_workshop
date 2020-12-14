@@ -72,26 +72,19 @@ public class Game {
     }
 
     public boolean won() {
-        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedFinished()){
-        }
-        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedPlayed()){
-        }
-        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedCollected()){
-        }
-        if(!maze.hasDotsLeft() && this.getMaze().getAchievement().isNewlyAchievedTook()){
-        }
+        
         return !maze.hasDotsLeft();
     }
 
     public boolean lost() {
         if(pacman.isDead()){
             
-            if(this.getMaze().getAchievement().isNewlyAchievedPlayed()){
-            }
-            if(this.getMaze().getAchievement().isNewlyAchievedCollected()){
-            }
-            if(this.getMaze().getAchievement().isNewlyAchievedTook()){
-            }
+            if(this.getMaze().getAchievement().isNewlyAchievedPlayed());
+            
+            if(this.getMaze().getAchievement().isNewlyAchievedCollected());
+            
+            if(this.getMaze().getAchievement().isNewlyAchievedTook());
+            
             maze.setTimePlayed(getAgeInSeconds());
             maze.writeAchievements();
         }
