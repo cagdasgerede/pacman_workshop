@@ -96,4 +96,12 @@ public class GameTest {
 
         verify(pacman).die();
     }
+
+    @Test 
+    public void shouldAddClonePacmanWhenToldSo() throws Exception {
+        Game game = new Game(maze, pacman, ghosts);
+        game.addClonePacman();
+
+        assertThat(game.hasClonePacman(), is(true));
+    }
 }

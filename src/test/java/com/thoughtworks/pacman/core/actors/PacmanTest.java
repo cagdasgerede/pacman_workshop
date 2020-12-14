@@ -16,6 +16,11 @@ import com.thoughtworks.pacman.core.maze.MazeBuilder;
 public class PacmanTest {
     private Pacman pacman;
 
+    /*
+        Clone pacman tests in not required since all visual tests are done in PacmanTest
+        and the movement tests are done in RandomMovementStrategyTest.
+    */ 
+
     @Before
     public void setUp() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();

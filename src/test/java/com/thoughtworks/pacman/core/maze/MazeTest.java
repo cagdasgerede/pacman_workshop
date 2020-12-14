@@ -9,6 +9,7 @@ import java.awt.Dimension;
 
 import com.thoughtworks.pacman.core.TileCoordinate;
 import org.junit.Test;
+import org.junit.internal.ExactComparisonCriteria;
 
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
@@ -83,5 +84,16 @@ public class MazeTest {
         dot.eat();
 
         assertThat(maze.hasDotsLeft(), is(false));
+    }
+
+    @Test
+    public void shouldInsertCloneItemWhenToldSo() throws Exception{
+        String mazeDescription = "+++\n+.+\n+++";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+
+        maze.insertCloneItem(new TileCoordinate(2, 1));
+
+        assertThat(maze.isCloneItemPresent(), is(true));
+        assertThat(maze.getCloneItem() == null, is(false));
     }
 }
