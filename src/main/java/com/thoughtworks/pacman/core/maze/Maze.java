@@ -97,7 +97,6 @@ public class Maze {
     }
     public void incrementDirections(){
         achievement.incrementTurnsTook();
-        System.out.println(achievement.turnsTook);
     }
     public void setTimePlayed(int time){
         achievement.setTimeplayed(time);

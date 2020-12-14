@@ -157,7 +157,6 @@ public class Achievements {
                 myWriter.close();
 
             } catch (IOException e) {
-                System.out.println("An error occurred.");
                 e.printStackTrace();
             }
             System.out.println("Achievements Reseted. ");
@@ -179,7 +178,6 @@ public class Achievements {
     }
     public  boolean isNewlyAchievedPlayed(){
         if(!isPlayed && timePlayed  >=180){
-            System.out.println("ACHIVEMENT newly UNLOCKED");
             JOptionPane.showMessageDialog(null, "Congratrulations ! Playing over 3 minutes achievement unlocked");
 
             return true;

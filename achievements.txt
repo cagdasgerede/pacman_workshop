@@ -1,4 +1,4 @@
-Level finished in 2 minutes: ACHIEVEMENT UNLOCKED !
+Level finished in 2 minutes: NOT ACHIEVED
 Total Time Played 3 minutes: NOT ACHIEVED
-200 items collected: NOT ACHIEVED
+200 items collected: ACHIEVEMENT UNLOCKED !
 Pacman took 150 turns: NOT ACHIEVED
