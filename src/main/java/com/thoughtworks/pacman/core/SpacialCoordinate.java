@@ -14,6 +14,15 @@ public class SpacialCoordinate {
         this.y = y;
     }
 
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
     public SpacialCoordinate add(SpacialCoordinate spacialCoordinate) {
         return new SpacialCoordinate(x + spacialCoordinate.x, y + spacialCoordinate.y);
     }

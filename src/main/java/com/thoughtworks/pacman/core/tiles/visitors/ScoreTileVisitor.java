@@ -4,6 +4,7 @@ import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.SpecialItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class ScoreTileVisitor implements TileVisitor<Integer> {
@@ -11,6 +12,10 @@ public class ScoreTileVisitor implements TileVisitor<Integer> {
 
     public Integer visit(Dot dot) {
         return dot.isEaten() ? SCORE_PER_DOT : 0;
+    }
+
+    public Integer visit(SpecialItem specialItem) {
+        return 0;
     }
 
     public Integer visit(Wall wall) {

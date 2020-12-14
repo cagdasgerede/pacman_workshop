@@ -6,6 +6,7 @@ import com.thoughtworks.pacman.core.Game;
 public class Ghost extends Actor {
     private final GhostType type;
     private boolean free;
+    private boolean freeze = false; //yeni
 
     public Ghost(Game game, GhostType type) {
         super(game.getMaze(), type.getMovementStrategy(game) , type.getStartCoordinate());
@@ -23,6 +24,18 @@ public class Ghost extends Actor {
     public void free() {
         jump(GhostType.doorExit());
         free = true;
+    }
+
+    public void freeze(){//yeni
+        freeze = true;
+    }
+
+    public void notFreeze(){//yeni
+        freeze = false;
+    }
+
+    public boolean isFreezed(){//yeni
+        return !freeze;
     }
 
     @Override

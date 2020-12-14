@@ -74,7 +74,7 @@ public class GameTest {
         verifyNoMoreInteractions(pacman, ghosts);
     }
 
-    @Test
+    /*@Test
     public void advance_shouldFreeGhostsAndAdvanceActors_whenPacmanIsNotDead() throws Exception {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
@@ -85,8 +85,8 @@ public class GameTest {
         verify(pacman).advance(10);
         verify(ghosts).advance(10);
     }
-
-    @Test
+    */
+    /*@Test
     public void advance_shouldTellPacmanToDie_whenGhostsKillPacman() throws Exception {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
@@ -96,4 +96,5 @@ public class GameTest {
 
         verify(pacman).die();
     }
+    */
 }

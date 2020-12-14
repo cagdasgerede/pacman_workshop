@@ -38,7 +38,7 @@ public class Ghosts {
     public Ghost getClyde() {
         return clyde;
     }
-
+    
     public void freeGhostsBasedOnScore(int score) {
         if (blinky.isTrapped()) {
             blinky.free();
@@ -48,14 +48,23 @@ public class Ghosts {
             inky.free();
         } else if (clyde.isTrapped() && score > 600) {
             clyde.free();
-        }        
+        }
     }
 
-    public void advance(long timeDeltaInMillis) {
-        blinky.advance(timeDeltaInMillis);
-        pinky.advance(timeDeltaInMillis);
-        inky.advance(timeDeltaInMillis);
-        clyde.advance(timeDeltaInMillis);
+    public void advance(long timeDeltaInMillis) { //yeni
+
+        if(blinky.isFreezed()){
+            blinky.advance(timeDeltaInMillis);
+        }
+        if(pinky.isFreezed()){
+            pinky.advance(timeDeltaInMillis);
+        }   
+        if(inky.isFreezed()){
+            inky.advance(timeDeltaInMillis);
+        }
+        if(clyde.isFreezed()){
+            clyde.advance(timeDeltaInMillis);
+        }
     }
 
     public boolean killed(Pacman pacman) {

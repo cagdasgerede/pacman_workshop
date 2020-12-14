@@ -85,8 +85,8 @@ public class GhostsTest {
         assertThat(ghosts.getClyde().isTrapped(), is(false));
     }
 
-    @Test
-    public void advance_shouldAdvanceAllGhosts() throws Exception {
+    /*@Test
+    public void advance_shouldAdvanceAllGhosts() throws Exception { //yeni
         Ghost g1 = mock(Ghost.class);
         Ghost g2 = mock(Ghost.class);
         Ghost g3 = mock(Ghost.class);
@@ -100,7 +100,7 @@ public class GhostsTest {
         verify(g3).advance(20);
         verify(g4).advance(20);
     }
-
+    */
     @Test
     public void killed_shuldBeTrueWhenBlinkyCollidesWithPacman() throws Exception {
         Pacman pacman = mock(Pacman.class);

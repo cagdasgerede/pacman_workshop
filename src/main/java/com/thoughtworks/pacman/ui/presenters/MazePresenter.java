@@ -29,11 +29,21 @@ public class MazePresenter implements Presenter {
         }
     }
 
+
     public void draw(Graphics2D graphics) {
         for (Presenter tilePresenter : mazeTiles) {
             tilePresenter.draw(graphics);
         }
         drawScore(graphics);
+    }
+
+    public void drawSI(Graphics2D graphics){
+            if(maze.isSIExist()){
+                toPresenter(maze.getSpecialItem()).draw(graphics);
+            }
+            
+        
+        
     }
 
     private void drawScore(Graphics2D graphics) {

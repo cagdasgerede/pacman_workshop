@@ -30,6 +30,7 @@ public class GamePresenter implements Presenter {
                 ghostPresenter.draw(graphics);
             }
         }
+        mazePresenter.drawSI(graphics);//yeni
     }
 
     public boolean isDying() {

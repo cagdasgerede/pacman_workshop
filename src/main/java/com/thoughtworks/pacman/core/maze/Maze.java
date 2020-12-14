@@ -6,10 +6,12 @@ import java.util.Map;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.SpecialItem;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
 public class Maze {
+    private SpecialItem specialItem;
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
@@ -54,12 +56,42 @@ public class Maze {
         return dotsLeft > 0;
     }
 
+
+
     public Tile tileAt(TileCoordinate tileCoordinate) {
         if (tiles.containsKey(tileCoordinate)) {
             return tiles.get(tileCoordinate);
         } else {
             return new EmptyTile(tileCoordinate);
         }
+    }
+
+    public Tile getSpecialItem(){
+        return specialItem;
+    }
+
+    public void eat(){
+        if(specialItem == null){
+            return;
+        }
+        this.specialItem.eat();
+        this.removeCloneItem();
+    
+    }
+
+
+    public void insert(TileCoordinate tileCoordinate){
+        this.specialItem = new SpecialItem(tileCoordinate);
+    }
+
+    public void removeCloneItem()
+    {
+        this.specialItem = null;
+    }
+
+
+    public boolean isSIExist(){
+        return specialItem != null;
     }
 
     @Override
