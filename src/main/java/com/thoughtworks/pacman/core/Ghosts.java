@@ -52,10 +52,10 @@ public class Ghosts {
     }
 
     public void advance(long timeDeltaInMillis, int level) {
-        blinky.advance(timeDeltaInMillis,level);
-        pinky.advance(timeDeltaInMillis,level);
-        inky.advance(timeDeltaInMillis,level);
-        clyde.advance(timeDeltaInMillis,level);
+        blinky.advance(timeDeltaInMillis, level);
+        pinky.advance(timeDeltaInMillis, level);
+        inky.advance(timeDeltaInMillis, level);
+        clyde.advance(timeDeltaInMillis, level);
     }
 
     public boolean killed(Pacman pacman) {
