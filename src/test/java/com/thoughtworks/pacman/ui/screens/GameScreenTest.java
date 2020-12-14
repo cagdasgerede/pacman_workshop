@@ -136,16 +136,4 @@ public class GameScreenTest {
         verify(pacman).setNextDirection(eq(Direction.DOWN));
     }
 
-    @Test
-    public void keyPressed_haltTheGame() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman, ghosts);
-        GameScreen gameScreen = new GameScreen(game, gamePresenter);
-
-        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_ESCAPE);
-        gameScreen.keyPressed(keyEvent);
-
-        verify(pacman).setNextDirection(eq(Direction.NONE));
-    }
-
 }
