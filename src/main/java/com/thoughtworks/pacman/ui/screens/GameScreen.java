@@ -18,7 +18,7 @@ public class GameScreen implements Screen , Serializable {
         this(new Game());
     }
 
-    private GameScreen(Game game) {
+    public GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
 

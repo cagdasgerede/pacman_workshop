@@ -30,6 +30,13 @@ public class Game implements Serializable {
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
+    public Game(Game game){
+        this.maze = game.maze;
+        this.pacman = game.pacman;
+        this.ghosts = game.ghosts;
+        this.pacmanTileVisitor = game.pacmanTileVisitor;
+    }
+
     public Game(Maze maze, Pacman pacman, Ghosts ghosts) {
         this.maze = maze;
         this.pacman = pacman;

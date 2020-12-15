@@ -15,10 +15,13 @@ public class IntroScreen implements Screen , Serializable {
 
     private final Dimension dimension;
     private boolean startGame;
+    private boolean loadGame;
+    LoadScreen loadScreen;
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
+        this.loadGame = false;
     }
 
     public void draw(Graphics2D graphics) {
@@ -27,6 +30,14 @@ public class IntroScreen implements Screen , Serializable {
     }
 
     public Screen getNextScreen() throws Exception {
+        if (loadGame){
+            if(loadScreen != null) {
+                Game game = loadScreen.getGame();
+                if (game != null) {
+                    return new GameScreen(game);
+                }
+            }
+        }
         if (startGame) {
             return new GameScreen();
         }
@@ -35,7 +46,8 @@ public class IntroScreen implements Screen , Serializable {
 
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_L){
-            LoadScreen loadScreen = new LoadScreen();
+            loadGame = true;
+            loadScreen = new LoadScreen();
         }
         else{
             startGame = true;

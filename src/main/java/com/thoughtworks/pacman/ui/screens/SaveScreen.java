@@ -70,7 +70,9 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        save();
+        if(!comboBox.getSelectedItem().equals("Select Player")) {
+            save();
+        }
     }
 
     private void save(){
