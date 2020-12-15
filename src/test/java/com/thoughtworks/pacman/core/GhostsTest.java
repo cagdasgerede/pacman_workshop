@@ -100,6 +100,22 @@ public class GhostsTest {
     }
 
     @Test
+    public void advance_shouldNotAdvanceWhenOnPause() throws Exception {
+        Ghost g1 = mock(Ghost.class);
+        Ghost g2 = mock(Ghost.class);
+        Ghost g3 = mock(Ghost.class);
+        Ghost g4 = mock(Ghost.class);
+        Ghosts ghosts = new Ghosts(g1, g2, g3, g4);
+
+        ghosts.advance(20,true);
+
+        verify(g1).advance(20,true);
+        verify(g2).advance(20,true);
+        verify(g3).advance(20,true);
+        verify(g4).advance(20,true);
+    }
+
+    @Test
     public void killed_shuldBeTrueWhenBlinkyCollidesWithPacman() throws Exception {
         Pacman pacman = mock(Pacman.class);
         when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);

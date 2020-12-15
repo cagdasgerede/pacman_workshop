@@ -1,12 +1,12 @@
 package com.thoughtworks.pacman.ui.screens;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Button;

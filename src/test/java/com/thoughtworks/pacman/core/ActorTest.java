@@ -58,6 +58,16 @@ public class ActorTest {
     }
 
     @Test
+    public void advance_shouldNotMove_whenGameisOnPause() throws Exception {
+        SpacialCoordinate center = new SpacialCoordinate(10 * Tile.SIZE + 1, 5 * Tile.SIZE + Tile.SIZE / 2);
+        Actor actor = new TestActor(maze, center, movementStrategy);
+
+        actor.advance(70, true);
+
+        assertThat(actor.getCenter(), equalTo(center));
+    }
+
+    @Test
     public void advance_shouldNotMove_whenCurrentPositionIsCenterOfTileAndDirectionIsNone() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;

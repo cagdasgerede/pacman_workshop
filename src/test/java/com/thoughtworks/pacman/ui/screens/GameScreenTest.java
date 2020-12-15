@@ -2,6 +2,8 @@ package com.thoughtworks.pacman.ui.screens;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -11,17 +13,11 @@ import static org.mockito.Mockito.when;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.event.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.awt.*;
-import java.awt.Rectangle;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
@@ -43,10 +39,6 @@ public class GameScreenTest {
     private Maze maze;
     @Mock
     private Ghosts ghosts;
-
-    @Mock
-    private MouseEvent mouseEvent;
-
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
@@ -86,6 +78,24 @@ public class GameScreenTest {
         when(gamePresenter.isDying()).thenReturn(false);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(LostScreen.class));
+    }
+
+    @Test
+    public void nextScreen_shouldReturnIntroScreen_whenPressedOnReturnToMainMenuButton() throws Exception {
+        Game game = new Game();
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
+
+        gameScreen.setReturnToIntroScreen(true);
+
+        assertThat(gameScreen.getNextScreen(), instanceOf(IntroScreen.class));
+    }
+
+    @Test
+    public void stopTheGame_shouldBeFalseByDefault() throws Exception {
+        Game game = new Game();
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
+
+        assertFalse(gameScreen.getStopTheGame());
     }
 
     @Test
@@ -134,6 +144,17 @@ public class GameScreenTest {
         gameScreen.keyPressed(keyEvent);
 
         verify(pacman).setNextDirection(eq(Direction.DOWN));
+    }
+
+    @Test
+    public void keyPressed_shouldNotMove() throws Exception {
+        Game game = new Game();
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
+
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_ESCAPE);
+        gameScreen.keyPressed(keyEvent);
+
+        assertTrue(gameScreen.getStopTheGame());
     }
 
 }

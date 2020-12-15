@@ -1,11 +1,11 @@
 package com.thoughtworks.pacman.ui.screens;
 
-import java.awt.Image;
 import java.awt.Color;
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
@@ -77,9 +77,7 @@ public class GameScreen implements Screen {
         long currentFrameAt;
 
         if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_PRESSED) {
-           
             areClickBoxesVisible = true;
-            stopTheGame = true;
             drawRectangle.draw("" + game.score, new Color(0, 0, 0, 230), settingsBlock, graphics);
             if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
                 drawRectangle.draw("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
@@ -100,8 +98,7 @@ public class GameScreen implements Screen {
             graphics.fill(settingsBlock); // clear settings button
             graphics.fill(returnClickBox); // clear return to main menu button
             graphics.fill(resumeClickBox); // clear resume button
-            areClickBoxesVisible = false;
-            stopTheGame = false;
+            areClickBoxesVisible = false;;
         }
 
         currentFrameAt = System.currentTimeMillis();
@@ -138,8 +135,10 @@ public class GameScreen implements Screen {
             case KeyEvent.VK_ESCAPE:
                 if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) {
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_PRESSED;
+                    stopTheGame = true;
                 } else {
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
+                    stopTheGame = false;
                 }
                 break;
         }
@@ -154,6 +153,10 @@ public class GameScreen implements Screen {
         SETTINGS_BUTTON_IS_NOT_PRESSED
     }
 
+    public void setReturnToIntroScreen(boolean returnToIntroScreen) {
+        this.returnToIntroScreen = returnToIntroScreen;
+    }
+    
 	@Override
 	public void eventDispatcher(MouseEvent event) {
 		if (event instanceof MouseEvent) {
@@ -162,15 +165,17 @@ public class GameScreen implements Screen {
             if (invisibleImageClickBox.contains(e.getPoint()) && e.getID() == MouseEvent.MOUSE_CLICKED) {
                 if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) {
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_PRESSED;
+                    stopTheGame = true;
                 } else { 
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
+                    stopTheGame = false;
                 }
             }
             if (areClickBoxesVisible && returnClickBox.contains(e.getPoint())) {
                 currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
                 if(e.getID() == MouseEvent.MOUSE_CLICKED){
                     currentStateOfReturnButton = State.HOVER_ON_RETURN_BUTTON;
-                    returnToIntroScreen = true;
+                    setReturnToIntroScreen(true);
                 }
             }
             else if (areClickBoxesVisible && resumeClickBox.contains(e.getPoint())) {
@@ -178,6 +183,7 @@ public class GameScreen implements Screen {
                 if(e.getID() == MouseEvent.MOUSE_CLICKED){
                     currentStateOfResumeButton = State.HOVER_ON_RESUME_BUTTON;
                     currentStateofSettingsButton = State.SETTINGS_BUTTON_IS_NOT_PRESSED;
+                    stopTheGame = false;
                 }
             } 
             else {

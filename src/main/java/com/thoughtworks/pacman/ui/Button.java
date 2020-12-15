@@ -1,8 +1,8 @@
 package com.thoughtworks.pacman.ui;
 
 import java.awt.Color;
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 
 public class Button {

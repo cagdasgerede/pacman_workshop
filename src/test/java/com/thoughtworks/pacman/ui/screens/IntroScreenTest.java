@@ -20,7 +20,7 @@ public class IntroScreenTest {
     }
 
     @Test
-    public void nextScreen_shouldReturnGameScreen_whenKeyPressed() throws Exception {
+    public void nextScreen_shouldReturnGameScreen_whenPlayButtonPressed() throws Exception {
         Game game = new Game();
         IntroScreen introScreen = new IntroScreen(game);
 
