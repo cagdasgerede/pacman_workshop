@@ -34,6 +34,11 @@ public class IntroScreen implements Screen , Serializable {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        if(e.getKeyCode() == KeyEvent.VK_L){
+            LoadScreen loadScreen = new LoadScreen();
+        }
+        else{
+            startGame = true;
+        }
     }
 }

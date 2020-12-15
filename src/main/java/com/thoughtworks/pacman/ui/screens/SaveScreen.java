@@ -28,7 +28,7 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
         }
 
         frame = new JFrame("Save and Exit");
-        label = new JLabel("Select path");
+        label = new JLabel("Select Player");
         comboBox = new JComboBox<String>();
         button = new JButton("Save");
         panel = new JPanel();
@@ -56,7 +56,7 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if(e.getSource() == comboBox){
+        if(e.getSource() == comboBox && !comboBox.getSelectedItem().equals("Select Player")){
             playerName = comboBox.getSelectedItem().toString();
         }
     }
@@ -77,7 +77,7 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
         String path = Paths.get("").toAbsolutePath().toString();
         path = path.substring(0,path.lastIndexOf("\\"));
         path = path.substring(0,path.lastIndexOf("\\"));
-        path += "\\" + playerName + ".obj";
+        path += "\\" + playerName + ".bin";
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
