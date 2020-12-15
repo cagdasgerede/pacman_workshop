@@ -22,36 +22,38 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
 
     public SaveScreen(Game game){
         this.game = game;
+        if(game != null) {
 
-        for(int i=0; i<game.getGhosts().length; i++){
-            game.getGhosts()[i].setSPEED(0);
+            for (int i = 0; i < game.getGhosts().length; i++) {
+                game.getGhosts()[i].setSPEED(0);
+            }
+
+            frame = new JFrame("Save and Exit");
+            label = new JLabel("Select Player");
+            comboBox = new JComboBox<String>();
+            button = new JButton("Save");
+            panel = new JPanel();
+
+            button.addActionListener(this);
+
+            comboBox.addItem("Select Player");
+            comboBox.addItem("Player1");
+            comboBox.addItem("Player2");
+            comboBox.addItem("Player3");
+            comboBox.addItemListener(this);
+
+            panel.add(label);
+            panel.add(comboBox);
+            panel.add(button);
+            panel.setVisible(true);
+
+            frame.setLayout(new FlowLayout());
+            frame.add(panel);
+            frame.setSize(700, 200);
+            frame.show();
+
+            frame.addWindowListener(this);
         }
-
-        frame = new JFrame("Save and Exit");
-        label = new JLabel("Select Player");
-        comboBox = new JComboBox<String>();
-        button = new JButton("Save");
-        panel = new JPanel();
-
-        button.addActionListener(this);
-
-        comboBox.addItem("Select Player");
-        comboBox.addItem("Player1");
-        comboBox.addItem("Player2");
-        comboBox.addItem("Player3");
-        comboBox.addItemListener(this);
-
-        panel.add(label);
-        panel.add(comboBox);
-        panel.add(button);
-        panel.setVisible(true);
-
-        frame.setLayout(new FlowLayout());
-        frame.add(panel);
-        frame.setSize(700,200);
-        frame.show();
-
-        frame.addWindowListener(this);
     }
 
     @Override
