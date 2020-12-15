@@ -18,17 +18,10 @@ public class Pacman extends Actor {
     }
 
     public void die() {
-
         this.dead = true;
     }
 
-    
-    
-    
-
     public boolean isDead() {
-
-        
         return dead;
     }
 
@@ -49,5 +42,4 @@ public class Pacman extends Actor {
         return movementStrategy.isMoving();
     }
     
-
 }
