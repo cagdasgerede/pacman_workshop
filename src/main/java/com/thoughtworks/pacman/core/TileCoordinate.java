@@ -2,7 +2,9 @@ package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class TileCoordinate {
+import java.io.Serializable;
+
+public class TileCoordinate implements Serializable {
     private final int x;
     private final int y;
 

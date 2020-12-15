@@ -11,7 +11,9 @@ import com.thoughtworks.pacman.ui.presenters.DotPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 
-public class TileToPresenterFactory implements TileVisitor<Presenter> {
+import java.io.Serializable;
+
+public class TileToPresenterFactory implements TileVisitor<Presenter> , Serializable {
     public static Presenter toPresenter(Tile tile) {
         final TileToPresenterFactory factory = new TileToPresenterFactory();
         return tile.visit(factory);

@@ -4,7 +4,9 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class UserControlledMovementStrategy implements MovementStrategy {
+import java.io.Serializable;
+
+public class UserControlledMovementStrategy implements MovementStrategy , Serializable {
     private final Maze maze;
     private Direction desiredDirection;
     private Direction previousDirection;

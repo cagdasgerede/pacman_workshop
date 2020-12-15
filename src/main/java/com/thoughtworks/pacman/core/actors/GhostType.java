@@ -6,7 +6,9 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import com.thoughtworks.pacman.core.movement.RandomMovementStrategy;
 
-public enum GhostType {
+import java.io.Serializable;
+
+public enum GhostType implements Serializable{
     BLINKY("ghost10.jpg", "ghost11.jpg", new SpacialCoordinate(14 * Tile.SIZE, 14 * Tile.SIZE + Tile.SIZE / 2)) {
         @Override
         public MovementStrategy getMovementStrategy(Game game) {

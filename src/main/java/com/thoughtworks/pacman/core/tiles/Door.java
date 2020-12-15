@@ -4,7 +4,9 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
-public class Door extends Tile {
+import java.io.Serializable;
+
+public class Door extends Tile implements Serializable {
 
     public Door(TileCoordinate coordinate, String value) {
         super(coordinate);

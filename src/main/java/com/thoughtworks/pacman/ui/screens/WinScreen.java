@@ -4,12 +4,13 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
-public class WinScreen implements Screen {
+public class WinScreen implements Screen, Serializable {
     static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "winScreen.jpg");
 
     private final Dimension dimension;

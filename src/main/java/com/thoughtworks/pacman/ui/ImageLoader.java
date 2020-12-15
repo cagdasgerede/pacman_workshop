@@ -2,10 +2,11 @@ package com.thoughtworks.pacman.ui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ImageLoader {
+public class ImageLoader implements Serializable {
     private static ImageLoader instance = new ImageLoader();
 
     public static Image loadImage(Class<?> className, String imageName) {

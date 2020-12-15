@@ -4,7 +4,9 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class TargetChasingMovementStrategy implements MovementStrategy {
+import java.io.Serializable;
+
+public class TargetChasingMovementStrategy implements MovementStrategy, Serializable {
 
     public TargetChasingMovementStrategy(Maze maze, TargetStrategy targetStrategy) {
     }

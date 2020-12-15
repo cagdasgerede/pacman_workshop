@@ -1,12 +1,13 @@
 package com.thoughtworks.pacman.core.tiles;
 
 import java.awt.Shape;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
-public class Wall extends Tile {
+public class Wall extends Tile implements Serializable {
 
     private final WallType type;
 

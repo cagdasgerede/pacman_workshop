@@ -1,6 +1,8 @@
 package com.thoughtworks.pacman.core;
 
-public abstract class Tile {
+import java.io.Serializable;
+
+public abstract class Tile implements Serializable {
     public static int SIZE = 16;
 
     private final TileCoordinate coordinate;

@@ -4,12 +4,13 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
-public class LostScreen implements Screen {
+public class LostScreen implements Screen, Serializable {
     static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "gameOver.png");
 
     private final Dimension dimension;

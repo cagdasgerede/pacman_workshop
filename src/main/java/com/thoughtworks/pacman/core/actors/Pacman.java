@@ -7,7 +7,9 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
-public class Pacman extends Actor {
+import java.io.Serializable;
+
+public class Pacman extends Actor implements Serializable{
     private boolean dead = false;
 
     public Pacman(Maze maze) {

@@ -5,13 +5,14 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Presenter;
 
-public class GhostPresenter implements Presenter {
+public class GhostPresenter implements Presenter, Serializable {
     private static final int DIMENSION = 20;
     private final Ghost ghost;
     private final Image[] images;

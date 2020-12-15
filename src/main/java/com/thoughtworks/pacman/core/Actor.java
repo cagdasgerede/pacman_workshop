@@ -3,8 +3,10 @@ package com.thoughtworks.pacman.core;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
-public abstract class Actor {
-    private static final int SPEED = 100;
+import java.io.Serializable;
+
+public abstract class Actor implements Serializable {
+    private static int SPEED = 100;
 
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
@@ -18,6 +20,10 @@ public abstract class Actor {
 
     public SpacialCoordinate getCenter() {
         return center;
+    }
+
+    public void setSPEED(int speed){
+        SPEED = speed;
     }
 
     public boolean collidesWith(Actor other) {

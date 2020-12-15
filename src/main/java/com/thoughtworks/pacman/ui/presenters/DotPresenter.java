@@ -8,8 +8,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class DotPresenter implements Presenter {
+public class DotPresenter implements Presenter, Serializable {
     private static final int SIDE = 4;
     private final Dot dot;
     private final Rectangle bounds;

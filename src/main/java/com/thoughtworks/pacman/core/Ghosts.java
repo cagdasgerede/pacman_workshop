@@ -5,7 +5,9 @@ import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class Ghosts {
+import java.io.Serializable;
+
+public class Ghosts implements Serializable {
     private Ghost blinky;
     private Ghost pinky;
     private Ghost inky;

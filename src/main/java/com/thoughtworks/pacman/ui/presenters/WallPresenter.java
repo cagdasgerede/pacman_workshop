@@ -3,11 +3,12 @@ package com.thoughtworks.pacman.ui.presenters;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
 
-public class WallPresenter implements Presenter {
+public class WallPresenter implements Presenter, Serializable {
     private final Wall wall;
 
     public WallPresenter(Wall wall) {

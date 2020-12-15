@@ -5,12 +5,14 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
+import java.io.Serializable;
+
 import static java.awt.geom.Arc2D.OPEN;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 
-public enum WallType {
+public enum WallType implements Serializable {
     BOTTOM_LEFT {
         @Override
         public Shape getShape(SpacialCoordinate center) {

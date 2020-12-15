@@ -7,8 +7,9 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen , Serializable {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
@@ -48,6 +49,9 @@ public class GameScreen implements Screen {
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+        case KeyEvent.VK_S:
+            SaveScreen storeScreen = new SaveScreen(game);
+            break;
         case KeyEvent.VK_LEFT:
             game.getPacman().setNextDirection(Direction.LEFT);
             break;

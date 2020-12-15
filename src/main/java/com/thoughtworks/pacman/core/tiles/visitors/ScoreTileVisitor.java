@@ -6,7 +6,9 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class ScoreTileVisitor implements TileVisitor<Integer> {
+import java.io.Serializable;
+
+public class ScoreTileVisitor implements TileVisitor<Integer>, Serializable {
     private static final int SCORE_PER_DOT = 10;
 
     public Integer visit(Dot dot) {

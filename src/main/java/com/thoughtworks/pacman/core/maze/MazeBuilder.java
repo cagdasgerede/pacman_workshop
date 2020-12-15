@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core.maze;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class MazeBuilder {
+public class MazeBuilder implements Serializable {
     private static final String WALLED_MAZE_MAP_FILENAME = "walled_maze.map";
     private static final String MAZE_MAP_FILENAME = "maze.map";
     @SuppressWarnings("serial")

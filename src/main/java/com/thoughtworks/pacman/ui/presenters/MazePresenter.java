@@ -8,12 +8,13 @@ import com.thoughtworks.pacman.ui.Presenter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.thoughtworks.pacman.ui.TileToPresenterFactory.toPresenter;
 
-public class MazePresenter implements Presenter {
+public class MazePresenter implements Presenter, Serializable {
     private final Maze maze;
     private final List<Presenter> mazeTiles;
 

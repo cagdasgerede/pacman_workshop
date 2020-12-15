@@ -4,7 +4,9 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
-public class Dot extends Tile {
+import java.io.Serializable;
+
+public class Dot extends Tile implements Serializable {
     private boolean eaten;
 
     public Dot(TileCoordinate coordinate, String value) {

@@ -6,7 +6,9 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class PacmanTileVisitor implements TileVisitor<Void> {
+import java.io.Serializable;
+
+public class PacmanTileVisitor implements TileVisitor<Void>, Serializable {
 
     public Void visit(Dot dot) {
         dot.eat();

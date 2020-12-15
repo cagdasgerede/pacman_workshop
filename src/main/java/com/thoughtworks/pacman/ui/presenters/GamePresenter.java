@@ -5,10 +5,11 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.ui.Presenter;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GamePresenter implements Presenter {
+public class GamePresenter implements Presenter , Serializable {
     private final MazePresenter mazePresenter;
     private final PacmanPresenter pacmanPresenter;
     private final List<GhostPresenter> ghostPresenters;

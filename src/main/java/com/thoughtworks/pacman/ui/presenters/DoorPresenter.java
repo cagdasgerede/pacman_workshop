@@ -3,12 +3,13 @@ package com.thoughtworks.pacman.ui.presenters;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.WallType;
 import com.thoughtworks.pacman.ui.Presenter;
 
-public class DoorPresenter implements Presenter {
+public class DoorPresenter implements Presenter, Serializable {
 
     private final Door door;
 

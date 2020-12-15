@@ -1,8 +1,9 @@
 package com.thoughtworks.pacman.core;
 
+import java.io.Serializable;
 import java.util.EnumSet;
 
-public enum Direction {
+public enum Direction implements Serializable {
     UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40), NONE(0, 0, 0);
 
     private final int x;

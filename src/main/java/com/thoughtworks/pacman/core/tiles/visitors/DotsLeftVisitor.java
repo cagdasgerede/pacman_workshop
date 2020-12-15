@@ -6,7 +6,9 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class DotsLeftVisitor implements TileVisitor<Integer> {
+import java.io.Serializable;
+
+public class DotsLeftVisitor implements TileVisitor<Integer> , Serializable {
     public Integer visit(Dot dot) {
         return dot.isEaten() ? 0 : 1;
     }

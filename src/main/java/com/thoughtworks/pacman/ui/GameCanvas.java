@@ -12,11 +12,12 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.io.Serializable;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class GameCanvas extends Canvas implements KeyListener {
+public class GameCanvas extends Canvas implements KeyListener, Serializable {
 
     private final Dimension dimension;
     private Screen currentScreen;
