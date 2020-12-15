@@ -33,6 +33,30 @@ public class Pacman_MovementTest {
     }
 
     @Test
+    public void advance_shouldUpdateCenterLevel2() throws Exception {
+        int initialX = 14 * Tile.SIZE;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 12, initialY)));
+    }
+
+    @Test
+    public void advance_shouldUpdateCenterLevel3() throws Exception {
+        int initialX = 14 * Tile.SIZE;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 15, initialY)));
+    }
+
+    @Test
     public void advance_shouldStayPutWhenFacingWall() throws Exception {
         int initialX = 6 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
@@ -45,6 +69,30 @@ public class Pacman_MovementTest {
     }
 
     @Test
+    public void advance_shouldStayPutWhenFacingWallLevel2() throws Exception {
+        int initialX = 6 * Tile.SIZE + Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
+    }
+
+    @Test
+    public void advance_shouldStayPutWhenFacingWallLevel3() throws Exception {
+        int initialX = 6 * Tile.SIZE + Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
+    }
+
+    @Test
     public void advance_shouldMoveWhenGoingTowardsWall() throws Exception {
         int initialX = 7 * Tile.SIZE - 1;
         int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
@@ -52,6 +100,30 @@ public class Pacman_MovementTest {
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
         pacman.advance(100, 1);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
+    }
+
+    @Test
+    public void advance_shouldMoveWhenGoingTowardsWallLevel2() throws Exception {
+        int initialX = 7 * Tile.SIZE - 1;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
+    }
+
+    @Test
+    public void advance_shouldMoveWhenGoingTowardsWallLevel3() throws Exception {
+        int initialX = 7 * Tile.SIZE - 1;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 3);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
     }
@@ -71,6 +143,34 @@ public class Pacman_MovementTest {
     }
 
     @Test
+    public void advance_shouldChangeToNextDirectionWhenPossibleBeforeMovingLevel2() throws Exception {
+        int initialX = 7 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.setNextDirection(Direction.UP);
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY - 12)));
+        assertThat(pacman.getDirection(), equalTo(Direction.UP));
+    }
+
+    @Test
+    public void advance_shouldChangeToNextDirectionWhenPossibleBeforeMovingLevel3() throws Exception {
+        int initialX = 7 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.setNextDirection(Direction.UP);
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY - 15)));
+        assertThat(pacman.getDirection(), equalTo(Direction.UP));
+    }
+
+    @Test
     public void advance_shouldKeepGoingInTheCurrentDirectionIfCantTurn() throws Exception {
         int initialX = 8 * Tile.SIZE - Tile.SIZE / 2;
         int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
@@ -81,6 +181,34 @@ public class Pacman_MovementTest {
         pacman.advance(100, 1);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 10, initialY)));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
+    }
+
+    @Test
+    public void advance_shouldKeepGoingInTheCurrentDirectionIfCantTurnLevel2() throws Exception {
+        int initialX = 8 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.setNextDirection(Direction.UP);
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 12, initialY)));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
+    }
+
+    @Test
+    public void advance_shouldKeepGoingInTheCurrentDirectionIfCantTurnLevel3() throws Exception {
+        int initialX = 8 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.setNextDirection(Direction.UP);
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 15, initialY)));
         assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 
@@ -99,15 +227,67 @@ public class Pacman_MovementTest {
     }
 
     @Test
+    public void advance_shouldTurnNearTheCenterOfTheTileLevel2() throws Exception {
+        int initialX = 7 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2 - 3;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.DOWN);
+
+        pacman.setNextDirection(Direction.RIGHT);
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX + 9, initialY + 3)));
+        assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
+    }
+
+    @Test
+    public void advance_shouldTurnNearTheCenterOfTheTileLevel3() throws Exception {
+        int initialX = 7 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2 - 3;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.DOWN);
+
+        pacman.setNextDirection(Direction.RIGHT);
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX + 12, initialY + 3)));
+        assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
+    }
+
+    @Test
     public void advance_shouldTeleport_whenPossible() throws Exception {
         int initialX = 3;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
-        pacman.advance(100, 1 );
+        pacman.advance(100, 1);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - 7, initialY)));
+    }
+
+    @Test
+    public void advance_shouldTeleport_whenPossibleLevel2() throws Exception {
+        int initialX = 3;
+        int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 2);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - 9, initialY)));
+    }
+
+    @Test
+    public void advance_shouldTeleport_whenPossibleLevel3() throws Exception {
+        int initialX = 3;
+        int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Pacman pacman = new Pacman(maze, center, Direction.LEFT);
+
+        pacman.advance(100, 3);
+
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - 12, initialY)));
     }
 
 }
