@@ -15,6 +15,11 @@ public class Wall extends Tile {
         this.type = WallType.fromMazeTile(value);
     }
 
+    public Wall(TileCoordinate coordinate, WallType type) {
+        super(coordinate);
+        this.type = type;
+    }
+
     public Wall(TileCoordinate coordinate) {
         super(coordinate);
         this.type = WallType.BOTTOM_LEFT;
@@ -31,11 +36,20 @@ public class Wall extends Tile {
     }
 
     @Override
+    public <T> T visit(TileVisitor<T> visitor, int xOffset) {
+        return visitor.visit(this, xOffset);
+    }
+
+    @Override
     public String toString() {
         return "+";
     }
 
     public Shape getShape() {
         return type.getShape(this.getCenter());
+    }
+
+    public WallType getType() {
+        return type;
     }
 }

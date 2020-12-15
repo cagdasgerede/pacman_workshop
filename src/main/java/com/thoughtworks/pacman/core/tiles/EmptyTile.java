@@ -25,6 +25,11 @@ public class EmptyTile extends Tile {
     }
 
     @Override
+    public <T> T visit(TileVisitor<T> visitor, int xOffset) {
+        return visitor.visit(this);
+    }
+
+    @Override
     public String toString() {
         return " ";
     }

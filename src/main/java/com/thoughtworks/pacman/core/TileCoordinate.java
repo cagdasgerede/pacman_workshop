@@ -76,4 +76,12 @@ public class TileCoordinate {
     private int unit(int value) {
         return (int) Math.signum(value);
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

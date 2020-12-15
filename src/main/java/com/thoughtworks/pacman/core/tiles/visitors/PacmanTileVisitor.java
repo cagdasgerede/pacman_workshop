@@ -24,4 +24,20 @@ public class PacmanTileVisitor implements TileVisitor<Void> {
     public Void visit(Door door) {
         return null;
     }
+
+    @Override
+    public Void visit(Dot dot, int xOffset) {
+        dot.eat();
+        return null;
+    }
+
+    @Override
+    public Void visit(Wall wall, int xOffset) {
+        return null;
+    }
+
+    @Override
+    public Void visit(Door door, int xOffset) {
+        return null;
+    }
 }

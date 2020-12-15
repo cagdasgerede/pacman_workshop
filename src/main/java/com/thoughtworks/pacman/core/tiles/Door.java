@@ -9,6 +9,9 @@ public class Door extends Tile {
     public Door(TileCoordinate coordinate, String value) {
         super(coordinate);
     }
+    public Door(TileCoordinate coordinate) {
+        super(coordinate);
+    }
 
     @Override
     public boolean isMovable() {
@@ -18,6 +21,11 @@ public class Door extends Tile {
     @Override
     public <T> T visit(TileVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public <T> T visit(TileVisitor<T> visitor, int xOffset) {
+        return visitor.visit(this, xOffset);
     }
 
     @Override

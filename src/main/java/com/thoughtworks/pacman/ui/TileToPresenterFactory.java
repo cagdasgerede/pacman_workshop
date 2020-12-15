@@ -17,6 +17,11 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
         return tile.visit(factory);
     }
 
+    public static Presenter toPresenter(Tile tile, int xOffset) {
+        final TileToPresenterFactory factory = new TileToPresenterFactory();
+        return tile.visit(factory, xOffset);
+    }
+
     public Presenter visit(Dot dot) {
         return new DotPresenter(dot);
     }
@@ -31,5 +36,18 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
 
     public Presenter visit(Door door) {
         return new DoorPresenter(door);
+    }
+
+    public Presenter visit(Dot dot, int xOffset) {
+        return new DotPresenter(dot, xOffset);
+    }
+
+    public Presenter visit(Wall wall, int xOffset) {
+        return new WallPresenter(wall, xOffset);
+    }
+
+
+    public Presenter visit(Door door, int xOffset) {
+        return new DoorPresenter(door, xOffset);
     }
 }

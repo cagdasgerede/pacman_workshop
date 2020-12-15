@@ -24,4 +24,19 @@ public class ScoreTileVisitor implements TileVisitor<Integer> {
     public Integer visit(Door door) {
         return 0;
     }
+
+    @Override
+    public Integer visit(Dot dot, int xOffset) {
+        return dot.isEaten() ? SCORE_PER_DOT : 0;
+    }
+
+    @Override
+    public Integer visit(Wall wall, int xOffset) {
+        return 0;
+    }
+
+    @Override
+    public Integer visit(Door door, int xOffset) {
+        return 0;
+    }
 }

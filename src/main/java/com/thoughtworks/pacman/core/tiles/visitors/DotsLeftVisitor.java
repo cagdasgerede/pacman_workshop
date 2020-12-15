@@ -22,4 +22,19 @@ public class DotsLeftVisitor implements TileVisitor<Integer> {
     public Integer visit(Door door) {
         return 0;
     }
+
+    @Override
+    public Integer visit(Dot dot, int xOffset) {
+        return dot.isEaten() ? 0 : 1;
+    }
+
+    @Override
+    public Integer visit(Wall wall, int xOffset) {
+        return 0;
+    }
+
+    @Override
+    public Integer visit(Door door, int xOffset) {
+        return 0;
+    }
 }

@@ -1,25 +1,22 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.ui.screens.IntroScreen;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas implements KeyListener {
 
     private final Dimension dimension;
     private Screen currentScreen;
+    private JPanel panel;
+    private boolean multiplayerActive = false;
 
     public GameCanvas(Dimension dimension, Game game) {
         this.dimension = dimension;
@@ -27,6 +24,7 @@ public class GameCanvas extends Canvas implements KeyListener {
     }
 
     public void initialize(JPanel panel) {
+        this.panel = panel;
         setBounds(new Rectangle(dimension));
         panel.add(this);
         setIgnoreRepaint(true);
@@ -51,11 +49,31 @@ public class GameCanvas extends Canvas implements KeyListener {
         strategy.show();
     }
 
-    public void keyTyped(KeyEvent e) { }
-
-    public void keyPressed(KeyEvent e) {
-        currentScreen.keyPressed(e);
+    public void keyTyped(KeyEvent e) {
     }
 
-    public void keyReleased(KeyEvent e) { }
+    public void keyPressed(KeyEvent e) {
+        if (currentScreen instanceof IntroScreen && e.getKeyCode() == KeyEvent.VK_M) {
+            if (multiplayerActive) {
+                dimension.setSize((dimension.getWidth() - Tile.SIZE * 2) / 2, dimension.getHeight());
+                multiplayerActive = false;
+            } else {
+                dimension.setSize(dimension.getWidth() * 2 + Tile.SIZE * 2, dimension.getHeight());
+                multiplayerActive = true;
+            }
+            setBounds(new Rectangle(dimension));
+            panel.setPreferredSize(dimension);
+            Container topLevelAncestor = panel.getTopLevelAncestor();
+            if (topLevelAncestor instanceof JFrame) {
+                ((JFrame) topLevelAncestor).pack();
+            }
+            ((IntroScreen) currentScreen).setMultiplayer(multiplayerActive);
+        } else {
+            currentScreen.keyPressed(e);
+        }
+
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
 }

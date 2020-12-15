@@ -14,10 +14,12 @@ public class IntroScreen implements Screen {
 
     private final Dimension dimension;
     private boolean startGame;
+    private boolean isMultiplayer;
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
+        this.isMultiplayer = false;
     }
 
     public void draw(Graphics2D graphics) {
@@ -26,13 +28,19 @@ public class IntroScreen implements Screen {
     }
 
     public Screen getNextScreen() throws Exception {
-        if (startGame) {
+        if (startGame && !isMultiplayer) {
             return new GameScreen();
+        } else if (startGame && isMultiplayer){
+            return new MultiplayerGameScreen();
         }
         return this;
     }
 
     public void keyPressed(KeyEvent e) {
         startGame = true;
+    }
+
+    public void setMultiplayer(boolean multiplayer) {
+        isMultiplayer = multiplayer;
     }
 }

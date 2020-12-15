@@ -10,4 +10,8 @@ public interface TileVisitor<T> {
     T visit(Wall wall);
     T visit(EmptyTile emptyTile);
     T visit(Door door);
+
+    T visit(Dot dot, int xOffset);
+    T visit(Wall wall, int xOffset);
+    T visit(Door door, int xOffset);
 }

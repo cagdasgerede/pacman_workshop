@@ -22,6 +22,15 @@ public class GamePresenter implements Presenter {
         }
     }
 
+    public GamePresenter(Game game, int xOffset) {
+        mazePresenter = new MazePresenter(game.getMaze(), xOffset);
+        pacmanPresenter = new PacmanPresenter(game.getPacman(), xOffset);
+        ghostPresenters = new LinkedList<GhostPresenter>();
+        for (Ghost ghost : game.getGhosts()) {
+            ghostPresenters.add(new GhostPresenter(ghost, xOffset));
+        }
+    }
+
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);

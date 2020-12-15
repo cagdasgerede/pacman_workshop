@@ -1,13 +1,10 @@
 package com.thoughtworks.pacman.ui.presenters;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
+
+import java.awt.*;
 
 public class PacmanPresenter implements Presenter {
     static final int DIAMETER = 20;
@@ -21,6 +18,12 @@ public class PacmanPresenter implements Presenter {
     private final Pacman pacman;
     private long lastFrame;
     private int deadFrame;
+    private int xOffset;
+
+    public PacmanPresenter(Pacman pacman, int xOffset) {
+        this(pacman);
+        this.xOffset = xOffset;
+    }
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
@@ -29,7 +32,7 @@ public class PacmanPresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.yellow);
         Rectangle bounds = getBounds();
-        graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
+        graphics.fillArc(bounds.x + xOffset, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
     }
 
     int getStartAngle() {
