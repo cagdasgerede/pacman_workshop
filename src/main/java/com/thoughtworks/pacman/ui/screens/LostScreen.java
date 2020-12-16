@@ -15,12 +15,13 @@ public class LostScreen implements Screen {
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
-    private SoundToScreens soundToScreens = new SoundToScreens("FinalSoundLoader");
+    private SoundToScreens soundToScreens;
 
     public LostScreen(Game game) {
         this.dimension = game.getDimension();
         this.game = game;
         this.startGame = false;
+        soundToScreens = new SoundToScreens("FinalSoundLoader");
     }
 
     public void draw(Graphics2D graphics) {
@@ -40,8 +41,7 @@ public class LostScreen implements Screen {
     }
 
     public void checkBeforeNewSound(){
-        if ( startGame)
-            soundToScreens.stop();
+        soundToScreens.checkTheSound(startGame);
     }
 
     public void keyPressed(KeyEvent e) {

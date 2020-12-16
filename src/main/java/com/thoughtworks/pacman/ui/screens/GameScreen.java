@@ -13,7 +13,7 @@ public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
-    private SoundToScreens soundToScreens = new SoundToScreens("BackgroundSoundLoader");
+    private SoundToScreens soundToScreens;
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
         this.game = game;
         this.gamePresenter = gamePresenter;
         this.lastFrameAt = System.currentTimeMillis();
+        soundToScreens = new SoundToScreens("BackgroundSoundLoader");
     }
 
     public void draw(Graphics2D graphics) {
@@ -53,11 +54,7 @@ public class GameScreen implements Screen {
     }
 
     public void checkBeforeNewSound(){
-        if (game.won()) {
-            soundToScreens.stop();
-        } else if (game.lost() && !gamePresenter.isDying()) {
-            soundToScreens.stop();
-        }
+        soundToScreens.checkTheSound((game.won()) || (game.lost() && !gamePresenter.isDying()));
     }
     
     public void keyPressed(KeyEvent e) {

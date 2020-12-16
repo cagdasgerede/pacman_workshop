@@ -15,12 +15,13 @@ public class WinScreen implements Screen {
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
-    private SoundToScreens soundToScreens = new SoundToScreens("WinnerSoundLoader");
+    private SoundToScreens soundToScreens;
 
     public WinScreen(Game game) {
         this.dimension = game.getDimension();
         this.game = game;
         this.startGame = false;
+        soundToScreens = new SoundToScreens("WinnerSoundLoader");
     }
 
     public void draw(Graphics2D graphics) {
@@ -40,8 +41,7 @@ public class WinScreen implements Screen {
     }
 
     public void checkBeforeNewSound(){
-        if (startGame) 
-        soundToScreens.stop();
+        soundToScreens.checkTheSound(startGame);
     }
     
     public void keyPressed(KeyEvent e) {

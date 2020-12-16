@@ -14,11 +14,12 @@ public class IntroScreen implements Screen {
 
     private final Dimension dimension;
     private boolean startGame;
-    private SoundToScreens soundToScreens = new SoundToScreens("IntroSoundLoader");
+    private SoundToScreens soundToScreens;
     
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
+        soundToScreens = new SoundToScreens("IntroSoundLoader");
     }
 
     public void draw(Graphics2D graphics) {
@@ -38,8 +39,7 @@ public class IntroScreen implements Screen {
     } 
 
     public void checkBeforeNewSound(){
-        if (startGame)
-            soundToScreens.stop();
+        soundToScreens.checkTheSound(startGame);
     }
 
     public void keyPressed(KeyEvent e) {

@@ -1,19 +1,12 @@
 package com.thoughtworks.pacman.ui.screens;
 
 import java.util.concurrent.locks.ReentrantLock;
-
-import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
-import com.thoughtworks.pacman.ui.FinalSoundLoader;
-import com.thoughtworks.pacman.ui.IntroSoundLoader;
-import com.thoughtworks.pacman.ui.WinnerSoundLoader;
+import com.thoughtworks.pacman.ui.SoundLoader;
 
 public class SoundToScreens{
     private String screenName;
-    private  ReentrantLock lock = new ReentrantLock();
-    private IntroSoundLoader IntroSoundLoader = new IntroSoundLoader();
-    private BackgroundSoundLoader BackgroundSoundLoader = new BackgroundSoundLoader();
-    private FinalSoundLoader FinalSoundLoader = new FinalSoundLoader();
-    private WinnerSoundLoader WinnerSoundLoader = new WinnerSoundLoader();
+    private ReentrantLock lock = new ReentrantLock();
+    private SoundLoader soundLoader;
     private Thread threadSounds ;
 
     public SoundToScreens(){
@@ -22,20 +15,16 @@ public class SoundToScreens{
 
     public SoundToScreens(String screenName){
        this.screenName = screenName;
-       System.out.println(screenName + " WOW");
+       soundLoader = new SoundLoader(screenName);
 
-    if (screenName.equals("IntroSoundLoader")) {
-        threadSounds = new Thread(IntroSoundLoader, "IntroSoundLoader");
-        System.out.println("intro");}
-    if (screenName.equals("BackgroundSoundLoader")){ 
-        threadSounds = new Thread(BackgroundSoundLoader, "BackgroundSoundLoader");
-        System.out.println("background");}   
-    if (screenName.equals("WinnerSoundLoader")){ 
-        threadSounds = new Thread(WinnerSoundLoader, "WinnerSoundLoader");
-        System.out.println("winner");}
-    if (screenName.equals("FinalSoundLoader")){ 
-        threadSounds = new Thread(FinalSoundLoader, "FinalSoundLoader");
-        System.out.println("final");} 
+       if (screenName.equals("IntroSoundLoader"))
+          threadSounds = new Thread(soundLoader, "IntroSoundLoader");
+       if (screenName.equals("BackgroundSoundLoader"))
+          threadSounds = new Thread(soundLoader, "BackgroundSoundLoader"); 
+       if (screenName.equals("WinnerSoundLoader"))
+          threadSounds = new Thread(soundLoader, "WinnerSoundLoader");
+       if (screenName.equals("FinalSoundLoader"))
+          threadSounds = new Thread(soundLoader, "FinalSoundLoader");
     }
 
     public boolean checkTheSound(boolean check){
@@ -69,19 +58,10 @@ public class SoundToScreens{
 
     public boolean stop(){
         try {
-            System.out.println("stopping");
-            if (screenName.equals("IntroSoundLoader"))
-                IntroSoundLoader.setStop();
-            if (screenName.equals("BackgroundSoundLoader")) 
-                BackgroundSoundLoader.setStop();
-            if (screenName.equals("WinnerSoundLoader")) 
-                WinnerSoundLoader.setStop();
-            if (screenName.equals("FinalSoundLoader")) 
-                FinalSoundLoader.setStop();  
+            soundLoader.setStop();  
         } catch (Exception e) {
             return false ;
         }
         return true ; 
     }
-
 }
