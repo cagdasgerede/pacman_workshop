@@ -51,17 +51,10 @@ public class SoundToScreens{
             lock.lock();
             threadSounds.start();
             lock.unlock();
-        } catch (Exception e) {
-            e.getMessage();
-        }
+        } catch (Exception e) {}
     }
 
-    public boolean stop(){
-        try {
-            soundLoader.setStop();  
-        } catch (Exception e) {
-            return false ;
-        }
-        return true ; 
+    public void stop(){
+        soundLoader.setStop();  
     }
 }

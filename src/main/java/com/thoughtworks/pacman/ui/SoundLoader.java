@@ -11,7 +11,7 @@ public class SoundLoader implements Runnable {
     private File pacmanFile;
     private String pacmanPath;
     private File musicPath ;
-    
+
     public SoundLoader(String soundName){
           this.soundName = soundName;
           pacmanFile = new File("pacman_workshop");
@@ -52,14 +52,8 @@ public class SoundLoader implements Runnable {
                 }else {
                     throw new Exception();
                    }
-            } catch (Exception e) {
-              e.getMessage();
-              e.getStackTrace();
-            }
+            } catch (Exception e) {}
             return true; 
     }
-
-
-
 }
 
