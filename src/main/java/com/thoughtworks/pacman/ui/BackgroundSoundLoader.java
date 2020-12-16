@@ -1,13 +1,12 @@
-
 package com.thoughtworks.pacman.ui;
+
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class BackgroundSoundLoader implements Runnable {
-private Clip clip ;
-    
+    private Clip clip ;
     public void run(){
         playBackground();  
           try {
@@ -31,10 +30,12 @@ private Clip clip ;
                      clip.start();
                      clip.loop(Clip.LOOP_CONTINUOUSLY);
                 }else {
-                     System.out.println("sorry");
+                      //loglama olacak
                    }
-            } catch (Exception e) {}
+            } catch (Exception e) {
+              e.getMessage();
+              e.getStackTrace();
+            }
     }
-
 }
 

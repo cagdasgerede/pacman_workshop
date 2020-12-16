@@ -65,7 +65,6 @@ public class Game {
         if (ghosts.killed(pacman)) {
             pacman.die();
         }
-        
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
         pacmanTile.visit(pacmanTileVisitor);
     }

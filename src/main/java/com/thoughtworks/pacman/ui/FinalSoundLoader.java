@@ -1,14 +1,13 @@
-
 package com.thoughtworks.pacman.ui;
+
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class FinalSoundLoader implements Runnable {
-private Clip clip ;
-
-    public void run(){
+     private Clip clip ;
+     public void run(){
         playFinalCountdown();
           try {
             Thread.currentThread().stop();    
@@ -31,9 +30,12 @@ private Clip clip ;
                      clip.start();
                      clip.loop(Clip.LOOP_CONTINUOUSLY);
                 }else {
-                     System.out.println("sorry");
+                     //loglama
                 }
-              } catch (Exception e) {}
+              } catch (Exception e) {
+                e.getMessage();
+                e.getStackTrace();
+              }
       }
         
 }

@@ -45,7 +45,7 @@ public class GameCanvas extends Canvas implements KeyListener {
         graphics.fill(new Rectangle(dimension));
 
         currentScreen = currentScreen.getNextScreen();
-        check();
+        checkBeforeNewSound();
         currentScreen.draw(graphics);
 
         graphics.dispose();
@@ -56,8 +56,8 @@ public class GameCanvas extends Canvas implements KeyListener {
         currentScreen.play();
     }
 
-    public void check (){
-        currentScreen.check();;
+    public void checkBeforeNewSound (){
+        currentScreen.checkBeforeNewSound();
     }
 
     public void keyTyped(KeyEvent e) { }

@@ -3,22 +3,17 @@ package com.thoughtworks.pacman.ui.screens;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
-import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
-import java.util.concurrent.locks.ReentrantLock;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.locks.Lock;
 
 public class GameScreen implements Screen {
-    private  ReentrantLock lock = new ReentrantLock();
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
-    private BackgroundSoundLoader BackgroundSoundLoader = new BackgroundSoundLoader();
-    private Thread threadSounds = new Thread(BackgroundSoundLoader, "BackgroundSoundLoader");
-    private boolean check = true ;
+    private SoundToScreens soundToScreens = new SoundToScreens("BackgroundSoundLoader");
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -54,20 +49,14 @@ public class GameScreen implements Screen {
     }
 
     public void play (){
-        try{   
-            lock.lock();
-            threadSounds.start();
-            lock.unlock();
-        }catch (Exception e) {}
+        soundToScreens.chooseTheSound();
     }
 
-    public void check(){
-        if (game.won() && check) {
-            check = false ;
-            BackgroundSoundLoader.setStop();
-        } else if ( check && game.lost() && !gamePresenter.isDying()) {
-            check = false ;
-            BackgroundSoundLoader.setStop();
+    public void checkBeforeNewSound(){
+        if (game.won()) {
+            soundToScreens.stop();
+        } else if (game.lost() && !gamePresenter.isDying()) {
+            soundToScreens.stop();
         }
     }
     

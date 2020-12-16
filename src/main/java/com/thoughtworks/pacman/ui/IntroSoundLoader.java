@@ -11,6 +11,7 @@ private Clip clip ;
     public void run(){
       playIntro();
       try {
+        System.out.println("intro about to kill");
          Thread.currentThread().stop();    
        } catch (Exception e) {}
     }

@@ -49,7 +49,7 @@ public class GameRunner {
    
     private void run() throws Exception {
         while (open) {
-            canvas.check();
+            canvas.checkBeforeNewSound();
             canvas.draw();
             canvas.play();
             

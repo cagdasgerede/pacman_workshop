@@ -12,7 +12,6 @@ import static org.mockito.Mockito.when;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

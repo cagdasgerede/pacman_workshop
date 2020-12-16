@@ -4,22 +4,18 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.locks.ReentrantLock;
+
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
-import com.thoughtworks.pacman.ui.IntroSoundLoader;
 
 public class IntroScreen implements Screen {
     static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "titleScreen.jpg");
-    
-    private  ReentrantLock lock = new ReentrantLock();
+
     private final Dimension dimension;
     private boolean startGame;
-    private IntroSoundLoader IntroSoundLoader = new IntroSoundLoader();
-    private Thread threadSounds = new Thread(IntroSoundLoader, "IntroSoundLoader");
-    private boolean check = true;
-
+    private SoundToScreens soundToScreens = new SoundToScreens("IntroSoundLoader");
+    
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
@@ -32,25 +28,18 @@ public class IntroScreen implements Screen {
 
     public Screen getNextScreen() throws Exception {
         if (startGame) {
-            check = true ;
             return new GameScreen();
         }
         return this;
     }
     
     public void play (){
-        try {
-            lock.lock();
-            threadSounds.start();
-            lock.unlock();
-        }catch (Exception e) {}
-    }
+        soundToScreens.chooseTheSound();
+    } 
 
-    public void check(){
-        if (startGame &&check) {
-           check = false ;   
-           IntroSoundLoader.setStop();
-        }
+    public void checkBeforeNewSound(){
+        if (startGame)
+            soundToScreens.stop();
     }
 
     public void keyPressed(KeyEvent e) {

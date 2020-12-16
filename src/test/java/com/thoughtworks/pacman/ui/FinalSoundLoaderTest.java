@@ -31,4 +31,5 @@ public class FinalSoundLoaderTest{
     private boolean throwException() throws Exception{
         throw new Exception();
     }
+
 }

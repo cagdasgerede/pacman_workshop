@@ -22,7 +22,6 @@ public class LostScreenTest {
         Game game = new Game();
         LostScreen lostScreen = new LostScreen(game);
         lostScreen.draw(graphics);
-
         verify(graphics).drawImage(LostScreen.LOST_SCREEN_IMAGE, 0, 0, 448, 448, null);
     }
 
