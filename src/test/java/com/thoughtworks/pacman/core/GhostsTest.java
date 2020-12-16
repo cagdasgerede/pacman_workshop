@@ -91,12 +91,12 @@ public class GhostsTest {
         Ghost g4 = mock(Ghost.class);
         Ghosts ghosts = new Ghosts(g1, g2, g3, g4);
 
-        ghosts.advance(20,false);
+        ghosts.advance(20, false);
 
-        verify(g1).advance(20,false);
-        verify(g2).advance(20,false);
-        verify(g3).advance(20,false);
-        verify(g4).advance(20,false);
+        verify(g1).advance(20, false);
+        verify(g2).advance(20, false);
+        verify(g3).advance(20, false);
+        verify(g4).advance(20, false);
     }
 
     @Test
@@ -107,12 +107,12 @@ public class GhostsTest {
         Ghost g4 = mock(Ghost.class);
         Ghosts ghosts = new Ghosts(g1, g2, g3, g4);
 
-        ghosts.advance(20,true);
+        ghosts.advance(20, true);
 
-        verify(g1).advance(20,true);
-        verify(g2).advance(20,true);
-        verify(g3).advance(20,true);
-        verify(g4).advance(20,true);
+        verify(g1).advance(20, true);
+        verify(g2).advance(20, true);
+        verify(g3).advance(20, true);
+        verify(g4).advance(20, true);
     }
 
     @Test

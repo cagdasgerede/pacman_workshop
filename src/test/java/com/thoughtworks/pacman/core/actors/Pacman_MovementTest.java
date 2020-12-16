@@ -27,7 +27,7 @@ public class Pacman_MovementTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 10, initialY)));
     }
@@ -39,7 +39,7 @@ public class Pacman_MovementTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
     }
@@ -51,7 +51,7 @@ public class Pacman_MovementTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
     }
@@ -64,7 +64,7 @@ public class Pacman_MovementTest {
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
         pacman.setNextDirection(Direction.UP);
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY - 10)));
         assertThat(pacman.getDirection(), equalTo(Direction.UP));
@@ -78,7 +78,7 @@ public class Pacman_MovementTest {
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
         pacman.setNextDirection(Direction.UP);
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX - 10, initialY)));
         assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
@@ -92,7 +92,7 @@ public class Pacman_MovementTest {
         Pacman pacman = new Pacman(maze, center, Direction.DOWN);
 
         pacman.setNextDirection(Direction.RIGHT);
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX + 7, initialY + 3)));
         assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
@@ -105,7 +105,7 @@ public class Pacman_MovementTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
-        pacman.advance(100,false);
+        pacman.advance(100, false);
 
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - 7, initialY)));
     }

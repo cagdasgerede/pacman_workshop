@@ -56,15 +56,13 @@ public class GameCanvas extends Canvas implements KeyListener, AWTEventListener 
         strategy.show();
     }
 
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) { }
 
     public void keyPressed(KeyEvent e) {
         currentScreen.keyPressed(e);
     }
 
-    public void keyReleased(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) { }
 
     @Override
     public void eventDispatched(AWTEvent event) {

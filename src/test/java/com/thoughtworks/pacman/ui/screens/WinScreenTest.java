@@ -25,7 +25,7 @@ public class WinScreenTest {
         Game game = new Game();
         WinScreen winScreen = new WinScreen(game);
 
-        winScreen.setStartGame(true);
+        winScreen.setReturnToMainMenu(true);
 
         assertThat(winScreen.getNextScreen(), instanceOf(IntroScreen.class));
     }

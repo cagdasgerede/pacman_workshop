@@ -41,7 +41,7 @@ public class PacmanPresenter implements Presenter {
             int angle = MOUTH_CLOSED - deadFrame * DEATH_FRAMES;
             return angle < 0 ? 0 : angle;
         }
-        if (!pacman.isMoving()) { 
+        if (!pacman.isMoving()) {
             return MOUTH_OPENED;
         }
         return lastFrame++ % CHEWING_FRAMES < CHEWING_FRAMES / 2 ? MOUTH_CLOSED : MOUTH_OPENED;

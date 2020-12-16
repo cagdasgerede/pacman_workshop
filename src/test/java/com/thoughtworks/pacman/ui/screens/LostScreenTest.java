@@ -26,7 +26,7 @@ public class LostScreenTest {
         Game game = new Game();
         LostScreen lostScreen = new LostScreen(game);
 
-        lostScreen.setStartGame(true);
+        lostScreen.setReturnToMainMenu(true);
 
         assertThat(lostScreen.getNextScreen(), instanceOf(IntroScreen.class));
     }

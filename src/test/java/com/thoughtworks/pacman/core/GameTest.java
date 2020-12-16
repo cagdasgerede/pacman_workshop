@@ -68,7 +68,7 @@ public class GameTest {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(true);
 
-        game.advance(10,false);
+        game.advance(10, false);
 
         verify(pacman).isDead();
         verifyNoMoreInteractions(pacman, ghosts);
@@ -78,7 +78,7 @@ public class GameTest {
     public void advance_shouldDoNothing_whenOnPause() throws Exception {
         Game game = new Game(maze, pacman, ghosts);
 
-        game.advance(10,true);
+        game.advance(10, true);
         assertTrue(game.onPause());
         
     }
@@ -88,11 +88,11 @@ public class GameTest {
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
 
-        game.advance(10,false);
+        game.advance(10, false);
 
         verify(ghosts).freeGhostsBasedOnScore(0);
-        verify(pacman).advance(10,false);
-        verify(ghosts).advance(10,false);
+        verify(pacman).advance(10, false);
+        verify(ghosts).advance(10, false);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class GameTest {
         when(pacman.isDead()).thenReturn(false);
         when(ghosts.killed(pacman)).thenReturn(true);
 
-        game.advance(10,false);
+        game.advance(10, false);
 
         verify(pacman).die();
     }

@@ -1,9 +1,9 @@
 package com.thoughtworks.pacman.ui.screens;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -50,7 +50,7 @@ public class GameScreenTest {
         Thread.sleep(1); // Some time for pacman to move
         gameScreen.draw(graphics);
 
-        verify(pacman).advance(gt(0L),eq(false));
+        verify(pacman).advance(gt(0L), eq(false));
     }
 
     @Test

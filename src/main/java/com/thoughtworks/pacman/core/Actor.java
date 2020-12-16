@@ -5,7 +5,6 @@ import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
 public abstract class Actor {
     private static final int SPEED = 100;
-
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
     private SpacialCoordinate center;

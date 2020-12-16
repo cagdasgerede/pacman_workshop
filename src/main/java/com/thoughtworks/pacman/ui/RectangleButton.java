@@ -5,9 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 
-public class Button {
+public class RectangleButton {
     
-
     public Graphics2D draw(String nameOfButton, Color colorOfTheButton, Rectangle drawnRectangle, Graphics2D graphics){
         graphics.setColor(colorOfTheButton);
         graphics.fill(drawnRectangle);

@@ -16,7 +16,7 @@ public class Game {
 
     private boolean isItOnPause;
 
-    public int score;
+    private int score;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -73,6 +73,10 @@ public class Game {
 
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
         pacmanTile.visit(pacmanTileVisitor);
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public boolean won() {
