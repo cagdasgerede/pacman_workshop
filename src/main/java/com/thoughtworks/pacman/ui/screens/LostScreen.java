@@ -35,6 +35,10 @@ public class LostScreen implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            game.getMaze().getAchievement().showAchievements();
+        }
+        else 
+            startGame = true;
     }
 }

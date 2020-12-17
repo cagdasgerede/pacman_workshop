@@ -72,22 +72,13 @@ public class Game {
     }
 
     public boolean won() {
-        
         return !maze.hasDotsLeft();
     }
 
     public boolean lost() {
         if(pacman.isDead()){
-
-            this.getMaze().getAchievement().isNewlyAchievedPlayed(); 
-            
-            this.getMaze().getAchievement().isNewlyAchievedCollected();
-            
-            this.getMaze().getAchievement().isNewlyAchievedTook();
-            
             maze.setTimePlayed(getAgeInSeconds());
             maze.writeAchievements();
-
         }
         return pacman.isDead();
     }

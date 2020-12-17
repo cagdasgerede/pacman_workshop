@@ -14,17 +14,14 @@ public class Maze {
     private final int width;
     private final int height;
     private final long createdMillis = System.currentTimeMillis();
-    int totalItems;
+    final int totalItems = 245; // Number of dots in Maze.
     Achievements achievement;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
-        totalItems = 245;       //Number of dots in Maze.
         achievement = new Achievements();
-        System.out.println("achievement");
-
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {
@@ -65,10 +62,6 @@ public class Maze {
             achievement.setTimeFinished(getAgeInSeconds());
             achievement.setWon(true);
             achievement.initializeAchievements();
-            achievement.isNewlyAchievedFinished();
-            achievement.isNewlyAchievedPlayed();
-            achievement.isNewlyAchievedCollected();
-            achievement.isNewlyAchievedTook();
         }
         return dotsLeft > 0;
     }

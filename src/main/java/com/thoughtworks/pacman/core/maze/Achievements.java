@@ -48,114 +48,100 @@ public class Achievements {
             playTime = new TimeAchievement(120);
             collect = new CollectingAchievement(100);
             turns = new TurnsAchievement(50);
+            TurnsAchievement turns2 = new TurnsAchievement(20);
             finishTimeAchievementsList.add(finish);
             totalTimeAchievementsList.add(playTime);
             collectingAchievementsList.add(collect);
             turnsAchievementsList.add(turns);
+            turnsAchievementsList.add(turns2);
         }
     }
 
     boolean readFromFile(){
+        int lineNumber = 0;
         try{
             ObjectInputStream inputStream;
-
             inputStream = new ObjectInputStream(new FileInputStream("achievements.txt"));
-
             Object obj = null;
             while ((obj = inputStream.readObject()) != null) {
+                lineNumber ++;
                 if (obj instanceof FinishAchievement ) {
                     finishTimeAchievementsList.add((FinishAchievement) obj);
-                    System.out.println("Added " + obj.getClass());
-
                 }
                 else if ( obj instanceof TimeAchievement){ 
                     totalTimeAchievementsList.add( (TimeAchievement) obj);
-                    System.out.println("Added " + obj.getClass());
-
                 }
                 else if (obj instanceof CollectingAchievement){
                     collectingAchievementsList.add( (CollectingAchievement) obj);
-                    System.out.println("Added " + obj.getClass());
-
                 }
                 else if (obj instanceof TurnsAchievement){
                     turnsAchievementsList.add( (TurnsAchievement) obj);
-                    System.out.println("Added " + obj.getClass());
-
                 }
-
             }
-
-
-
         }
         catch (EOFException e) {
-            return true;
+            if(lineNumber > 2)
+                return true;
         }
         catch(Exception e){
             return false;
         }
-        return true;
+        if(lineNumber > 2)
+            return true;
+        else
+            return false;
     }
 
     void initializeAchievements() {
         if(!isInitialized){
-            System.out.println("initing");
 
             try {
                 FileOutputStream output = new FileOutputStream(new File("achievements.txt"));
                 ObjectOutputStream o = new ObjectOutputStream(output);
-                System.out.println("finish alist length:" + finishTimeAchievementsList.size());
     
                 for(FinishAchievement f : finishTimeAchievementsList){
                     if (timeFinished < f.getTargetFinishTime() && isWon){
-                        System.out.println("New achievement " + f.getClass());
-    
+                        System.out.println("New achievement finish time " + f.getClass());
                         f.setIsAchieved(true);
                         if(f.getIsNewlyAchieved() == false){
+                            JOptionPane.showMessageDialog(null, f.toString());
                             f.setIsNewlyAchieved(true);
                         }
                     }
                     o.writeObject(f);
                 }
-                System.out.println("time alist length:" + totalTimeAchievementsList.size());
     
                 for(TimeAchievement t : totalTimeAchievementsList){
                     if (timePlayed > t.getTargetTime()){
-                        System.out.println("New achievement " + t.getClass());
-    
+                        System.out.println("New achievement total time " + t.toString());
                         t.setIsAchieved(true);
-                        t.setIsNewlyAchieved(true);
                         if(t.getIsNewlyAchieved() == false){
+                            JOptionPane.showMessageDialog(null, t.toString());
                             t.setIsNewlyAchieved(true);
                         }
                     }  
                     o.writeObject(t);
     
                 }
-                System.out.println("collect alist length:" + collectingAchievementsList.size());
     
                 for(CollectingAchievement c : collectingAchievementsList){
                     if (itemsCollected > c.getTargetCollection()){
-                        System.out.println("New achievement " +c.getTargetCollection()+ c.getClass());
-    
+                        System.out.println("New achievement collecting ac " + c.toString());
                         c.setIsAchieved(true);
-                        c.setIsNewlyAchieved(true);
                         if(c.getIsNewlyAchieved() == false){
+                            JOptionPane.showMessageDialog(null, c.toString());
                             c.setIsNewlyAchieved(true);
                         }
                     }
                     o.writeObject(c);
                 }
-                System.out.println("turns alist length:" + turnsAchievementsList.size());
     
                 for(TurnsAchievement t : turnsAchievementsList){
                     if (turnsTook > t.getTargetTurns()){
-                        System.out.println("New achievement " + t.getClass());
-    
+                        System.out.println("New achievement turns tookke " + t.toString());
                         t.setIsAchieved(true);
-                        t.setIsNewlyAchieved(true);
                         if(t.getIsNewlyAchieved() == false){
+                            JOptionPane.showMessageDialog(null, t.toString());
                             t.setIsNewlyAchieved(true);
                         }
                     }
@@ -169,8 +155,6 @@ public class Achievements {
             } 
             isInitialized = true;
         }
-
-        
     } 
     void resetAchievements(){
         FileWriter fwOb;
@@ -182,35 +166,26 @@ public class Achievements {
             pwOb.close();
             fwOb.close();
         } catch (IOException e) {
+            System.out.println("No achievements to be resetted.");
             e.printStackTrace();
         }
         
-        
-
-        if (true) { 
-            System.out.println("file deleted.");
-
-            for(FinishAchievement f : finishTimeAchievementsList){
-                f.setIsAchieved(false);
-                f.setIsNewlyAchieved(false);
-            }
-            for(TimeAchievement t : totalTimeAchievementsList){
-                t.setIsAchieved(false);
-                t.setIsNewlyAchieved(false);
-            }
-            for(CollectingAchievement c : collectingAchievementsList){
-                c.setIsAchieved(false);
-                c.setIsNewlyAchieved(false);
-            }
-            for(TurnsAchievement t : turnsAchievementsList){
-                t.setIsAchieved(false);
-                t.setIsNewlyAchieved(false);
-            }
-          } 
-          else {
-            System.out.println("No achievements to be resetted.");
-          } 
-          
+        for(FinishAchievement f : finishTimeAchievementsList){
+             f.setIsAchieved(false);
+             f.setIsNewlyAchieved(false);
+        }
+        for(TimeAchievement t : totalTimeAchievementsList){
+              t.setIsAchieved(false);
+             t.setIsNewlyAchieved(false);
+         }
+         for(CollectingAchievement c : collectingAchievementsList){
+            c.setIsAchieved(false);
+             c.setIsNewlyAchieved(false);
+         }
+         for(TurnsAchievement t : turnsAchievementsList){
+             t.setIsAchieved(false);
+             t.setIsNewlyAchieved(false);
+         }
     }
         
     void setTimeFinished(int time) {
@@ -229,43 +204,28 @@ public class Achievements {
         turnsTook++;
     }
     
-    public void isNewlyAchievedFinished(){
+    public void showAchievements(){
+        String message = "";
         for(FinishAchievement f : finishTimeAchievementsList){
-            if(f.getIsNewlyAchieved()){
-                JOptionPane.showMessageDialog(null, "Congratrulations ! " + f.toString());
-                f.setIsNewlyAchieved(false);
-            }
+            message += f.toString();
+            message += "\n";
         }
-    }
-    public  void isNewlyAchievedPlayed(){
         for(TimeAchievement t : totalTimeAchievementsList){
-            if(t.getIsNewlyAchieved()){
-                JOptionPane.showMessageDialog(null, "Congratrulations ! " + t.toString());
-                t.setIsNewlyAchieved(false);
-            }
+            message += t.toString();
+            message += "\n";
         }
-    }
-    public   void isNewlyAchievedCollected(){
         for(CollectingAchievement c : collectingAchievementsList){
-            if(c.getIsNewlyAchieved()){
-                JOptionPane.showMessageDialog(null, "Congratrulations ! " + c.toString());
-                c.setIsNewlyAchieved(false);
-            }
+            message += c.toString();
+            message += "\n";
         }
-        
-    }
-    public void isNewlyAchievedTook(){
         for(TurnsAchievement t : turnsAchievementsList){
-            if(t.getIsNewlyAchieved()){
-                JOptionPane.showMessageDialog(null, "Congratrulations ! " + t.toString());
-                t.setIsNewlyAchieved(false);
-            }
+            message += t.toString();
+            message += "\n";
         }
+        JOptionPane.showMessageDialog(null, "Achievements:\n" + message);
     }
     public void setWon(boolean isWonTheGame){
         isWon = isWonTheGame;
     }
     
-    
-
 }

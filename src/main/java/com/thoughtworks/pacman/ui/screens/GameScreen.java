@@ -71,6 +71,9 @@ public class GameScreen implements Screen {
         case KeyEvent.VK_R:
             game.getMaze().resetAchievements();
             break;
+        case KeyEvent.VK_A:
+            game.getMaze().getAchievement().showAchievements();
+            break;
         }
     }
 }
