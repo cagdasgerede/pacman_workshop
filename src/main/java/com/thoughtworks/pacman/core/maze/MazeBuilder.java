@@ -46,14 +46,14 @@ public class MazeBuilder {
 
         return buildMaze(scanner);
     }
-    //Ahmet
+
     public static Maze buildWalledMaze(int level) throws Exception {
         String walled_map_maze_file_name = "walled_maze_level" + level + ".map";
         InputStream fileInputStream = MazeBuilder.class.getResourceAsStream(walled_map_maze_file_name);
         Scanner scanner = new Scanner(fileInputStream);
 
         return buildMaze(scanner);
-    }//Ahmet
+    }
 
     public static Maze buildMaze(String mazeDescription) throws Exception {
         Scanner scanner = new Scanner(mazeDescription);
