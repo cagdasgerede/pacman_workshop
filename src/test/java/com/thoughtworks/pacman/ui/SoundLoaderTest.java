@@ -16,7 +16,7 @@ public class SoundLoaderTest{
     private File f = null;
     
     @Test  (expected = ThreadDeath.class)
-    public void killAfterRunning_ThrowsException() throws Exception{
+    public void killAfterRunning_ThrowsException() throws Exception {
         soundLoader = new SoundLoader ("IntroSoundLoader");
         soundLoader.run();
         assertTrue(throwException());
@@ -24,14 +24,14 @@ public class SoundLoaderTest{
 
 
     @Test (expected = Exception.class)
-    public void playwithNullPath() throws Exception{
+    public void playWithNullPath() throws Exception {
         soundLoader = mock(SoundLoader.class);
         soundLoader.playTheSound(f);
         assertTrue(throwException());
     }
 
     @Test
-    public void playIntroWithPath() throws Exception{
+    public void playIntroWithPath() throws Exception {
         soundLoader = new SoundLoader("IntroSoundLoader");
         f = new File("/home/irem/pacman_workshop/src/main/resources/com/thoughtworks/pacman/ui/pacman_beginning.wav");  
     
@@ -39,7 +39,7 @@ public class SoundLoaderTest{
     }
 
     @Test
-    public void playBackgroundWithPath() throws Exception{
+    public void playBackgroundWithPath() throws Exception {
         soundLoader = new SoundLoader("BackgroundSoundLoader");
 
         assertTrue(soundLoader.playTheSound(mock(File.class)));

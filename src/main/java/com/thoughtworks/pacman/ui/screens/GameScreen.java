@@ -7,7 +7,6 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.locks.Lock;
 
 public class GameScreen implements Screen {
     private final Game game;
@@ -49,11 +48,11 @@ public class GameScreen implements Screen {
         return this;
     }
 
-    public void play (){
+    public void play() {
         soundToScreens.chooseTheSound();
     }
 
-    public void checkBeforeNewSound(){
+    public void checkBeforeNewSound() {
         soundToScreens.checkTheSound((game.won()) || (game.lost() && !gamePresenter.isDying()));
     }
     

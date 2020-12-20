@@ -36,11 +36,11 @@ public class LostScreen implements Screen {
         return this;
     }
 
-    public void play(){
+    public void play() {
         soundToScreens.chooseTheSound();
     }
 
-    public void checkBeforeNewSound(){
+    public void checkBeforeNewSound() {
         soundToScreens.checkTheSound(startGame);
     }
 
