@@ -30,14 +30,11 @@ public class GamePresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
-        if(this.game.hasClonePacman())
-        {
+        if(this.game.hasClonePacman()) {
             if(this.clonePacmanPresenter == null)
                 this.clonePacmanPresenter = new ClonePacmanPresenter(game.getClonePacman());
             this.clonePacmanPresenter.draw(graphics);
-        }
-        else
-        {
+        } else {
             this.clonePacmanPresenter = null;
         }
         mazePresenter.drawNewCloneItem(graphics);

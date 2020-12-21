@@ -2,19 +2,22 @@ package com.thoughtworks.pacman.core;
 
 import java.awt.Dimension;
 
+import com.thoughtworks.pacman.core.actors.ClonePacman;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
-import com.thoughtworks.pacman.core.actors.ClonePacman;
+
 import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.CloneItem;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+
+import com.thoughtworks.pacman.core.tiles.CloneItem;
+import com.thoughtworks.pacman.core.tiles.Dot;
+
 import com.thoughtworks.pacman.core.tiles.visitors.ClonePacmanTileVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
 public class Game {
     private final Maze maze;
-    private final Pacman pacman; 
+    private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
     private final ClonePacmanTileVisitor clonePacmanTileVisitor;
@@ -68,8 +71,7 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
-    public void addClonePacman()
-    {
+    public void addClonePacman() {
         if(this.hasClonePacman())
             return;
 
@@ -77,19 +79,45 @@ public class Game {
         this.maze.useCloneItem();
     }
 
-    public void expireClonePacman()
-    {
-        this.clonePacman = null;
-    }
-
-    public ClonePacman getClonePacman()
-    {
+    public ClonePacman getClonePacman() {
         return this.clonePacman;
     }
 
-    public boolean hasClonePacman()
-    {
+    public boolean hasClonePacman() {
         return this.clonePacman != null;
+    }
+
+    public void clonePacmanPresenceState() {
+        java.util.Random random = new java.util.Random();
+        int decision = random.nextInt(10);
+        
+        if(!this.doesCloneItemExist && decision == 1) {
+            int mazeWidth = this.maze.getWidth();
+            int mazeHeight = this.maze.getHeight();
+            TileCoordinate tempCloneItemCoordinate = new TileCoordinate(random.nextInt(mazeWidth), random.nextInt(mazeHeight));
+            if(this.maze.tileAt(tempCloneItemCoordinate) instanceof Dot) {
+                this.maze.insertCloneItem(tempCloneItemCoordinate);
+                this.doesCloneItemExist = true;
+                this.cloneItemTimePassed = 0;
+            }
+        } else if(this.doesCloneItemExist) {
+            if(this.cloneItemTimePassed == CLONE_ITEM_THRESHOLD) { 
+                this.doesCloneItemExist = false;
+                this.maze.removeCloneItem();
+                this.cloneItemTimePassed = 0;
+            } else {
+                this.cloneItemTimePassed++;
+            }
+        }
+
+        if(this.hasClonePacman()) {
+            if(this.clonePacmanTimePassed == CLONE_PACMAN_THRESHOLD) {
+                this.clonePacmanTimePassed = 0;
+                this.clonePacman = null;
+            } else {
+                this.clonePacmanTimePassed++;
+            }
+        }
     }
 
     public void advance(long timeDeltaInMillis) {
@@ -97,41 +125,7 @@ public class Game {
             return;
         }
 
-        java.util.Random random = new java.util.Random();
-        int decision = random.nextInt(10);
-        
-        if(!this.doesCloneItemExist && decision == 1)
-        {
-            int mazeWidth = this.maze.getWidth();
-            int mazeHeight = this.maze.getHeight();
-            TileCoordinate tempCloneItemCoordinate = new TileCoordinate(random.nextInt(mazeWidth), random.nextInt(mazeHeight));
-            if(this.maze.tileAt(tempCloneItemCoordinate) instanceof Dot)
-            {
-                this.maze.insertCloneItem(tempCloneItemCoordinate);
-                this.doesCloneItemExist = true;
-                this.cloneItemTimePassed = 0;
-            }
-        }
-        else if(this.doesCloneItemExist)
-        {
-            if(this.cloneItemTimePassed == CLONE_ITEM_THRESHOLD)
-            { 
-                this.doesCloneItemExist = false;
-                this.maze.removeCloneItem();
-                this.cloneItemTimePassed = 0;
-            }
-            else this.cloneItemTimePassed++;
-        }
-
-        if(this.hasClonePacman())
-        {
-            if(this.clonePacmanTimePassed == CLONE_PACMAN_THRESHOLD)
-            {
-                this.clonePacmanTimePassed = 0;
-                this.clonePacman = null;
-            }
-            else this.clonePacmanTimePassed++;
-        }
+        this.clonePacmanPresenceState();
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
@@ -145,8 +139,7 @@ public class Game {
         }
 
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
-        if(this.hasClonePacman())
-        {
+        if(this.hasClonePacman()) {
             Tile clonePacmanTile = maze.tileAt(this.clonePacman.getCenter().toTileCoordinate());
             clonePacmanTile.visit(clonePacmanTileVisitor);
         }

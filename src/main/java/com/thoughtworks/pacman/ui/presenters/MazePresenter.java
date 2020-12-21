@@ -36,8 +36,7 @@ public class MazePresenter implements Presenter {
         drawScore(graphics);
     }
 
-    public void drawNewCloneItem(Graphics2D graphics)
-    {
+    public void drawNewCloneItem(Graphics2D graphics) {
         if(this.maze.isCloneItemPresent())
             toPresenter(this.maze.getCloneItem()).draw(graphics);
     }

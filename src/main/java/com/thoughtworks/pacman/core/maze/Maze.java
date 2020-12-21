@@ -43,8 +43,7 @@ public class Maze {
         return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
 
-    public Tile getCloneItem()
-    {
+    public Tile getCloneItem() {
         return this.activeCloneItem;
     }
 
@@ -57,26 +56,22 @@ public class Maze {
         return totalScore;
     }
 
-    public void insertCloneItem(TileCoordinate cloneItemCoordinate)
-    {
+    public void insertCloneItem(TileCoordinate cloneItemCoordinate) {
         this.activeCloneItem = new CloneItem(cloneItemCoordinate);
         this.cloneItemCoordinate = cloneItemCoordinate;
         this.prevTile = this.tiles.get(cloneItemCoordinate);
         this.tiles.put(cloneItemCoordinate, this.activeCloneItem); 
     }
 
-    public TileCoordinate getCloneItemCoordinate()
-    {
+    public TileCoordinate getCloneItemCoordinate() {
         return this.cloneItemCoordinate;
     }
 
-    public boolean isCloneItemPresent()
-    {
+    public boolean isCloneItemPresent() {
         return this.activeCloneItem != null;
     }
 
-    public void removeCloneItem()
-    {
+    public void removeCloneItem() {
         this.tiles.replace(this.cloneItemCoordinate, this.prevTile);
         this.prevTile = null;
         this.cloneItemCoordinate = null;
@@ -84,8 +79,7 @@ public class Maze {
         this.activeCloneItem = null;
     }
 
-    public void eatCloneItem()
-    {
+    public void eatCloneItem() {
         if(this.activeCloneItem == null)
             return;
 
@@ -94,16 +88,14 @@ public class Maze {
         this.removeCloneItem();
     }
 
-    public void useCloneItem()
-    {
+    public void useCloneItem() {
         if(this.cloneItemEaten == 0)
             return;
         
         this.cloneItemEaten--;
     }
 
-    public int getEatenCloneItemCount()
-    {
+    public int getEatenCloneItemCount() {
         return this.cloneItemEaten;
     }
 

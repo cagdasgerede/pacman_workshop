@@ -14,8 +14,7 @@ public class PacmanTileVisitor implements TileVisitor<Void> {
         return null;
     }
 
-    public Void visit(CloneItem ci)
-    {
+    public Void visit(CloneItem ci) {
         ci.eat();
         return null;
     }

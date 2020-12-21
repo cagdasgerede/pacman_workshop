@@ -14,8 +14,7 @@ public class ScoreTileVisitor implements TileVisitor<Integer> {
         return dot.isEaten() ? SCORE_PER_DOT : 0;
     }
 
-    public Integer visit(CloneItem ci)
-    {
+    public Integer visit(CloneItem ci) {
         return 0;
     }
 

@@ -1,8 +1,8 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.tiles.CloneItem;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.CloneItem;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 

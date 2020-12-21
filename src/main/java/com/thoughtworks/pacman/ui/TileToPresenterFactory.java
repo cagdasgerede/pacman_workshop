@@ -23,8 +23,7 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
         return new DotPresenter(dot);
     }
 
-    public Presenter visit(CloneItem ci)
-    {
+    public Presenter visit(CloneItem ci) {
         return new CloneItemPresenter(ci);
     }
 
