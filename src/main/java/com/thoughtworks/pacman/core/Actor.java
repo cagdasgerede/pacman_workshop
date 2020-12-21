@@ -8,7 +8,7 @@ public abstract class Actor {
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
     private SpacialCoordinate center;
-   
+    
     public Actor(Maze maze, MovementStrategy movementStrategy, SpacialCoordinate center) {
         this.maze = maze;
         this.movementStrategy = movementStrategy;
