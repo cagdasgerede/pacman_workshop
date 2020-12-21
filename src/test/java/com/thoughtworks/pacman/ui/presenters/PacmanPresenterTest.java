@@ -38,7 +38,7 @@ public class PacmanPresenterTest {
         Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
         PacmanPresenter presenter = new PacmanPresenter(pacman);
         for (int i = 0; i < 5; i++) {
-            pacman.advance(1000 /*Ahmet*/,1/*Ahmet*/);
+            pacman.advance(1000 ,1);
         }
         assertThat(pacman.isMoving(), is(false));
 
