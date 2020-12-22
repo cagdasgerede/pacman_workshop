@@ -1,65 +1,70 @@
 package com.thoughtworks.pacman.ui.screens;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-
 import com.thoughtworks.pacman.core.Game;
+
+import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import java.nio.file.Paths;
 
-public class SaveScreen extends WindowAdapter implements ActionListener, ItemListener {
-    private JComboBox<String> comboBox;
+public class SaveScreen extends WindowAdapter implements ActionListener{
+    private JTextField textField;
     private JPanel panel;
     private JFrame frame;
     private JLabel label;
     private JButton button;
-    private String playerName;
 
     private final Game game;
 
-    public SaveScreen(Game game){
+    public SaveScreen(Game game, String whereWasItCalledFrom){
         this.game = game;
-        if(game != null) {
+        if(whereWasItCalledFrom.equals("GameScreen")) {
+            if (game != null) {
 
-            for (int i = 0; i < game.getGhosts().length; i++) {
-                game.getGhosts()[i].setSPEED(0);
+                for (int i = 0; i < game.getGhosts().length; i++) {
+                    game.getGhosts()[i].setSPEED(0);
+                }
+
+                frame = new JFrame("Save");
+                label = new JLabel("Player Name");
+                textField = new JTextField(20);
+                button = new JButton("Save");
+                panel = new JPanel();
+
+                button.addActionListener(this);
+
+                panel.add(label);
+                panel.add(textField);
+                panel.add(button);
+                panel.setVisible(true);
+
+                frame.setLayout(new FlowLayout());
+                frame.add(panel);
+                frame.setSize(700, 200);
+                frame.show();
+
+                frame.addWindowListener(this);
             }
-
-            frame = new JFrame("Save and Exit");
-            label = new JLabel("Select Player");
-            comboBox = new JComboBox<String>();
-            button = new JButton("Save");
-            panel = new JPanel();
-
-            button.addActionListener(this);
-
-            comboBox.addItem("Select Player");
-            comboBox.addItem("Player1");
-            comboBox.addItem("Player2");
-            comboBox.addItem("Player3");
-            comboBox.addItemListener(this);
-
-            panel.add(label);
-            panel.add(comboBox);
-            panel.add(button);
-            panel.setVisible(true);
-
-            frame.setLayout(new FlowLayout());
-            frame.add(panel);
-            frame.setSize(700, 200);
-            frame.show();
-
-            frame.addWindowListener(this);
         }
-    }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        if(e.getSource() == comboBox && !comboBox.getSelectedItem().equals("Select Player")){
-            playerName = comboBox.getSelectedItem().toString();
+        else if(whereWasItCalledFrom.equals("GameRunner")){
+            save("autoSave");
         }
     }
 
@@ -72,15 +77,43 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!comboBox.getSelectedItem().equals("Select Player")) {
-            save();
+        String playerName;
+        if(e.getActionCommand().equals("Save")){
+            playerName = textField.getText();
+            if(!playerName.equals("")){
+                save(playerName);
+                for(int i=0; i<game.getGhosts().length; i++){
+                    game.getGhosts()[i].setSPEED(100);
+                }
+                frame.dispose();
+            }
         }
     }
 
-    private void save(){
+    private void save(String playerName){
         String path = Paths.get("").toAbsolutePath().toString();
         path = path.substring(0,path.lastIndexOf("\\"));
         path = path.substring(0,path.lastIndexOf("\\"));
+
+        if(!playerName.equals("autoSave")){
+            String date = java.time.LocalDate.now().toString();
+            String time = java.time.LocalTime.now().toString();
+            time = time.substring(0,time.lastIndexOf("."));
+            time = time.replace(':', '$');
+            String dateAndTime = "#" + date + "#" + time;
+            playerName += dateAndTime;
+            playerName = playerName.replace(' ','#');
+            try {
+                FileWriter fileWriter = new FileWriter((path + "\\" + "saved.txt"), true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                PrintWriter printWriter = new PrintWriter(bufferedWriter);
+                printWriter.println(playerName);
+                printWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         path += "\\" + playerName + ".bin";
 
         try {
@@ -97,6 +130,5 @@ public class SaveScreen extends WindowAdapter implements ActionListener, ItemLis
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.exit(0);
     }
 }

@@ -10,6 +10,6 @@ public class SaveScreenTest {
 
     @Test
     public void SaveScreenTest() throws Exception{
-        SaveScreen saveScreen = new SaveScreen(null);
+        SaveScreen saveScreen = new SaveScreen(null,"GameScreen");
     }
 }

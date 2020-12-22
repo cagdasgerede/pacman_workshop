@@ -50,7 +50,7 @@ public class GameScreen implements Screen , Serializable {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_S:
-            SaveScreen storeScreen = new SaveScreen(game);
+            SaveScreen storeScreen = new SaveScreen(game,"GameScreen");
             break;
         case KeyEvent.VK_LEFT:
             game.getPacman().setNextDirection(Direction.LEFT);

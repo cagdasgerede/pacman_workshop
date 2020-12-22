@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.screens.SaveScreen;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,6 +40,7 @@ public class GameRunner {
 
         container.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                SaveScreen saveScreen = new SaveScreen(game, "GameRunner");
                 open = false;
                 System.exit(0);
             }
