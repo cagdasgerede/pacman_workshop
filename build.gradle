@@ -15,17 +15,18 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-core:1.3'
     testCompile 'org.mockito:mockito-core:1.9.0'
 
-   // implementation "org.apache.logging.log4j:log4j-api:2.13.3"
-   // implementation "org.apache.logging.log4j:log4j-core:2.13.3"
-   /// implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.13.3"
-    
+    implementation "org.apache.logging.log4j:log4j-api:2.13.3"
+    implementation "org.apache.logging.log4j:log4j-core:2.13.3"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.13.3"
 
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
 }
 
 mainClassName = 'com.thoughtworks.pacman.ui.GameRunner'
 
 jar {
-    manifest { attributes 'Main-Class': 'com.thoughtworks.pacman.ui.GameRunner' }
+    manifest { attributes 'Main-Class': 'com.thoughtworks.pacman.ui.GameRunner'
+    attributes "Class-Path": configurations.compile.collect { it.absolutePath }.join(" ") }
 }
 
 wrapper {
@@ -33,17 +34,14 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-/*task logInfo {
-    //task debug
-    logger.error('Logged an error message.')
-} */
-
 jacoco {
     toolVersion = "0.8.5"
     reportsDir = file("$buildDir/jacoco")
 }
 
 test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
     finalizedBy jacocoTestReport
 }
 

@@ -2,12 +2,16 @@ package com.thoughtworks.pacman.ui.screens;
 
 import java.util.concurrent.locks.ReentrantLock;
 import com.thoughtworks.pacman.ui.SoundLoader;
+import java.util.logging.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class SoundToScreens {
     private String screenName;
     private ReentrantLock lock = new ReentrantLock();
     private SoundLoader soundLoader;
     private Thread threadSounds ;
+    private final Logger LOGGER = Logger.getLogger(SoundToScreens.class);
 
     public SoundToScreens() {
        this("IntroSoundLoader");
@@ -36,7 +40,9 @@ public class SoundToScreens {
             lock.lock();
             threadSounds.start();
             lock.unlock();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            LOGGER.error("exception", e);
+        }
     }
 
     public void stop() {
