@@ -1,9 +1,7 @@
 package com.thoughtworks.pacman.core.maze;
 
 import javax.swing.JOptionPane;
-import java.io.BufferedReader;
 import java.io.EOFException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,7 +10,6 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class Achievements {
@@ -44,8 +41,8 @@ public class Achievements {
         isInitialized = false;
         isReadFromFile = readFromFile();
         if(!isReadFromFile){
-            finish = new FinishAchievement(60);
-            playTime = new TimeAchievement(120);
+            finish = new FinishAchievement(180);
+            playTime = new TimeAchievement(150);
             collect = new CollectingAchievement(100);
             turns = new TurnsAchievement(50);
             TurnsAchievement turns2 = new TurnsAchievement(20);
@@ -78,6 +75,7 @@ public class Achievements {
                     turnsAchievementsList.add( (TurnsAchievement) obj);
                 }
             }
+            inputStream.close();
         }
         catch (EOFException e) {
             if(lineNumber > 2)
@@ -94,7 +92,6 @@ public class Achievements {
 
     void initializeAchievements() {
         if(!isInitialized){
-
             try {
                 FileOutputStream output = new FileOutputStream(new File("achievements.txt"));
                 ObjectOutputStream o = new ObjectOutputStream(output);
@@ -151,7 +148,18 @@ public class Achievements {
                 output.close();
             } 
             catch (IOException e) {
-               e.printStackTrace();
+                FileWriter fileStream;
+                PrintWriter out;
+                try {
+                    fileStream = new FileWriter("AchievementsError.txt", true);
+                    out = new PrintWriter(fileStream);
+                    e.printStackTrace(out);
+                    out.close();
+                    fileStream.close();
+                } 
+                catch (IOException e1) {    
+                    e1.printStackTrace();
+                }
             } 
             isInitialized = true;
         }
@@ -166,8 +174,18 @@ public class Achievements {
             pwOb.close();
             fwOb.close();
         } catch (IOException e) {
-            System.out.println("No achievements to be resetted.");
-            e.printStackTrace();
+            FileWriter fileStream;
+            PrintWriter out;
+                try {
+                    fileStream = new FileWriter("AchievementsError.txt", true);
+                    out = new PrintWriter(fileStream);
+                    out.println("No achievements to reset.");
+                    out.close();
+                    fileStream.close();
+                } 
+                catch (IOException e1) {    
+                    e1.printStackTrace();
+                }
         }
         
         for(FinishAchievement f : finishTimeAchievementsList){
@@ -222,10 +240,9 @@ public class Achievements {
             message += t.toString();
             message += "\n";
         }
-        JOptionPane.showMessageDialog(null, "Achievements:\n" + message);
+        JOptionPane.showMessageDialog(null, "Achievements:\n" + message,"Achievements List",JOptionPane.INFORMATION_MESSAGE);
     }
     public void setWon(boolean isWonTheGame){
         isWon = isWonTheGame;
     }
-    
 }

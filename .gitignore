@@ -9,3 +9,6 @@ bin
 build
 *~
 highScores.txt
+.project
+.vscode
+achievements.txt
