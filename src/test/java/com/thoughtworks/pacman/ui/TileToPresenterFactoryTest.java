@@ -4,6 +4,7 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
+import com.thoughtworks.pacman.core.tiles.WallType;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class TileToPresenterFactoryTest {
     @Test
     public void toPresenter_shouldReturnWallPresenter_whenTileIsWall() {
-        Presenter presenter = TileToPresenterFactory.toPresenter(new Wall(null, null));
+        Presenter presenter = TileToPresenterFactory.toPresenter(new Wall(null, (String) null));
         assertThat(presenter, instanceOf(WallPresenter.class));
     }
 

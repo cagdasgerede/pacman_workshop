@@ -6,7 +6,7 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 public class MultiplayerGameScreen implements Screen {
@@ -21,7 +21,7 @@ public class MultiplayerGameScreen implements Screen {
     }
 
     private MultiplayerGameScreen(Game game1, Game game2) {
-        this(game1, game2, new GamePresenter(game1, game2.getDimension().width+ Tile.SIZE*2), new GamePresenter(game2));
+        this(game1, game2, new GamePresenter(game1, game2.getDimension().width + Tile.SIZE * 2), new GamePresenter(game2));
     }
 
     MultiplayerGameScreen(Game game1, Game game2, GamePresenter gamePresenter1, GamePresenter gamePresenter2) {
