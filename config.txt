@@ -1,6 +1,6 @@
-low
-low
-purple
+medium
+medium
+gold
 UP KEY
 DOWN KEY
 LEFT KEY

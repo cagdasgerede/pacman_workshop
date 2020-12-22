@@ -9,7 +9,9 @@ import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
 import java.io.IOException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 
 public class PacmanPresenter implements Presenter {
     static final int DIAMETER = 20;
@@ -27,7 +29,6 @@ public class PacmanPresenter implements Presenter {
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
-        
         try {
         File file=new File("config.txt");    //creates a new file instance  
         FileReader fr=new FileReader(file);   //reads the file  
