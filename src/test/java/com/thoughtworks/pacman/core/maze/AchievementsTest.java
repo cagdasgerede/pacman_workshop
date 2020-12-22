@@ -20,8 +20,7 @@ public class AchievementsTest {
     @Test
     public void finishTimeAchievementsList_ShouldNotBe_Empty() throws Exception {
 
-        assertNotNull(maze.getAchievement().finishTimeAchievementsList);    
-          
+        assertNotNull(maze.getAchievement().finishTimeAchievementsList);      
     }
     
     @Test
