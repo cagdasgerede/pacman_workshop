@@ -13,8 +13,9 @@ public class SoundLoader implements Runnable {
     private SoundConstants soundConstants;
     private final Logger LOGGER = Logger.getLogger(SoundLoader.class);
 
-    public SoundLoader(String soundName){
+    public SoundLoader(String soundName, Clip clip){
         this.soundName = soundName;
+        this.clip = clip;
         soundConstants = new SoundConstants(soundName); 
     }
 

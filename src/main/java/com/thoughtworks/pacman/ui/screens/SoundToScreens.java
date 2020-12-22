@@ -2,15 +2,15 @@ package com.thoughtworks.pacman.ui.screens;
 
 import java.util.concurrent.locks.ReentrantLock;
 import com.thoughtworks.pacman.ui.SoundLoader;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import javax.sound.sampled.Clip;
 
 public class SoundToScreens {
     private String screenName;
     private ReentrantLock lock = new ReentrantLock();
     private SoundLoader soundLoader;
     private Thread threadSounds ;
+    private Clip clip ;
     private final Logger LOGGER = Logger.getLogger(SoundToScreens.class);
 
     public SoundToScreens() {
@@ -19,7 +19,7 @@ public class SoundToScreens {
 
     public SoundToScreens(String screenName) {
        this.screenName = screenName;
-       soundLoader = new SoundLoader(screenName);
+       soundLoader = new SoundLoader(screenName,clip);
        threadSounds = new Thread(soundLoader, screenName);
     }
 
