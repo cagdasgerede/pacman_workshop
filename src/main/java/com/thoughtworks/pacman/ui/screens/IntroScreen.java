@@ -1,9 +1,5 @@
 package com.thoughtworks.pacman.ui.screens;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
