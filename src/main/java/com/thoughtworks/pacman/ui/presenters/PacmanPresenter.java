@@ -30,9 +30,9 @@ public class PacmanPresenter implements Presenter {
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
         try {
-        File file=new File("config.txt");    //creates a new file instance  
-        FileReader fr=new FileReader(file);   //reads the file  
-        BufferedReader br=new BufferedReader(fr);  //creates a buffering character input stream  
+        File file=new File("config.txt");    
+        FileReader fr=new FileReader(file);     
+        BufferedReader br=new BufferedReader(fr);
 
         String line=br.readLine();
         line=br.readLine();
