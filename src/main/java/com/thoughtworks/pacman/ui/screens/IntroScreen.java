@@ -31,7 +31,6 @@ public class IntroScreen implements Screen {
     public void draw(Graphics2D graphics) {
         int height = TITLE_SCREEN_IMAGE.getHeight(null) * dimension.width / TITLE_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(TITLE_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
-        graphics.drawString("This is gona be awesome",70,20);
     }
 
     public Screen getNextScreen() throws Exception {
