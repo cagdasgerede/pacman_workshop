@@ -144,9 +144,8 @@ public class SettingsScreen extends JFrame implements ActionListener {
          Window win = SwingUtilities.getWindowAncestor(components[0]);
          win.dispose();
 
-
       }catch (IOException e) {
-         System.out.println("error");
+         e.printStackTrace();  
       }
    }
 }

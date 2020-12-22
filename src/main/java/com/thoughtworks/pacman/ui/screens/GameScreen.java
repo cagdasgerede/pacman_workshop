@@ -8,8 +8,10 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import java.io.*;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 
 public class GameScreen implements Screen {
     private final Game game;

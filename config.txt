@@ -1,7 +1,7 @@
-medium
-medium
-gold
+low
+low
+red
 UP KEY
 DOWN KEY
-LEFT KEY
+DOWN KEY
 RIGHT KEY
