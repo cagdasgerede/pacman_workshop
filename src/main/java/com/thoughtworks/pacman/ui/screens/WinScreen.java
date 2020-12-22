@@ -42,18 +42,18 @@ public class WinScreen extends ParentScreen {
         graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
         if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
-            drawRectangle.draw("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
+            drawRectangle.drawButtons("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
         }
         if (currentStateOfReturnButton == State.HOVER_ON_RETURN_BUTTON) {
-            drawRectangle.draw("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
+            drawRectangle.drawButtons("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
         }
 
         if (currentStateOfQuitButton == State.RELEASED_QUIT_BUTTON) {
-            drawRectangle.draw("QUIT", buttonMainColor, exitClickBox, graphics);
+            drawRectangle.drawButtons("QUIT", buttonMainColor, exitClickBox, graphics);
         }
 
         if (currentStateOfQuitButton == State.HOVER_ON_QUIT_BUTTON) {
-            drawRectangle.draw("QUIT", buttonOnHoverColor, exitClickBox, graphics);
+            drawRectangle.drawButtons("QUIT", buttonOnHoverColor, exitClickBox, graphics);
         }
     }
 
@@ -66,6 +66,10 @@ public class WinScreen extends ParentScreen {
 
     public void setStartGame(boolean bool) {
         this.startGame = bool;
+    }
+
+    public void setDrawRectangle(RectangleButton drawRectangle) {
+        this.drawRectangle = drawRectangle;
     }
 
     private enum State {

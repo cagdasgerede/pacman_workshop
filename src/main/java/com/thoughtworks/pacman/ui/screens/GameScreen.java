@@ -69,19 +69,19 @@ public class GameScreen extends ParentScreen {
 
         if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_PRESSED) {
             areClickBoxesVisible = true;
-            drawRectangle.draw("" + game.getScore(), new Color(0, 0, 0, 230), settingsBlock, graphics);
+            drawRectangle.drawScore("" + game.getScore(), new Color(0, 0, 0, 230), settingsBlock, graphics);
             if (currentStateOfReturnButton == State.RELEASED_RETURN_BUTTON) {
-                drawRectangle.draw("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
+                drawRectangle.drawButtons("RETURN TO MAIN MENU", buttonMainColor, returnClickBox, graphics);
             }
             if (currentStateOfReturnButton == State.HOVER_ON_RETURN_BUTTON) {
-                drawRectangle.draw("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
+                drawRectangle.drawButtons("RETURN TO MAIN MENU", buttonOnHoverColor, returnClickBox, graphics);
             }
             if (currentStateOfResumeButton == State.RELEASED_RESUME_BUTTON) {
-                drawRectangle.draw("RESUME", buttonMainColor, resumeClickBox, graphics);
+                drawRectangle.drawButtons("RESUME", buttonMainColor, resumeClickBox, graphics);
 
             }
             if (currentStateOfResumeButton == State.HOVER_ON_RESUME_BUTTON) {
-                drawRectangle.draw("RESUME", buttonOnHoverColor, resumeClickBox, graphics);
+                drawRectangle.drawButtons("RESUME", buttonOnHoverColor, resumeClickBox, graphics);
             }
 
         } else if (currentStateofSettingsButton == State.SETTINGS_BUTTON_IS_NOT_PRESSED) { 
@@ -182,5 +182,5 @@ public class GameScreen extends ParentScreen {
                 currentStateOfResumeButton = State.RELEASED_RESUME_BUTTON;
             }
         }
-	}
+    }
 }

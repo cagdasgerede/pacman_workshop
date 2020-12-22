@@ -45,22 +45,22 @@ public class IntroScreen extends ParentScreen {
         graphics.drawImage(TITLE_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
 
         if(currentStateofPlayButton == State.RELEASED_PLAY_BUTTON){
-            drawRectangle.draw("PLAY", buttonMainColor, playClickBox, graphics);
+            drawRectangle.drawButtons("PLAY", buttonMainColor, playClickBox, graphics);
         }
         if(currentStateOfSettingsButton == State.RELEASED_SETTINGS_BUTTON){
-            drawRectangle.draw("SETTINGS", buttonMainColor, settingsClickBox, graphics);
+            drawRectangle.drawButtons("SETTINGS", buttonMainColor, settingsClickBox, graphics);
         }
         if(currentStateOfQuitButton == State.RELEASED_QUIT_BUTTON){
-            drawRectangle.draw("QUIT", buttonMainColor, exitClickBox, graphics);
+            drawRectangle.drawButtons("QUIT", buttonMainColor, exitClickBox, graphics);
 		}
 		if(currentStateofPlayButton == State.HOVER_ON_PLAY_BUTTON){
-            drawRectangle.draw("PLAY", buttonOnHoverColor, playClickBox, graphics);
+            drawRectangle.drawButtons("PLAY", buttonOnHoverColor, playClickBox, graphics);
         }
         if(currentStateOfSettingsButton == State.HOVER_ON_SETTINGS_BUTTON){
-            drawRectangle.draw("SETTINGS", buttonOnHoverColor, settingsClickBox, graphics);
+            drawRectangle.drawButtons("SETTINGS", buttonOnHoverColor, settingsClickBox, graphics);
         }
         if(currentStateOfQuitButton == State.HOVER_ON_QUIT_BUTTON){
-            drawRectangle.draw("QUIT", buttonOnHoverColor, exitClickBox, graphics);
+            drawRectangle.drawButtons("QUIT", buttonOnHoverColor, exitClickBox, graphics);
 
 		}
         
@@ -77,6 +77,9 @@ public class IntroScreen extends ParentScreen {
         this.startGame = bool;
     }
 
+    public void setDrawRectangle(RectangleButton drawRectangle) {
+        this.drawRectangle = drawRectangle;
+    }
 
     private enum State{
         HOVER_ON_PLAY_BUTTON, 
@@ -85,7 +88,7 @@ public class IntroScreen extends ParentScreen {
         RELEASED_SETTINGS_BUTTON,
         HOVER_ON_QUIT_BUTTON, 
         RELEASED_QUIT_BUTTON
-	}
+    }
 
     @Override
     public void eventDispatcher(MouseEvent event) {
@@ -109,7 +112,7 @@ public class IntroScreen extends ParentScreen {
                 currentStateOfSettingsButton = State.RELEASED_SETTINGS_BUTTON;
                 currentStateofPlayButton = State.RELEASED_PLAY_BUTTON;
                 currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
-            }            
+            }           
         }
     }
 }
