@@ -14,7 +14,7 @@ public class Maze {
     private final int width;
     private final int height;
     private final long createdMillis = System.currentTimeMillis();
-    final int totalItems = 245; // Number of dots in Maze.
+    final int TOTAL_ITEMS = 245; // Number of dots in Maze.
     Achievements achievement;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
@@ -56,7 +56,7 @@ public class Maze {
         for (Tile tile : tiles.values()) {
             dotsLeft += tile.visit(dotsLeftVisitor);
         }
-        achievement.setItemsCollected(totalItems-dotsLeft);
+        achievement.setItemsCollected(TOTAL_ITEMS - dotsLeft);
 
         if(dotsLeft == 0){
             achievement.setTimeFinished(getAgeInSeconds());

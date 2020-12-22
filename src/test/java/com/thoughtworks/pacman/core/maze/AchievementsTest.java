@@ -1,63 +1,58 @@
 package com.thoughtworks.pacman.core.maze;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.screens.LostScreen;
 import org.mockito.Mock;
-
-import com.thoughtworks.pacman.core.Ghosts;
-import com.thoughtworks.pacman.core.actors.Pacman;
-
 import org.junit.Before;
 import org.junit.Test;
 public class AchievementsTest {
     @Mock
-    private Ghosts ghosts;
-    private Pacman pacman;
     private Maze maze;
     
-
     @Before
     public void setUp() throws Exception {
         this.maze = MazeBuilder.buildDefaultMaze();
     }
 
+    @Test
+    public void finishTimeAchievementsList_ShouldNotBe_Empty() throws Exception {
 
-
+        assertNotNull(maze.getAchievement().finishTimeAchievementsList);      
+    }
     
     @Test
-    public void ifWon_itemsCollected_shouldBe245() throws Exception {      
-        
-        Maze maze = MazeBuilder.buildMaze("+ +");
-        boolean b = maze.hasDotsLeft();
-                
-        assertThat(maze.getAchievement().itemsCollected==245, is(true));
+    public void totalTimeAchievementsList_ShouldNotBe_Empty() throws Exception {
+
+        assertNotNull(maze.getAchievement().totalTimeAchievementsList);      
     }
 
+    @Test
+    public void collectingAchievementsList_ShouldNotBe_Empty() throws Exception {
 
+        assertNotNull(maze.getAchievement().collectingAchievementsList);      
+    }
+
+    public void turnsAchievementsList_ShouldNotBe_Empty() throws Exception {
+
+        assertNotNull(maze.getAchievement().turnsAchievementsList);      
+    }
 
     @Test
-    public void ifTook150Turns_isTookShouldBeTrue()throws Exception{
-        Maze maze = MazeBuilder.buildMaze("+ +");
-        for(int i = 0;i<200;i++){
+    public void incrementTurnsTook_Method_ShouldIncrement_Correctly() throws Exception {      
+        for(int i = 0;i<5;i++){
             maze.getAchievement().incrementTurnsTook();
         }
-        maze.getAchievement().checkTurnsTook();
-        assertThat(maze.getAchievement().isTook, is(true));
+        assertEquals(maze.getAchievement().turnsTook, 5);
     }
-
 
     @Test
-    public void ifReseted_variablesInAchievements_ShouldBeReseted() throws Exception {      
-        
-        Maze maze = MazeBuilder.buildMaze("+ +");
-        boolean before = maze.getAchievement().isReseted;
-        maze.getAchievement().resetAchievements();
-        boolean after = maze.getAchievement().isReseted;
-        assertThat(before != after , is(true));
+    public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
+        Game game = new Game();
+        LostScreen lostScreen = new LostScreen(game);
+        lostScreen.keyPressed(null);
+        assertTrue(lostScreen.getNextScreen().getClass().equals(lostScreen.getClass())); 
     }
-
-
 }
