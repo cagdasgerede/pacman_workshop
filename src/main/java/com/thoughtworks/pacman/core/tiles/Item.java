@@ -37,5 +37,4 @@ public abstract class Item extends Tile {
     public String toString() {
         return "*";
     }
-    
 }
