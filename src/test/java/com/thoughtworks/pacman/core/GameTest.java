@@ -97,11 +97,4 @@ public class GameTest {
 
         verify(pacman).die();
     }
-
-    @Test
-    public void GameEntryControl() throws Exception {
-        Game game = new Game(maze, pacman, ghosts);
-        game.check(1);
-        assertTrue(game.scoreControl);
-    }
 }
