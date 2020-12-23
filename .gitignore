@@ -9,3 +9,7 @@ bin
 build
 *~
 highScores.txt
+pacman_workshop.iml
+pacman_workshop.ipr
+pacman_workshop.main.iml
+pacman_workshop.test.iml
