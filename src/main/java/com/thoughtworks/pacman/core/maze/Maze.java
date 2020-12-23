@@ -66,7 +66,7 @@ public class Maze {
     }
 
     public void insertFreezingItemBomb(TileCoordinate ItemCoordinate){
-        if(freezingItemCount<=0)
+        if(freezingItemCount <= 0)
             return;
 
         this.aliveFreezingItemBombs.add(ItemCoordinate);
