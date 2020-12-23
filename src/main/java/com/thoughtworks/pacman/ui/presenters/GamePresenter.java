@@ -9,11 +9,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GamePresenter implements Presenter {
+    private final ItemPresenter itemPresenter;
     private final MazePresenter mazePresenter;
     private final PacmanPresenter pacmanPresenter;
     private final List<GhostPresenter> ghostPresenters;
 
     public GamePresenter(Game game) {
+        itemPresenter = new ItemPresenter(game.getItemController());
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         ghostPresenters = new LinkedList<GhostPresenter>();
@@ -24,6 +26,7 @@ public class GamePresenter implements Presenter {
 
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
+        itemPresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {

@@ -5,14 +5,12 @@ import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.FreezingItem;
-import com.thoughtworks.pacman.core.tiles.FreezingItemBomb;
+import com.thoughtworks.pacman.core.tiles.Item;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.presenters.DoorPresenter;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
-import com.thoughtworks.pacman.ui.presenters.FreezingItemBombPresenter;
-import com.thoughtworks.pacman.ui.presenters.FreezingItemPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
+import com.thoughtworks.pacman.ui.presenters.SquareItemPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 
 public class TileToPresenterFactory implements TileVisitor<Presenter> {
@@ -37,11 +35,7 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
         return new DoorPresenter(door);
     }
 
-    public Presenter visit(FreezingItem freezingItem) {
-        return new FreezingItemPresenter(freezingItem);
-    }
-
-    public Presenter visit(FreezingItemBomb freezingItemBomb) {
-        return new FreezingItemBombPresenter(freezingItemBomb);
+    public Presenter visit(Item item) {
+        return new SquareItemPresenter(item);
     }
 }

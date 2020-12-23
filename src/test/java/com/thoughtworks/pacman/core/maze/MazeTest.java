@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeTest {
@@ -54,28 +53,12 @@ public class MazeTest {
 
     @Test
     public void getScore_shouldCalculatePointsPerDotsEaten() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-
-        assertThat(maze.getScore(), equalTo(0));
-
-        maze.insertFreezingItem(new TileCoordinate(1, 1));
-        maze.eatFreezingItem();
-
-        assertThat(maze.getFreezingItemCount(), equalTo(1));
-
-        maze.insertFreezingItem(new TileCoordinate(2, 1));
-        maze.eatFreezingItem();
-        assertThat(maze.getFreezingItemCount(), equalTo(2));
-    }
-
-    @Test
-    public void getFreezingItemCount_shouldCalculateEatenFreezingItemCount() throws Exception {
         String mazeDescription = "++++\n+..+\n++++";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
+        Dot dot;
+        assertThat(maze.getScore(), equalTo(0));
 
-        assertThat(maze.getFreezingItemCount(), equalTo(0));
-
-        Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
+        dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
         dot.eat();
         assertThat(maze.getScore(), equalTo(10));
 
@@ -83,6 +66,8 @@ public class MazeTest {
         dot.eat();
         assertThat(maze.getScore(), equalTo(20));
     }
+
+
 
     @Test
     public void hasDotsLeft_shouldBeTrue_whenDotsAreLeftUneaten() throws Exception {
