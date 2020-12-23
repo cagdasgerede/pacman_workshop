@@ -24,6 +24,9 @@ import java.io.IOException;
 
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class LoadScreen extends WindowAdapter implements ActionListener, ItemListener {
     private JComboBox<String> comboBox;
@@ -35,6 +38,8 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
     private String playerName;
     private Game game;
     private String path;
+
+    private Logger logger = LogManager.getLogManager().getLogger(SaveScreen.class.getName());
 
     public Game getGame(){
         return game;
@@ -67,7 +72,7 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
 
         comboBox.addItemListener(this);
@@ -126,11 +131,11 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             game = (Game) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
     }
 }

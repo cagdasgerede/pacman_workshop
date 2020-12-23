@@ -22,6 +22,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class SaveScreen extends WindowAdapter implements ActionListener{
     private JTextField textField;
@@ -30,7 +33,9 @@ public class SaveScreen extends WindowAdapter implements ActionListener{
     private JLabel label;
     private JButton button;
 
-    private final Game game;
+    private final Game game ;
+
+    private Logger logger = LogManager.getLogManager().getLogger(SaveScreen.class.getName());
 
     public SaveScreen(Game game, String whereWasItCalledFrom){
         this.game = game;
@@ -109,7 +114,7 @@ public class SaveScreen extends WindowAdapter implements ActionListener{
                 printWriter.println(playerName);
                 printWriter.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.INFO, e.getMessage(), e);
             }
         }
 
@@ -125,9 +130,9 @@ public class SaveScreen extends WindowAdapter implements ActionListener{
             fileOutputStream.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
     }
 }
