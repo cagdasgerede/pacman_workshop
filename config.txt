@@ -1,7 +1,7 @@
-medium
-medium
+high
+low
 red
-UP KEY
 DOWN KEY
-LEFT KEY
+UP KEY
 RIGHT KEY
+LEFT KEY
