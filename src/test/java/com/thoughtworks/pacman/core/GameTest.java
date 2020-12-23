@@ -35,7 +35,7 @@ public class GameTest {
     public void won_shouldBeTrue_whenNoDotsLeftInMaze() throws Exception {
         Maze maze = MazeBuilder.buildMaze("+ +");
         Game game = new Game(maze, pacman, ghosts);
-
+        maze.getAchievement().setWon(false);
         assertThat(game.won(), is(true));
     }
 
@@ -43,7 +43,7 @@ public class GameTest {
     public void won_shouldBeFalse_whenDotsLeftInMaze() throws Exception {
         Maze maze = MazeBuilder.buildMaze("+.+");
         Game game = new Game(maze, pacman, ghosts);
-
+        maze.getAchievement().setWon(false);
         assertThat(game.won(), is(false));
     }
 

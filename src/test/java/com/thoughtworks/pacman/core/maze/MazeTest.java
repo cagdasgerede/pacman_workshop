@@ -64,6 +64,7 @@ public class MazeTest {
 
         dot = (Dot) maze.tileAt(new TileCoordinate(2, 1));
         dot.eat();
+        maze.getAchievement().itemsCollected = 0;
         assertThat(maze.getScore(), equalTo(20));
     }
 
@@ -81,7 +82,7 @@ public class MazeTest {
 
         Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
         dot.eat();
-
+        maze.getAchievement().itemsCollected = 0;
         assertThat(maze.hasDotsLeft(), is(false));
     }
 }
