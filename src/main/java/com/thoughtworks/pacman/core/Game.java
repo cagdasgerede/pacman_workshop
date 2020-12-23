@@ -52,15 +52,15 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
-    public void advance(long timeDeltaInMillis, long timeDeltaInMillis2) {
+    public void advance(long timeDeltaInMillisPacman, long timeDeltaInMillisGhost) {
         if (pacman.isDead()) {
             return;
         }
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
-        pacman.advance(timeDeltaInMillis);
-        ghosts.advance(timeDeltaInMillis2);
+        pacman.advance(timeDeltaInMillisPacman);
+        ghosts.advance(timeDeltaInMillisGhost);
 
         if (ghosts.killed(pacman)) {
             pacman.die();
