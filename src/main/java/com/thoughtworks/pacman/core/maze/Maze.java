@@ -61,11 +61,10 @@ public class Maze {
     public void insertFreezingItem(TileCoordinate ItemCoordinate){
         this.aliveFreezingItem = new FreezingItem(ItemCoordinate);
         this.freezingItemCoordinate = ItemCoordinate;
-        oldTile=this.tiles.get(freezingItemCoordinate);
+        oldTile = this.tiles.get(freezingItemCoordinate);
         this.tiles.put(ItemCoordinate, this.aliveFreezingItem); 
     }
 
-    
     public void insertFreezingItemBomb(TileCoordinate ItemCoordinate){
         if(freezingItemCount<=0)
             return;

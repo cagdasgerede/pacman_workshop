@@ -47,7 +47,6 @@ public class GameScreenTest {
 
         Thread.sleep(10); // Some time for pacman to move
         gameScreen.draw(graphics);
-        
         verify(pacman).advance(gt(0L));
     }
 

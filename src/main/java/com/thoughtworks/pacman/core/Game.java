@@ -7,28 +7,28 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
-import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
-
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.FreezingItemBomb;
+import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
 public class Game {
     private final Maze maze;
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
-    private final int maxAliveTime=200;
-    private final int ghostFreezeTime=100;
-    private final int defaultGhostSpeed=100;
+    private final int maxAliveTime = 200;
+    private final int ghostFreezeTime = 100;
+    private final int defaultGhostSpeed = 100;
+    private final int spawnFrequency = 15; // Lower is more frequent.
 
     private int activeBombCount = 0;
     private int freezingItemTimePassed = 0;
 
-    private int BlinkyFreezingTimePassed = 0;
-    private int PinkyFreezingTimePassed = 0;
-    private int InkyFreezingTimePassed = 0;
-    private int ClydeFreezingTimePassed = 0;
+    private int blinkyFreezingTimePassed = 0;
+    private int pinkyFreezingTimePassed = 0;
+    private int inkyFreezingTimePassed = 0;
+    private int clydeFreezingTimePassed = 0;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -68,7 +68,7 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
-    public void dropBomb(){
+    public void dropBomb() {
         this.maze.insertFreezingItemBomb(pacman.getCenter().toTileCoordinate());
         activeBombCount++;
     }
@@ -78,71 +78,71 @@ public class Game {
             return;
         }
 
+        Ghost[] ghostsArray = getGhosts();
         if(activeBombCount>0){
-            for(int i=0;i<=3;i++){
-                Ghost[] ghostsArray = getGhosts();
+            for(int i = 0; i <= ghostsArray.length; i++){
                 if(this.maze.tileAt(ghostsArray[i].getCenter().toTileCoordinate()) instanceof FreezingItemBomb){
                     this.maze.removeFreezingItemBomb(ghostsArray[i].getCenter().toTileCoordinate());
                     activeBombCount--;
-                    switch(i){
+                    switch(i) {
                         case 0:
                             ghosts.getBlinky().setSpeed(0);
-                            BlinkyFreezingTimePassed=0;
+                            blinkyFreezingTimePassed = 0;
                             break;
                         case 1:
                             ghosts.getPinky().setSpeed(0);
-                            PinkyFreezingTimePassed=0;
+                            pinkyFreezingTimePassed = 0;
                             break;
                         case 2:
                             ghosts.getInky().setSpeed(0);
-                            InkyFreezingTimePassed=0;
+                            inkyFreezingTimePassed = 0;
                             break;
                         case 3:
                             ghosts.getClyde().setSpeed(0);
-                            ClydeFreezingTimePassed=0;
+                            clydeFreezingTimePassed = 0;
                             break;
                    }
                 }
             }
         }
 
-        for(int i=0;i<=3;i++){
-                switch(i){
+        for(int i = 0; i <= ghostsArray.length; i++){
+                switch(i) {
                     case 0:
-                        if(BlinkyFreezingTimePassed>ghostFreezeTime)
+                        if(blinkyFreezingTimePassed>ghostFreezeTime)
                             ghosts.getBlinky().setSpeed(defaultGhostSpeed);
                         else{
-                            BlinkyFreezingTimePassed++;
+                            blinkyFreezingTimePassed++;
                         }
                         break;
                     case 1:
-                        if(PinkyFreezingTimePassed>ghostFreezeTime)
+                        if(pinkyFreezingTimePassed>ghostFreezeTime)
                             ghosts.getPinky().setSpeed(defaultGhostSpeed);
                         else{
-                            PinkyFreezingTimePassed++;
+                            pinkyFreezingTimePassed++;
                         }
                         break;
                     case 2:
-                        if(InkyFreezingTimePassed>ghostFreezeTime)
+                        if(inkyFreezingTimePassed>ghostFreezeTime)
                             ghosts.getInky().setSpeed(defaultGhostSpeed);
                         else{
-                            InkyFreezingTimePassed++;
+                            inkyFreezingTimePassed++;
                         }
                         break;
                     case 3:
-                        if(ClydeFreezingTimePassed>ghostFreezeTime)
+                        if(clydeFreezingTimePassed>ghostFreezeTime)
                             ghosts.getClyde().setSpeed(defaultGhostSpeed);
                         else{
-                            ClydeFreezingTimePassed++;
+                            clydeFreezingTimePassed++;
                         }
                         break;
                 }
         }
         
         Random r = new Random();
-        int spawnDecision = r.nextInt(15);
+        int spawnDecision = r.nextInt(spawnFrequency);
 
-        if(this.maze.isFreezingItemAlive()==false && spawnDecision==1){
+        if(this.maze.isFreezingItemAlive() == false && spawnDecision == 1) {
             int width = this.maze.getWidth();
             int height = this.maze.getHeight();
             Random r1 = new Random();
@@ -150,14 +150,13 @@ public class Game {
             TileCoordinate tempCoordinate = new TileCoordinate(r1.nextInt(width), r2.nextInt(height));
             if(this.maze.tileAt(tempCoordinate) instanceof Dot){
                 this.maze.insertFreezingItem(tempCoordinate);
-                freezingItemTimePassed=0;
+                freezingItemTimePassed = 0;
             }
         }
-
         else if(this.maze.isFreezingItemAlive()){
-            if(freezingItemTimePassed==maxAliveTime){
+            if(freezingItemTimePassed == maxAliveTime){
                 this.maze.removeFreezingItem();
-                freezingItemTimePassed=0;
+                freezingItemTimePassed = 0;
             }
             else{
                 freezingItemTimePassed++;
@@ -174,8 +173,9 @@ public class Game {
         }
 
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
-        if(pacmanTile instanceof FreezingItem)
+        if(pacmanTile instanceof FreezingItem) {
             this.maze.eatFreezingItem();
+        }
         pacmanTile.visit(pacmanTileVisitor);
     }
 

@@ -4,6 +4,7 @@ bin
 .idea
 .gradle
 .vscode
+*.project
 .settings
 *.iws
 *.class

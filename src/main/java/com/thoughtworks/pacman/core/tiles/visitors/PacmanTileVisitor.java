@@ -5,8 +5,9 @@ import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.FreezingItem;
-import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.core.tiles.FreezingItemBomb;
+import com.thoughtworks.pacman.core.tiles.Wall;
+
 
 public class PacmanTileVisitor implements TileVisitor<Void> {
 
