@@ -40,7 +40,7 @@ public class GameRunner {
 
         container.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                SaveScreen saveScreen = new SaveScreen(game, "GameRunner");
+                new SaveScreen(game, "GameRunner");
                 open = false;
                 System.exit(0);
             }

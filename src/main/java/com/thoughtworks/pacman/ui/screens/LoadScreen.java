@@ -16,14 +16,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.IOException;
 
-import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class LoadScreen extends WindowAdapter implements ActionListener, ItemListener {
     private JComboBox<String> comboBox;
@@ -62,7 +62,6 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
             while(scanner.hasNextLine()){
                 String line = scanner.nextLine();
                 if(!line.equals("")){
-                    line = line.replace('#',' ');
                     line = line.replace('$', ':');
                     comboBox.addItem(line);
                 }
@@ -106,9 +105,7 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
 
         else {
             if (!comboBox.getSelectedItem().equals("Select Player")) {
-                playerName = playerName.replace(' ','#');
                 playerName = playerName.replace(':', '$');
-                deleteFromSavedTxt();
                 path += "\\"+playerName+".bin";
                 File file = new File(path);
                 if (file.exists()) {
@@ -133,19 +130,6 @@ public class LoadScreen extends WindowAdapter implements ActionListener, ItemLis
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void deleteFromSavedTxt(){
-        File file = new File(path + "\\saved.txt");
-        List<String> out = null;
-        try {
-            out = Files.lines(file.toPath())
-                    .filter(line -> !line.contains(playerName))
-                    .collect(Collectors.toList());
-            Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -100,9 +100,8 @@ public class SaveScreen extends WindowAdapter implements ActionListener{
             String time = java.time.LocalTime.now().toString();
             time = time.substring(0,time.lastIndexOf("."));
             time = time.replace(':', '$');
-            String dateAndTime = "#" + date + "#" + time;
+            String dateAndTime = " " + date + " " + time;
             playerName += dateAndTime;
-            playerName = playerName.replace(' ','#');
             try {
                 FileWriter fileWriter = new FileWriter((path + "\\" + "saved.txt"), true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
