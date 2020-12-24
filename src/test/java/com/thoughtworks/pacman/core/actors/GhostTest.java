@@ -56,4 +56,22 @@ public class GhostTest {
         clyde.free();
         assertThat(clyde.isHalted(), equalTo(false));
     }
+
+    @Test
+    public void isFreezed_shouldBeTrueByDefault() throws Exception {
+        assertThat(clyde.isFreezed(), equalTo(true));
+    }
+
+    @Test
+    public void isFreezed_shouldBeFalse_whenGhostsAreFreezed() throws Exception {
+        clyde.freeze();
+        assertThat(clyde.isFreezed(), equalTo(false));
+    }
+
+    @Test
+    public void isFreezed_shouldBeTrue_whenFreezeIsOver() throws Exception {
+        clyde.freeze();
+        clyde.removeFreeze();
+        assertThat(clyde.isFreezed(), equalTo(true));
+    }
 }

@@ -2,7 +2,10 @@ package com.thoughtworks.pacman.core;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -13,6 +16,8 @@ import org.junit.Test;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
+
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -73,28 +78,4 @@ public class GameTest {
         verify(pacman).isDead();
         verifyNoMoreInteractions(pacman, ghosts);
     }
-
-    /*@Test
-    public void advance_shouldFreeGhostsAndAdvanceActors_whenPacmanIsNotDead() throws Exception {
-        Game game = new Game(maze, pacman, ghosts);
-        when(pacman.isDead()).thenReturn(false);
-
-        game.advance(10);
-
-        verify(ghosts).freeGhostsBasedOnScore(0);
-        verify(pacman).advance(10);
-        verify(ghosts).advance(10);
-    }
-    */
-    /*@Test
-    public void advance_shouldTellPacmanToDie_whenGhostsKillPacman() throws Exception {
-        Game game = new Game(maze, pacman, ghosts);
-        when(pacman.isDead()).thenReturn(false);
-        when(ghosts.killed(pacman)).thenReturn(true);
-
-        game.advance(10);
-
-        verify(pacman).die();
-    }
-    */
 }

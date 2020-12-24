@@ -11,6 +11,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthPasswordFieldUI;
+
 import static com.thoughtworks.pacman.ui.TileToPresenterFactory.toPresenter;
 
 public class MazePresenter implements Presenter {
@@ -29,7 +31,6 @@ public class MazePresenter implements Presenter {
         }
     }
 
-
     public void draw(Graphics2D graphics) {
         for (Presenter tilePresenter : mazeTiles) {
             tilePresenter.draw(graphics);
@@ -37,13 +38,12 @@ public class MazePresenter implements Presenter {
         drawScore(graphics);
     }
 
-    public void drawSI(Graphics2D graphics){
-            if(maze.isSIExist()){
-                toPresenter(maze.getSpecialItem()).draw(graphics);
-            }
-            
-        
-        
+    public void drawFreezingItem(Graphics2D graphics) {
+        for(int i = 0 ; i < maze.getAllItems().size() ; i++) {
+            if(maze.isFreezingItemExist(i)) {
+                toPresenter(maze.getFreezingItem(i)).draw(graphics);
+            } 
+        }  
     }
 
     private void drawScore(Graphics2D graphics) {

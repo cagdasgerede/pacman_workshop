@@ -5,13 +5,21 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.awt.Dimension;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import com.thoughtworks.pacman.core.AllSpecialItems;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeTest {
@@ -83,5 +91,111 @@ public class MazeTest {
         dot.eat();
 
         assertThat(maze.hasDotsLeft(), is(false));
+    }
+
+    @Test
+    public void getFreezingItem_shouldBeNull_whenCanNotFindAnFreezingItemInTheArraylist() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        
+        allitems.add(null);
+        
+        assertNull(maze.getFreezingItem(0));
+    }
+
+    @Test
+    public void getFreezingItem_shouldReturnFreezingItem() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        
+        allitems.add(freezingItem);
+
+        assertThat(maze.getFreezingItem(0), instanceOf(FreezingItem.class));
+    }
+
+    @Test
+    public void isFreezingItemExist_shouldReturnTrue_whenFreezingItemIsExistCertainIndex() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        
+        allitems.add(null);
+        allitems.add(freezingItem);
+
+        assertTrue(maze.isFreezingItemExist(1));
+    }
+
+    @Test
+    public void isFreezingItemExist_shouldReturnFalse_whenFreezingItemIsNotExistCertainIndex() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        
+        allitems.add(null);
+        allitems.add(freezingItem);
+
+        assertFalse(maze.isFreezingItemExist(0));
+    }
+
+    @Test
+    public void isFreezingItemExist_shouldReturnFalse_whenSpecificFreezingItemIsNull() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = null;
+        
+        allitems.add(freezingItem);
+
+        assertFalse(maze.isFreezingItemExist(freezingItem));
+    }
+
+    @Test
+    public void isFreezingItemExist_shouldReturnTrue_whenSpecificFreezingItemIsExistInArraylist() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        
+        allitems.add(freezingItem);
+
+        assertTrue(maze.isFreezingItemExist(freezingItem));
+    }
+
+    @Test
+    public void isFreezingItemExist_shouldReturnFalse_whenSpecificFreezingItemIsNotExistInArraylist() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        FreezingItem freezingItem2 = new FreezingItem(new TileCoordinate(2,2));
+        
+        allitems.add(freezingItem2);
+
+        assertFalse(maze.isFreezingItemExist(freezingItem));
+    }
+
+    @Test
+    public void insert_correctlyFreezingItem() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        ArrayList<AllSpecialItems> allitems = maze.getAllItems();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        FreezingItem freezingItem2 = new FreezingItem(new TileCoordinate(2,2));
+        
+        maze.insert(freezingItem);
+        maze.insert(freezingItem2);
+
+        assertEquals(freezingItem,maze.getAllItems().get(0));
+        assertEquals(freezingItem2,maze.getAllItems().get(1));
+    }
+
+    @Test
+    public void removeFreezingItem_correctly() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        FreezingItem freezingItem = new FreezingItem(new TileCoordinate(1,1));
+        FreezingItem freezingItem2 = new FreezingItem(new TileCoordinate(2,2));
+       
+        maze.insert(freezingItem);
+        maze.insert(freezingItem2);
+        maze.removeFreezingItem(0);
+
+        assertEquals(freezingItem2,maze.getAllItems().get(0));
     }
 }

@@ -2,17 +2,19 @@ package com.thoughtworks.pacman.core.maze;
 
 import java.awt.Dimension;
 import java.util.Map;
+import java.util.ArrayList;
 
+import com.thoughtworks.pacman.core.AllSpecialItems;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
 public class Maze {
-    private SpecialItem specialItem;
     private final Map<TileCoordinate, Tile> tiles;
+    private final ArrayList<AllSpecialItems> allitems;
     private final int width;
     private final int height;
 
@@ -20,6 +22,7 @@ public class Maze {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
+        allitems = new ArrayList<AllSpecialItems>();
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {
@@ -56,8 +59,6 @@ public class Maze {
         return dotsLeft > 0;
     }
 
-
-
     public Tile tileAt(TileCoordinate tileCoordinate) {
         if (tiles.containsKey(tileCoordinate)) {
             return tiles.get(tileCoordinate);
@@ -66,32 +67,58 @@ public class Maze {
         }
     }
 
-    public Tile getSpecialItem(){
-        return specialItem;
+    public Tile getFreezingItem(int index) {
+        if(allitems.get(index) instanceof FreezingItem) {
+            return allitems.get(index);
+        }
+       return null;
     }
 
-    public void eat(){
-        if(specialItem == null){
+    public void eat(AllSpecialItems specialItems) {
+        if(specialItems == null){
             return;
         }
-        this.specialItem.eat();
-        this.removeCloneItem();
-    
+        for(int i = 0;i<allitems.size();i++) {
+            if(allitems.get(i).equals(specialItems)) {
+                allitems.get(i).eat();
+                removeFreezingItem(i);
+            }
+        }
     }
 
-
-    public void insert(TileCoordinate tileCoordinate){
-        this.specialItem = new SpecialItem(tileCoordinate);
+    public void insert(AllSpecialItems specialItems) {
+        allitems.add(specialItems);
     }
 
-    public void removeCloneItem()
-    {
-        this.specialItem = null;
+    public void removeFreezingItem(int index) {
+       for(int i = 0;i<allitems.size();i++) {
+            if(allitems.get(i) instanceof FreezingItem && i == index) {
+                allitems.remove(index);
+            }
+       }
     }
 
+    public boolean isFreezingItemExist(int index) {
+        if(allitems.get(index) instanceof FreezingItem) {
+            return true;
+        } 
+        return false;
+    }
 
-    public boolean isSIExist(){
-        return specialItem != null;
+    public boolean isFreezingItemExist(FreezingItem freezingItem) {
+        if(freezingItem == null) {
+            return false;
+        }
+        for(int i = 0; i < allitems.size();i++) {
+                if(allitems.get(i).equals(freezingItem)) {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    public ArrayList<AllSpecialItems> getAllItems() {
+        return allitems;
     }
 
     @Override

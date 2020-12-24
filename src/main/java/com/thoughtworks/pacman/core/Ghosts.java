@@ -51,18 +51,18 @@ public class Ghosts {
         }
     }
 
-    public void advance(long timeDeltaInMillis) { //yeni
+    public void advance(long timeDeltaInMillis) {
 
-        if(blinky.isFreezed()){
+        if(blinky.isFreezed()) {
             blinky.advance(timeDeltaInMillis);
         }
-        if(pinky.isFreezed()){
+        if(pinky.isFreezed()) {
             pinky.advance(timeDeltaInMillis);
         }   
-        if(inky.isFreezed()){
+        if(inky.isFreezed()) {
             inky.advance(timeDeltaInMillis);
         }
-        if(clyde.isFreezed()){
+        if(clyde.isFreezed()) {
             clyde.advance(timeDeltaInMillis);
         }
     }

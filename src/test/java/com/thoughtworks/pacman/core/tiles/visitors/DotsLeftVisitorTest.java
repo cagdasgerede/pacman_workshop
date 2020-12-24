@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.core.tiles.visitors;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import org.junit.Test;
 
@@ -50,5 +51,15 @@ public class DotsLeftVisitorTest {
         Door door = new Door(null, null);
 
         assertThat(scoreTileVisitor.visit(door), equalTo(0));
+    }
+
+    @Test
+    public void visitingFreezingItem_shouldCountZero() {
+        DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
+        FreezingItem freezingItem = new FreezingItem(null, null);
+
+        freezingItem.eat();
+
+        assertThat(scoreTileVisitor.visit(freezingItem), equalTo(0));
     }
 }

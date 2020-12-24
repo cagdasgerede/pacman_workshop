@@ -5,14 +5,13 @@ import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
 import com.thoughtworks.pacman.ui.presenters.DoorPresenter;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
+import com.thoughtworks.pacman.ui.presenters.FreezingItemPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
-import com.thoughtworks.pacman.ui.presenters.SpecialItemPresenter;
 
 public class TileToPresenterFactory implements TileVisitor<Presenter> {
     public static Presenter toPresenter(Tile tile) {
@@ -24,8 +23,8 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
         return new DotPresenter(dot);
     }
 
-    public Presenter visit(SpecialItem specialItem) {
-        return new SpecialItemPresenter(specialItem);
+    public Presenter visit(FreezingItem freezingItem) {
+        return new FreezingItemPresenter(freezingItem);
     }
 
     public Presenter visit(Wall wall) {

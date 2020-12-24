@@ -4,7 +4,7 @@ import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class PacmanTileVisitor implements TileVisitor<Void> {
@@ -14,8 +14,8 @@ public class PacmanTileVisitor implements TileVisitor<Void> {
         return null;
     }
 
-    public Void visit(SpecialItem specialItem) {
-        specialItem.eat();
+    public Void visit(FreezingItem freezingItem) {
+        freezingItem.eat();
         return null;
     }
 

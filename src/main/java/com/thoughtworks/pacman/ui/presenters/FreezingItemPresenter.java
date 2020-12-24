@@ -1,7 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.ui.Presenter;
 
 import java.awt.Color;
@@ -9,18 +9,18 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class SpecialItemPresenter implements Presenter {
+public class FreezingItemPresenter implements Presenter {
     private static final int SIDE = 20;
-    private final SpecialItem specialItem;
+    private final FreezingItem freezingItem;
     private final Rectangle bounds;
 
-    public SpecialItemPresenter(SpecialItem specialItem) {
-        this.specialItem = specialItem;
+    public FreezingItemPresenter(FreezingItem freezingItem) {
+        this.freezingItem = freezingItem;
         this.bounds = getBounds();
     }
 
     public void draw(Graphics2D graphics) {
-        if (!specialItem.isEaten()) {
+        if (!freezingItem.isEaten()) {
             graphics.setColor(Color.red);
             graphics.fill(bounds);
         }
@@ -28,7 +28,7 @@ public class SpecialItemPresenter implements Presenter {
 
     public Rectangle getBounds() {
         int delta = SIDE / 2;
-        Point upperLeft = specialItem.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
+        Point upperLeft = freezingItem.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
         return new Rectangle(upperLeft.x, upperLeft.y, SIDE, SIDE);
     }
 }

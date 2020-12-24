@@ -4,7 +4,7 @@ import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.SpecialItem;
+import com.thoughtworks.pacman.core.tiles.FreezingItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class DotsLeftVisitor implements TileVisitor<Integer> {
@@ -12,8 +12,8 @@ public class DotsLeftVisitor implements TileVisitor<Integer> {
         return dot.isEaten() ? 0 : 1;
     }
 
-    public Integer visit(SpecialItem specialItem) {
-        return specialItem.isEaten() ? 0 : 1;
+    public Integer visit(FreezingItem freezingItem) {
+        return freezingItem.isEaten() ? 0 : 1;
     }
 
     public Integer visit(Wall wall) {
