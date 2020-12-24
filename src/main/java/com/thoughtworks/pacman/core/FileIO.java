@@ -24,7 +24,7 @@ public class FileIO {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
         Scanner scn = null;
         try {
@@ -58,7 +58,7 @@ public class FileIO {
             }
             pw.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
     }
 
@@ -69,7 +69,7 @@ public class FileIO {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, e.getMessage(), e);
         }
         Scanner scn = null;
         try {
