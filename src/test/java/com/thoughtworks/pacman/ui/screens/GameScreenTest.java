@@ -38,21 +38,6 @@ public class GameScreenTest {
     @Mock
     private Ghosts ghosts;
 
-    /*
-    @Test
-    public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman, ghosts);
-        GameScreen gameScreen = new GameScreen(game, gamePresenter);
-
-        Thread.sleep(1); // Some time for pacman to move
-        gameScreen.draw(graphics);
-
-        verify(pacman).advance(gt(0L));
-    }
-    */
-
     @Test
     public void nextScreen_shouldReturnGameScreen_whenGameNotOver() throws Exception {
         Game game = new Game();
