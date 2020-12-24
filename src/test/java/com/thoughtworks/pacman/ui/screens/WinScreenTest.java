@@ -30,8 +30,8 @@ public class WinScreenTest {
         winScreen.setDrawRectangle(rectangleButton);
 
         Color buttonMainColor = Color.YELLOW;
-        Rectangle returnClickBox = new Rectangle(130, 350, 200, 30);
-        Rectangle exitClickBox = new Rectangle(180, 390, 100, 30);
+        Rectangle returnClickBox = new Rectangle(130, 450, 200, 30);
+        Rectangle exitClickBox = new Rectangle(180, 490, 100, 30);
 
         winScreen.draw(graphics);	
 

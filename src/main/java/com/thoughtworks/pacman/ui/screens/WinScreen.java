@@ -26,8 +26,8 @@ public class WinScreen extends ParentScreen {
     private State currentStateOfReturnButton = State.RELEASED_RETURN_BUTTON;
     private State currentStateOfQuitButton = State.RELEASED_QUIT_BUTTON;
 
-    private Rectangle returnClickBox = new Rectangle(130, 350, 200, 30);
-    private Rectangle exitClickBox = new Rectangle(180, 390, 100, 30);
+    private Rectangle returnClickBox = new Rectangle(130, 450, 200, 30);
+    private Rectangle exitClickBox = new Rectangle(180, 490, 100, 30);
 
     private RectangleButton drawRectangle = new RectangleButton();
 
