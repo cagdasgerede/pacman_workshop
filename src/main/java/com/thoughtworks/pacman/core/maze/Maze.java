@@ -1,13 +1,16 @@
 package com.thoughtworks.pacman.core.maze;
 
+import java.util.Random;
 import java.awt.Dimension;
 import java.util.Map;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
+
 
 public class Maze {
     private final Map<TileCoordinate, Tile> tiles;
@@ -74,5 +77,21 @@ public class Maze {
         }
 
         return result.toString();
+    }
+
+    public TileCoordinate getDotCoordinate(){
+        Random random = new Random();
+        TileCoordinate coordinate;
+        Tile tile;        
+        while(true){
+            int randomX = random.nextInt(28);
+            int randomY = random.nextInt(36);
+            coordinate = new TileCoordinate(randomX, randomY);
+            tile=tiles.get(coordinate);
+            if  (tile.getClass() == Dot.class)
+            {
+                 return coordinate;
+            }
+        }       
     }
 }

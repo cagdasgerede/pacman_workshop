@@ -20,6 +20,10 @@ public abstract class Actor {
         return center;
     }
 
+    public void setCenter(SpacialCoordinate coordinate){
+        this.center = coordinate;
+    }
+
     public boolean collidesWith(Actor other) {
         return center.toTileCoordinate().equals(other.center.toTileCoordinate());
     }

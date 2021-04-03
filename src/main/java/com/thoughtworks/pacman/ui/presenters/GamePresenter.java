@@ -12,11 +12,13 @@ public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;
     private final PacmanPresenter pacmanPresenter;
     private final List<GhostPresenter> ghostPresenters;
+    private final FreezeItemPresenter freezeItemPresenter;
 
     public GamePresenter(Game game) {
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         ghostPresenters = new LinkedList<GhostPresenter>();
+        freezeItemPresenter = new FreezeItemPresenter(game.getFreezeItem());
         for (Ghost ghost : game.getGhosts()) {
             ghostPresenters.add(new GhostPresenter(ghost));
         }
@@ -24,6 +26,7 @@ public class GamePresenter implements Presenter {
 
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
+        freezeItemPresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
