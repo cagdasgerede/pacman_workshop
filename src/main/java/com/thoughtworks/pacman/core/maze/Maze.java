@@ -45,13 +45,13 @@ public class Maze {
         return totalScore;
     }
 
-    public boolean hasDotsLeft() {
+    public int dotsLeft() {
         DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
         int dotsLeft = 0;
         for (Tile tile : tiles.values()) {
             dotsLeft += tile.visit(dotsLeftVisitor);
         }
-        return dotsLeft > 0;
+        return dotsLeft;
     }
 
     public Tile tileAt(TileCoordinate tileCoordinate) {

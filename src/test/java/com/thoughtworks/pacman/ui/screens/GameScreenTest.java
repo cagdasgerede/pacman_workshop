@@ -41,7 +41,7 @@ public class GameScreenTest {
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
+        Pacman pacman = spy(new Pacman(maze, "initialize"));
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
@@ -53,7 +53,7 @@ public class GameScreenTest {
 
     @Test
     public void nextScreen_shouldReturnGameScreen_whenGameNotOver() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(GameScreen.class));
@@ -69,7 +69,7 @@ public class GameScreenTest {
 
     @Test
     public void nextScreen_shouldReturnLostScreen_whenGameLostAndDyingAnimationFinished() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         game.getPacman().die();
@@ -80,7 +80,7 @@ public class GameScreenTest {
 
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
+        Pacman pacman = spy(new Pacman(maze, "initialize"));
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
@@ -92,7 +92,7 @@ public class GameScreenTest {
 
     @Test
     public void keyPressed_shouldMovePacmanRight() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
+        Pacman pacman = spy(new Pacman(maze, "initialize"));
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
@@ -104,7 +104,7 @@ public class GameScreenTest {
 
     @Test
     public void keyPressed_shouldMovePacmanUp() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
+        Pacman pacman = spy(new Pacman(maze, "initialize"));
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
@@ -116,7 +116,7 @@ public class GameScreenTest {
 
     @Test
     public void keyPressed_shouldMovePacmanDown() throws Exception {
-        Pacman pacman = spy(new Pacman(maze));
+        Pacman pacman = spy(new Pacman(maze, "initialize"));
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 

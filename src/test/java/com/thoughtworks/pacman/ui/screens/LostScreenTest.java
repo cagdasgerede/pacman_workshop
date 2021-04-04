@@ -19,7 +19,7 @@ public class LostScreenTest {
 
     @Test
     public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         LostScreen lostScreen = new LostScreen(game);
 
         lostScreen.draw(graphics);
@@ -29,7 +29,7 @@ public class LostScreenTest {
 
     @Test
     public void nextScreen_shouldReturnLostScreen_whenKeyNotPressed() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         LostScreen lostScreen = new LostScreen(game);
 
         assertThat(lostScreen.getNextScreen(), instanceOf(LostScreen.class));
@@ -37,7 +37,7 @@ public class LostScreenTest {
 
     @Test
     public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         LostScreen lostScreen = new LostScreen(game);
 
         lostScreen.keyPressed(null);

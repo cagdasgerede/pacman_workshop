@@ -15,11 +15,12 @@ import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class PacmanTest {
     private Pacman pacman;
+    Maze maze;
 
     @Before
     public void setUp() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        pacman = new Pacman(maze);
+        maze = MazeBuilder.buildDefaultMaze();
+        pacman = new Pacman(maze, "initialize");
     }
 
     @Test
@@ -48,5 +49,17 @@ public class PacmanTest {
     public void isHalted_shouldBeTrueAfterDead() throws Exception {
         pacman.die();
         assertThat(pacman.isHalted(), is(true));
+    }
+
+    @Test
+    public void isSpeedChangesAccordingToDifficultyLevel() throws Exception {
+        pacman = new Pacman(maze, "easy");
+        assertThat(pacman.getSpeed(), is(110));
+
+        pacman = new Pacman(maze, "medium");
+        assertThat(pacman.getSpeed(), is(95));
+
+        pacman = new Pacman(maze, "hard");
+        assertThat(pacman.getSpeed(), is(80));
     }
 }

@@ -14,7 +14,7 @@ public class GhostTest {
 
     @Before
     public void setUp() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         blinky = new Ghost(game, GhostType.BLINKY);
         clyde = new Ghost(game, GhostType.CLYDE);
     }

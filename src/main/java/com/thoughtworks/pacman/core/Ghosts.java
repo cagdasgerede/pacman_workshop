@@ -62,4 +62,11 @@ public class Ghosts {
         return pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky)
                 || pacman.collidesWith(clyde);
     }
+
+    public void setGhostsSpeed(int speed) {
+        blinky.setSpeed(speed);
+        pinky.setSpeed(speed);
+        inky.setSpeed(speed);
+        clyde.setSpeed(speed);
+    }
 }

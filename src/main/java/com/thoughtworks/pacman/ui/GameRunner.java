@@ -22,7 +22,7 @@ public class GameRunner {
     private Game game;
 
     private void initialize() throws Exception {
-        game = new Game();
+        game = new Game("initialize");
         Dimension dimension = game.getDimension();
         canvas = new GameCanvas(dimension, game);
 

@@ -21,7 +21,7 @@ public class GhostsTest {
 
     @Before
     public void setUp() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         ghosts = new Ghosts(game);
     }
 

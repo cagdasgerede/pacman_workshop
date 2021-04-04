@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GhostPresenterTest {
     @Test
     public void shouldCalculateBoundInPixels() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         GhostPresenter presenter = new GhostPresenter(new Ghost(game, GhostType.BLINKY));
         Point point = GhostType.BLINKY.getStartCoordinate().toPoint();
         assertThat(presenter.getBounds(), equalTo(new Rectangle(point.x - 10, point.y - 10, 20, 20)));

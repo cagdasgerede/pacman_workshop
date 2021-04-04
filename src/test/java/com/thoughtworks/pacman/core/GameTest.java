@@ -28,7 +28,7 @@ public class GameTest {
     @Before
     public void setUp() throws Exception {
         this.maze = MazeBuilder.buildDefaultMaze();
-        this.pacman = spy(new Pacman(maze));
+        this.pacman = spy(new Pacman(maze, "initialize"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class GameTest {
 
     @Test
     public void lost_shouldBeTrue_whenPacmanIsDead() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
 
         game.getPacman().die();
 
@@ -58,7 +58,7 @@ public class GameTest {
 
     @Test
     public void lost_shouldBeFalse_whenPacmanIsAlive() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
 
         assertThat(game.lost(), is(false));
     }
@@ -95,5 +95,42 @@ public class GameTest {
         game.advance(10);
 
         verify(pacman).die();
+    }
+
+    @Test
+    public void areSpeedsOfPacmanAndGhostsUpdatedAccordingToDotsLeft() throws Exception {
+        String mazeDescription = "++++\n+..................+\n++++";
+
+        Game game = new Game(mazeDescription, "easy");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(105));
+        assertThat(game.getGhosts()[0].getSpeed(), is(105));
+
+        game = new Game(mazeDescription, "medium");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(90));
+        assertThat(game.getGhosts()[0].getSpeed(), is(110));
+
+        game = new Game(mazeDescription, "hard");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(75));
+        assertThat(game.getGhosts()[0].getSpeed(), is(115));
+
+        mazeDescription = "++++\n+......+\n++++";
+
+        game = new Game(mazeDescription, "easy");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(100));
+        assertThat(game.getGhosts()[0].getSpeed(), is(110));
+
+        game = new Game(mazeDescription, "medium");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(85));
+        assertThat(game.getGhosts()[0].getSpeed(), is(115));
+
+        game = new Game(mazeDescription, "hard");
+        game.advance(90);
+        assertThat(game.getPacman().getSpeed(), is(70));
+        assertThat(game.getGhosts()[0].getSpeed(), is(120));
     }
 }

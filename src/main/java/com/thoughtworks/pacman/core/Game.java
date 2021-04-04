@@ -13,18 +13,20 @@ public class Game {
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
+    private String difficulty = "";
 
-    public Game() throws Exception {
-        this(MazeBuilder.buildWalledMaze());
+    public Game(String difficulty) throws Exception{
+        this.difficulty = difficulty;
+        this.maze = MazeBuilder.buildWalledMaze();
+        this.pacman = new Pacman(maze, difficulty);
+        this.ghosts = new Ghosts(this);
+        this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
-    private Game(Maze maze) {
-        this(maze, new Pacman(maze));
-    }
-
-    private Game(Maze maze, Pacman pacman) {
-        this.maze = maze;
-        this.pacman = pacman;
+    public Game(String mazeDescription, String difficulty) throws Exception {
+        this.difficulty = difficulty;
+        maze = MazeBuilder.buildMaze(mazeDescription);
+        this.pacman = new Pacman(maze, difficulty);
         this.ghosts = new Ghosts(this);
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
@@ -59,6 +61,36 @@ public class Game {
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
+        int dotsLeft = maze.dotsLeft();
+        if (difficulty.equals("easy")) {
+            if (dotsLeft <= 20) {
+                pacman.setSpeed(105);
+                ghosts.setGhostsSpeed(105);
+            }
+            if (dotsLeft <= 10) {
+                pacman.setSpeed(100);
+                ghosts.setGhostsSpeed(110);
+            }
+        } else if (difficulty.equals("medium")) {
+            if (dotsLeft <= 20) {
+                pacman.setSpeed(90);
+                ghosts.setGhostsSpeed(110);
+            }
+            if (dotsLeft <= 10) {
+                pacman.setSpeed(85);
+                ghosts.setGhostsSpeed(115);
+            }
+        } else if (difficulty.equals("hard")) {
+            if (dotsLeft <= 20) {
+                pacman.setSpeed(75);
+                ghosts.setGhostsSpeed(115);
+            }
+            if (dotsLeft <= 10) {
+                pacman.setSpeed(70);
+                ghosts.setGhostsSpeed(120);
+            }
+        }
+
         pacman.advance(timeDeltaInMillis);
         ghosts.advance(timeDeltaInMillis);
 
@@ -71,7 +103,7 @@ public class Game {
     }
 
     public boolean won() {
-        return !maze.hasDotsLeft();
+        return maze.dotsLeft() <= 0;
     }
 
     public boolean lost() {
