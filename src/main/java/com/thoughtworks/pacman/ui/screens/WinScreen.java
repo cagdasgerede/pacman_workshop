@@ -1,10 +1,10 @@
 package com.thoughtworks.pacman.ui.screens;
-
+import java.util.concurrent.TimeUnit;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-
+import com.thoughtworks.pacman.ui.Sound;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
@@ -15,11 +15,13 @@ public class WinScreen implements Screen {
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
-
+    Sound s=new Sound();
     public WinScreen(Game game) {
         this.dimension = game.getDimension();
         this.game = game;
         this.startGame = false;
+
+        s.playWinScreenSound();
     }
 
     public void draw(Graphics2D graphics) {
@@ -29,6 +31,7 @@ public class WinScreen implements Screen {
 
     public Screen getNextScreen() {
         if (startGame) {
+            s.stopWinScreenSound();
             return new IntroScreen(game);
         }
         return this;

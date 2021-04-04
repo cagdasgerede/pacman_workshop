@@ -6,12 +6,14 @@ import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
+import com.thoughtworks.pacman.ui.Sound;
 
 public class Pacman extends Actor {
     private boolean dead = false;
-
+    Sound s;
     public Pacman(Maze maze) {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
+        s=new Sound();
     }
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
@@ -20,6 +22,7 @@ public class Pacman extends Actor {
 
     public void die() {
         this.dead = true;
+        s.deathEffect();
     }
 
     public boolean isDead() {
