@@ -10,8 +10,17 @@ import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 public class Pacman extends Actor {
     private boolean dead = false;
 
-    public Pacman(Maze maze) {
+    public Pacman(Maze maze, String difficulty) {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
+        if (difficulty.equals("easy")) {
+            setSpeed(110);
+        } else if (difficulty.equals("medium")) {
+            setSpeed(95);
+        } else if (difficulty.equals("hard")) {
+            setSpeed(80);
+        } else {
+            setSpeed(100);
+        }
     }
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {

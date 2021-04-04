@@ -7,14 +7,15 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
 
-    public GameScreen() throws Exception {
-        this(new Game());
+    public GameScreen(String difficulty) throws Exception {
+        this(new Game(difficulty));
     }
 
     private GameScreen(Game game) {
@@ -62,4 +63,6 @@ public class GameScreen implements Screen {
             break;
         }
     }
+
+    public void mouseClicked(MouseEvent e) { }
 }

@@ -19,7 +19,7 @@ public class WinScreenTest {
 
     @Test
     public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         WinScreen winScreen = new WinScreen(game);
 
         winScreen.draw(graphics);
@@ -29,7 +29,7 @@ public class WinScreenTest {
 
     @Test
     public void nextScreen_shouldReturnWinScreen_whenKeyNotPressed() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         WinScreen winScreen = new WinScreen(game);
 
         assertThat(winScreen.getNextScreen(), instanceOf(WinScreen.class));
@@ -37,7 +37,7 @@ public class WinScreenTest {
 
     @Test
     public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
-        Game game = new Game();
+        Game game = new Game("initialize");
         WinScreen winScreen = new WinScreen(game);
 
         winScreen.keyPressed(null);

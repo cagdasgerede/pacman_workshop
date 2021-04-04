@@ -71,7 +71,8 @@ public class MazeTest {
     public void hasDotsLeft_shouldBeTrue_whenDotsAreLeftUneaten() throws Exception {
         String mazeDescription = "+++\n+.+\n+++";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.hasDotsLeft(), is(true));
+        boolean hasDotsLeft = maze.dotsLeft() > 0;
+        assertThat(hasDotsLeft, is(true));
     }
 
     @Test
@@ -82,6 +83,26 @@ public class MazeTest {
         Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
         dot.eat();
 
-        assertThat(maze.hasDotsLeft(), is(false));
+        boolean hasDotsLeft = maze.dotsLeft() > 0;
+        assertThat(hasDotsLeft, is(false));
+    }
+
+    @Test
+    public void areDotsCountedCorrectly() throws Exception {
+        String mazeDescription = "+. ";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+        assertThat(maze.dotsLeft(), is(1));
+
+        mazeDescription = "+";
+        maze = MazeBuilder.buildMaze(mazeDescription);
+        assertThat(maze.dotsLeft(), is(0));
+
+        mazeDescription = "++++\n+..+\n++++";
+        maze = MazeBuilder.buildMaze(mazeDescription);
+        assertThat(maze.dotsLeft(), is(2));
+
+        mazeDescription = "+++\n+.+\n+++";
+        maze = MazeBuilder.buildMaze(mazeDescription);
+        assertThat(maze.dotsLeft(), is(1));
     }
 }

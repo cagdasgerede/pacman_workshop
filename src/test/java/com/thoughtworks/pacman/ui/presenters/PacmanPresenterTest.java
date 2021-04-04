@@ -15,13 +15,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PacmanPresenterTest {
     @Test
     public void shouldCalculateBoundInPixels() throws Exception {
-        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
+        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze(), "initialize"));
         assertThat(presenter.getBounds(), equalTo(new Rectangle(214, 414, PacmanPresenter.DIAMETER, PacmanPresenter.DIAMETER)));
     }
 
     @Test
     public void shouldAnimateMouth() throws Exception {
-        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
+        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze(), "initialize"));
         for (int i = 0; i < 5; i++) {
             assertThat(presenter.getArcAngle(), equalTo(PacmanPresenter.MOUTH_CLOSED));
         }
@@ -35,7 +35,7 @@ public class PacmanPresenterTest {
 
     @Test
     public void shouldDisplayOpenMouthWhenNotMoving() throws Exception {
-        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
+        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze(), "initialize");
         PacmanPresenter presenter = new PacmanPresenter(pacman);
         for (int i = 0; i < 5; i++) {
             pacman.advance(1000);
@@ -48,7 +48,7 @@ public class PacmanPresenterTest {
 
     @Test
     public void shouldAnimateDying() throws Exception {
-        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
+        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze(), "initialize");
         pacman.die();
         PacmanPresenter presenter = new PacmanPresenter(pacman);
 
@@ -61,13 +61,13 @@ public class PacmanPresenterTest {
 
     @Test
     public void isDying_shouldBeFalseByDefault() throws Exception {
-        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
+        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze(), "initialize"));
         Assert.assertThat(presenter.isDying(), is(false));
     }
 
     @Test
     public void die_shouldKillPacmanSlowly() throws Exception {
-        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
+        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze(), "initialize");
         PacmanPresenter presenter = new PacmanPresenter(pacman);
 
         pacman.die();
