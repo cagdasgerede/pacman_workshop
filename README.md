@@ -56,3 +56,8 @@ This implementation was written by Danilo Sato and Mariana Bravo for educational
 ```cd build\libs```
 
 ```java -jar pacman_workshop.jar```
+
+## References to Source of Sound Files
+* https://soundcloud.com/morning-kulishow/8-bit-background-music-no-copyright-gaming-royalty-free-music-free-download
+* https://mixkit.co/free-sound-effects/video-game/?page=3
+* https://freesound.org/people/Leszek_Szary/sounds/133283/
