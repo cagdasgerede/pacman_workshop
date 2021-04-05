@@ -23,7 +23,7 @@ public class Dot extends Tile {
 
     public void eat() {
      if(this.eaten==false){
-        s = new Sound();
+        s =  new Sound("sounds/mixkit-arcade-game-jump-coin-216.wav","sounds/mixkit-video-game-bomb-alert-2803.wav","sounds/mixkit-8-bit-lose-2031.wav","sounds/background2.wav","sounds/133283__leszek-szary__game-over.wav","sounds/mixkit-video-game-win-2016.wav");
         s.eatDot();
      }
         this.eaten = true;

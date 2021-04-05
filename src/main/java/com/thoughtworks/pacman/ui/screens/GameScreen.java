@@ -14,22 +14,22 @@ public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
-    Sound  s=new Sound();
+    Sound  s;
     public GameScreen() throws Exception {
-        this(new Game()); 
-        s.playBackgroundSound();
+        this(new Game());    
     }
 
     private GameScreen(Game game) {
         this(game, new GamePresenter(game));
-      
+       
     }
 
     GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
         this.gamePresenter = gamePresenter;
         this.lastFrameAt = System.currentTimeMillis();
-       
+        s = new Sound("sounds/mixkit-arcade-game-jump-coin-216.wav","sounds/mixkit-video-game-bomb-alert-2803.wav","sounds/mixkit-8-bit-lose-2031.wav","sounds/background2.wav","sounds/133283__leszek-szary__game-over.wav","sounds/mixkit-video-game-win-2016.wav");
+        s.playBackgroundSound();
     }
 
     public void draw(Graphics2D graphics) {
@@ -49,7 +49,6 @@ public class GameScreen implements Screen {
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
             s.stopBackgroundSound();
-
             return new LostScreen(game);
         }
         return this;

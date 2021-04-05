@@ -19,7 +19,7 @@ public class IntroScreen implements Screen {
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
-        s=new Sound();
+        s =new Sound("sounds/mixkit-arcade-game-jump-coin-216.wav","sounds/mixkit-video-game-bomb-alert-2803.wav","sounds/mixkit-8-bit-lose-2031.wav","sounds/background2.wav","sounds/133283__leszek-szary__game-over.wav","sounds/mixkit-video-game-win-2016.wav");
         s.playIntroSound();
     }
 

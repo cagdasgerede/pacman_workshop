@@ -1,5 +1,5 @@
 package com.thoughtworks.pacman.ui;
-import java.io.*;
+
 import java.net.URL;
 import javax.sound.sampled.*;
 
@@ -13,39 +13,39 @@ public class Sound{
     Clip gameOver;
     Clip winScreenSound;
        
-    public Sound(){
+    public Sound(String r1,String r2, String r3, String r4,String r5,String r6){
    
         URL url;
         AudioInputStream audioIn;
         
         try{
-            url = this.getClass().getClassLoader().getResource("sounds/mixkit-arcade-game-jump-coin-216.wav");
+            url = this.getClass().getClassLoader().getResource(r1);
             audioIn = AudioSystem.getAudioInputStream(url);
             eatDotEffect = AudioSystem.getClip();
             eatDotEffect.open(audioIn);
         
-            url = this.getClass().getClassLoader().getResource("sounds/mixkit-video-game-bomb-alert-2803.wav");
+            url = this.getClass().getClassLoader().getResource(r2);
             audioIn = AudioSystem.getAudioInputStream(url);
             introSound = AudioSystem.getClip();
             introSound.open(audioIn);
       
-            url = this.getClass().getClassLoader().getResource("sounds/mixkit-8-bit-lose-2031.wav");
+            url = this.getClass().getClassLoader().getResource(r3);
             audioIn = AudioSystem.getAudioInputStream(url);
             deathEffect = AudioSystem.getClip();
             deathEffect.open(audioIn);
 
 
-            url = this.getClass().getClassLoader().getResource("sounds/background2.wav");
+            url = this.getClass().getClassLoader().getResource(r4);
             audioIn = AudioSystem.getAudioInputStream(url);
             backgroundSound = AudioSystem.getClip();
             backgroundSound.open(audioIn);
 
-            url = this.getClass().getClassLoader().getResource("sounds/133283__leszek-szary__game-over.wav");
+            url = this.getClass().getClassLoader().getResource(r5);
             audioIn = AudioSystem.getAudioInputStream(url);
             gameOver = AudioSystem.getClip();
             gameOver.open(audioIn);
 
-            url = this.getClass().getClassLoader().getResource("sounds/mixkit-video-game-win-2016.wav");
+            url = this.getClass().getClassLoader().getResource(r6);
             audioIn = AudioSystem.getAudioInputStream(url);
             winScreenSound = AudioSystem.getClip();
             winScreenSound.open(audioIn);
@@ -55,54 +55,62 @@ public class Sound{
     }
     
     
-    public void eatDot(){
+    public int eatDot(){
         eatDotEffect.setFramePosition(0);
         eatDotEffect.start();
+        return 1;
     }
 
-    public void playIntroSound(){
+    public int playIntroSound(){
         introSound.setFramePosition(0);
         introSound.start();
         introSound.loop(Clip.LOOP_CONTINUOUSLY);
+        return 2;
     }
-    public void playBackgroundSound(){
+    public int playBackgroundSound(){
         backgroundSound.setFramePosition(0);
         backgroundSound.start();
         backgroundSound.loop(Clip.LOOP_CONTINUOUSLY);
+        return 3;
     }
-    public void playGameOverScreenSound(){
+    public int playGameOverScreenSound(){
         gameOver.setFramePosition(0);
         gameOver.start();
         gameOver.loop(Clip.LOOP_CONTINUOUSLY);
+        return 4;
     }
     
-    public void playWinScreenSound(){
+    public int playWinScreenSound(){
         winScreenSound.setFramePosition(0);
         winScreenSound.start();
         winScreenSound.loop(Clip.LOOP_CONTINUOUSLY);
+        return 5;
     }
 
-    public void deathEffect(){
+    public int deathEffect(){
         deathEffect.setFramePosition(0);
         deathEffect.start();
+        return 6;
     }
 
-    public void stopIntroSound(){
+    public int stopIntroSound(){
         introSound.stop();
-       
+        return 7;
     }
-    public void stopBackgroundSound(){
+    public int stopBackgroundSound(){
         backgroundSound.stop();
-       
+        return 8;
     }
-    public void stopDeathSound(){
+    public int stopDeathSound(){
         deathEffect.stop();
-       
+        return 9;
     }
-    public void gameOverSoundStop(){
+    public int gameOverSoundStop(){
         gameOver.stop();
+        return 10;
     }
-    public void stopWinScreenSound(){
+    public int stopWinScreenSound(){
         winScreenSound.stop();
+        return 11;
     }
 }
