@@ -33,8 +33,8 @@ public class LostScreen implements Screen {
 
     public Screen getNextScreen() {
         if (startGame) {
-         sound.gameOverSoundStop();
-        return new IntroScreen(game);
+            sound.gameOverSoundStop();
+            return new IntroScreen(game);
         }
         return this;
     }
