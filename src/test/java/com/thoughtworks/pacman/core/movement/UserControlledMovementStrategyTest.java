@@ -51,7 +51,7 @@ public class UserControlledMovementStrategyTest {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         assertThat(movementStrategy.getNextDirection(new TileCoordinate(6, 26)), equalTo(Direction.NONE));
         assertThat(movementStrategy.isMoving(), is(false));
-        assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
+        assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
@@ -60,12 +60,12 @@ public class UserControlledMovementStrategyTest {
         movementStrategy.setNextDirection(Direction.UP);
         assertThat(movementStrategy.getNextDirection(new TileCoordinate(15, 29)), equalTo(Direction.NONE));
         assertThat(movementStrategy.isMoving(), is(false));
-        assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
+        assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
     public void shouldMaintainDirectionAtEdgeOfMazeOnTheRight() throws Exception {
-        UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
+        UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.RIGHT);
         movementStrategy.setNextDirection(Direction.RIGHT);
         assertThat(movementStrategy.getNextDirection(new TileCoordinate(27, 17)), equalTo(Direction.RIGHT));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));

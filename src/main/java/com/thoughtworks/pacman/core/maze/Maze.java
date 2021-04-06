@@ -19,7 +19,7 @@ public class Maze {
         this.height = height;
         this.tiles = tiles;
     }
-
+    
     public boolean canMove(TileCoordinate tileCoordinate) {
         return tileAt(tileCoordinate).isMovable();
     }

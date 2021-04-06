@@ -10,7 +10,7 @@ public class TileCoordinate {
         this.x = x;
         this.y = y;
     }
-
+    
     public SpacialCoordinate toSpacialCoordinate() {
         return new SpacialCoordinate(transformToCenter(x), transformToCenter(y));
     }
@@ -21,6 +21,9 @@ public class TileCoordinate {
 
     public TileCoordinate add(TileCoordinate delta) {
         return new TileCoordinate(x + delta.x, y + delta.y);
+    }
+    public TileCoordinate set(TileCoordinate delta) {
+        return new TileCoordinate(delta.x,delta.y);
     }
 
     public TileCoordinate subtract(TileCoordinate delta) {

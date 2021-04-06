@@ -10,6 +10,7 @@ public enum Direction {
     private final int startAngle;
 
     private Direction(int x, int y, int startAngle) {
+        
         this.x = x;
         this.y = y;
         this.startAngle = startAngle;
