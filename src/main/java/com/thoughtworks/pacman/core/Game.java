@@ -6,6 +6,7 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.tiles.TeleporterItem;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
 public class Game {
@@ -13,6 +14,7 @@ public class Game {
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
+    private final TeleporterItemController teleporterItemController;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -27,6 +29,7 @@ public class Game {
         this.pacman = pacman;
         this.ghosts = new Ghosts(this);
         this.pacmanTileVisitor = new PacmanTileVisitor();
+        this.teleporterItemController = new TeleporterItemController(this);
     }
 
     public Game(Maze maze, Pacman pacman, Ghosts ghosts) {
@@ -34,10 +37,15 @@ public class Game {
         this.pacman = pacman;
         this.ghosts = ghosts;
         this.pacmanTileVisitor = new PacmanTileVisitor();
+        this.teleporterItemController = new TeleporterItemController(this);
     }
 
     public Maze getMaze() {
         return maze;
+    }
+
+    public TeleporterItemController getTeleporterItemController() {
+        return teleporterItemController;
     }
 
     public Dimension getDimension() {
@@ -56,7 +64,11 @@ public class Game {
         if (pacman.isDead()) {
             return;
         }
-
+        Ghost[] ghostsArr = getGhosts();
+        if(!teleporterItemController.getDroppedTeleporters().isEmpty()) {
+            teleporterItemController.checkGhostCollision(ghostsArr);
+        }
+        teleporterItemController.spawnTeleporterItem();
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
         pacman.advance(timeDeltaInMillis);
@@ -67,6 +79,9 @@ public class Game {
         }
 
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
+        if(pacmanTile instanceof TeleporterItem && !pacmanTile.isDropped()) {
+            teleporterItemController.eatTeleporterItem();   
+        }
         pacmanTile.visit(pacmanTileVisitor);
     }
 
