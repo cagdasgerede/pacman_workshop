@@ -5,12 +5,18 @@ import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
+import com.thoughtworks.pacman.core.tiles.TeleporterItem;
+
 
 public class ScoreTileVisitor implements TileVisitor<Integer> {
     private static final int SCORE_PER_DOT = 10;
 
     public Integer visit(Dot dot) {
         return dot.isEaten() ? SCORE_PER_DOT : 0;
+    }
+
+    public Integer visit(TeleporterItem teleporterItem) {
+        return 0;
     }
 
     public Integer visit(Wall wall) {
