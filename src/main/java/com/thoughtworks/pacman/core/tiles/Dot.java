@@ -27,6 +27,11 @@ public class Dot extends Tile {
     public boolean isMovable() {
         return true;
     }
+    
+    @Override
+    public boolean isDropped() {
+        return false;
+    }
 
     @Override
     public <T> T visit(TileVisitor<T> visitor) {

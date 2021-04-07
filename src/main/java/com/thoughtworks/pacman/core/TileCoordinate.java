@@ -11,6 +11,14 @@ public class TileCoordinate {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public SpacialCoordinate toSpacialCoordinate() {
         return new SpacialCoordinate(transformToCenter(x), transformToCenter(y));
     }
