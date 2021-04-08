@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
@@ -15,6 +18,9 @@ public class LostScreen implements Screen {
     private final Dimension dimension;
     private final Game game;
     private boolean startGame;
+
+
+    StringBuilder sb = new StringBuilder();
 
     public LostScreen(Game game) {
         this.dimension = game.getDimension();
@@ -35,6 +41,27 @@ public class LostScreen implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        if(game.newHighScore){
+            if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                game.scoreList.put(sb.toString(),game.finalScore);
+                try {
+                    FileWriter fw = new FileWriter("scores.txt");
+                    for (HashMap.Entry<String, Integer> entry : game.scoreList.entrySet()) {
+                        fw.write("" + entry.getKey()+ ", " + entry.getValue());
+                    }
+                    fw.close();
+                    game.newHighScore = false;
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                
+
+                startGame = true;
+            }
+            sb.append(e.getKeyChar());
+        }
+        else{
+            startGame = true;
+        }
     }
 }

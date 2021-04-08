@@ -41,6 +41,9 @@ public class GameScreen implements Screen {
         if (game.won()) {
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
+            if(game.newHighScore){
+                
+            }
             return new LostScreen(game);
         }
         return this;
