@@ -2,7 +2,7 @@ package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
-import com.thoughtworks.pacman.core.tiles.Wall;
+
 
 public abstract class Actor {
     private static final int SPEED = 100;
@@ -80,7 +80,7 @@ public abstract class Actor {
     }
     private TileCoordinate getNextTile(TileCoordinate currentTile) {
         Direction nextDirection = movementStrategy.getNextDirection(currentTile);
-        if(!allowMove(currentTile,nextDirection)){
+        if(!allowMove(currentTile,nextDirection)){         
             addTeleport(currentTile);
         }
         

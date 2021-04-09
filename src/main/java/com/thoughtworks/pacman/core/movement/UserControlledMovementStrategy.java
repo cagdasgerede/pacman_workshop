@@ -16,16 +16,7 @@ public class UserControlledMovementStrategy implements MovementStrategy {// plac
         this.direction = startDirection;
         this.desiredDirection = startDirection;
     }
-    public void addTeleport(TileCoordinate currentTile){
-         coordinateX=(int)(Math.random()*maze.getWidth());
-         coordinateY=(int)(Math.random()*maze.getHeight());
-        while(maze.canMove(new TileCoordinate(coordinateX, coordinateY))){
-            coordinateX=(int)(Math.random()*maze.getWidth());
-            coordinateY=(int)(Math.random()*maze.getHeight());
-        }
-        
-        currentTile.add(new TileCoordinate(coordinateX, coordinateY));
-    }
+    
     public int getCoordinateX(){
         return coordinateX;
     }
@@ -33,10 +24,7 @@ public class UserControlledMovementStrategy implements MovementStrategy {// plac
         return coordinateY;
     }
     public void setNextDirection(Direction nextDirection) {
-       // TileCoordinate currentTile = nextDirection.tileDelta();
-       /* if(!maze.canMove(currentTile)){
-            this.desiredDirection=(new Direction(currentTile));
-        }*/
+       
         this.desiredDirection = nextDirection;
     }
 
@@ -52,7 +40,7 @@ public class UserControlledMovementStrategy implements MovementStrategy {// plac
         if (allowMove(currentTile, desiredDirection)) {
             direction = desiredDirection;
         } else if (!allowMove(currentTile, direction)) {
-            addTeleport(currentTile);
+           // addTeleport(currentTile);
             if(direction ==Direction.UP)
                 direction = Direction.DOWN;
             else if(direction ==Direction.DOWN)
