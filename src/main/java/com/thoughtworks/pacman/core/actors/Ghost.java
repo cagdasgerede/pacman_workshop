@@ -4,6 +4,10 @@ import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Game;
 
 public class Ghost extends Actor {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3117419856046382485L;
     private final GhostType type;
     private boolean free;
 

@@ -6,6 +6,11 @@ import com.thoughtworks.pacman.core.TileVisitor;
 
 public class Door extends Tile {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 956827688785975061L;
+
     public Door(TileCoordinate coordinate, String value) {
         super(coordinate);
     }

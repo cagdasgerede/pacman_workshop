@@ -1,10 +1,16 @@
 package com.thoughtworks.pacman.core.movement;
 
+import java.io.Serializable;
+
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class UserControlledMovementStrategy implements MovementStrategy {
+public class UserControlledMovementStrategy implements MovementStrategy, Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8210833074706419350L;
     private final Maze maze;
     private Direction desiredDirection;
     private Direction previousDirection;

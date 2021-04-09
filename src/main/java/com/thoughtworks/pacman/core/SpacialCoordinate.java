@@ -2,10 +2,15 @@ package com.thoughtworks.pacman.core;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class SpacialCoordinate {
+public class SpacialCoordinate implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7752348514573198437L;
     private final int x;
     private final int y;
 

@@ -8,6 +8,10 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
 public class Pacman extends Actor {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5252541874767236993L;
     private boolean dead = false;
 
     public Pacman(Maze maze) {

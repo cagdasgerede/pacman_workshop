@@ -1,8 +1,14 @@
 package com.thoughtworks.pacman.core;
 
+import java.io.Serializable;
+
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class TileCoordinate {
+public class TileCoordinate implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2381219266148097086L;
     private final int x;
     private final int y;
 

@@ -1,9 +1,16 @@
 package com.thoughtworks.pacman.core;
 
+import java.io.Serializable;
+
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
-public abstract class Actor {
+public abstract class Actor implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1749630207131261690L;
+
     private static final int SPEED = 100;
 
     protected final Maze maze;
