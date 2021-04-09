@@ -1,11 +1,16 @@
 package com.thoughtworks.pacman.core;
 
+import java.io.Serializable;
+
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.actors.Pacman;
-import com.thoughtworks.pacman.core.maze.Maze;
 
-public class Ghosts {
+public class Ghosts implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6157287111575247062L;
     private Ghost blinky;
     private Ghost pinky;
     private Ghost inky;

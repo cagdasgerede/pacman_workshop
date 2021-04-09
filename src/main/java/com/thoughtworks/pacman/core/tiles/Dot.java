@@ -5,6 +5,10 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
 public class Dot extends Tile {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5098531951926992345L;
     private boolean eaten;
 
     public Dot(TileCoordinate coordinate, String value) {

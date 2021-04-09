@@ -8,6 +8,10 @@ import com.thoughtworks.pacman.core.TileVisitor;
 
 public class Wall extends Tile {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1601092184162109919L;
     private final WallType type;
 
     public Wall(TileCoordinate coordinate, String value) {

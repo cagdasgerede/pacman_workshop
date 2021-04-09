@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
@@ -8,7 +9,11 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
-public class Game {
+public class Game implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4503618388922418647L;
     private final Maze maze;
     private final Pacman pacman;
     private final Ghosts ghosts;

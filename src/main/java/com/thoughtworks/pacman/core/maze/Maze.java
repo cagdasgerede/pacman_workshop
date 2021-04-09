@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core.maze;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.Map;
 
 import com.thoughtworks.pacman.core.Tile;
@@ -9,7 +10,11 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
-public class Maze {
+public class Maze implements Serializable{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4451103888446677712L;
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;

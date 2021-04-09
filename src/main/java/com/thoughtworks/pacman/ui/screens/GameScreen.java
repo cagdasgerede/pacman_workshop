@@ -7,17 +7,22 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import javax.swing.JOptionPane;
 
 public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
+    private boolean saveGame = false;
 
     public GameScreen() throws Exception {
         this(new Game());
     }
 
-    private GameScreen(Game game) {
+    GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
 
@@ -37,17 +42,35 @@ public class GameScreen implements Screen {
         lastFrameAt = currentFrameAt;
     }
 
-    public Screen getNextScreen() {
+    public Screen getNextScreen() throws Exception {
         if (game.won()) {
             return new WinScreen(game);
-        } else if (game.lost() && !gamePresenter.isDying()) {
+        } 
+        else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);
+        }
+        else if(saveGame) {
+            String location = JOptionPane.showInputDialog("Give an absolute path to save\nAdd the file name to the end : .../save1");
+            if(location != null && !location.equals("")){
+                FileOutputStream fos = new FileOutputStream(location);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(game);
+                oos.flush();
+                oos.close();
+                JOptionPane.showMessageDialog(null,"SAVED!","INFO",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+                JOptionPane.showMessageDialog(null,"NOT ENTERED A PATH TO SAVE!","Warning",JOptionPane.WARNING_MESSAGE);
+            return new IntroScreen(new Game());
         }
         return this;
     }
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+        case KeyEvent.VK_S:
+            saveGame = true;
+            break;
         case KeyEvent.VK_LEFT:
             game.getPacman().setNextDirection(Direction.LEFT);
             break;
