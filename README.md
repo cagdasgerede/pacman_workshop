@@ -33,6 +33,8 @@ Done:
 * ~~Teleport~~
 * ~~Detect win or lose (transition screens)~~
 * ~~Animations (chewing, ghost eyes, pacman dying)~~
+* ~~Tutorial like level syste~~
+* ~~An end game where ghosts get faster and faster each level till player dies~~
 
 To do:
 * Managing lives (1)
