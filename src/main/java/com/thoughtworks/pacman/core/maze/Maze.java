@@ -54,6 +54,15 @@ public class Maze {
         return dotsLeft > 0;
     }
 
+    public int getDotsLeft() {
+        DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
+        int dotsLeft = 0;
+        for (Tile tile : tiles.values()) {
+            dotsLeft += tile.visit(dotsLeftVisitor);
+        }
+        return dotsLeft;
+    }
+
     public Tile tileAt(TileCoordinate tileCoordinate) {
         if (tiles.containsKey(tileCoordinate)) {
             return tiles.get(tileCoordinate);

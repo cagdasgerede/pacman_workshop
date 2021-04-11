@@ -64,7 +64,7 @@ public class GameScreenTest {
         Game game = new Game(MazeBuilder.buildMaze("+ +"), mock(Pacman.class), mock(Ghosts.class));
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
-        assertThat(gameScreen.getNextScreen(), instanceOf(WinScreen.class));
+        assertThat(gameScreen.getNextScreenWithoutAlerting(), instanceOf(WinScreen.class));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class GameScreenTest {
         game.getPacman().die();
         when(gamePresenter.isDying()).thenReturn(false);
 
-        assertThat(gameScreen.getNextScreen(), instanceOf(LostScreen.class));
+        assertThat(gameScreen.getNextScreenWithoutAlerting(), instanceOf(LostScreen.class));
     }
 
     @Test
