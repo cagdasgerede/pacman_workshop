@@ -40,5 +40,23 @@ public class MazePresenter implements Presenter {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
         graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+
+        graphics.setColor(Color.blue);
+        graphics.drawString("Type 1 Special Item:", Tile.SIZE*4, Tile.SIZE*2);
+        graphics.drawString(String.format("%2d", maze.getNumberOfType1Items()), Tile.SIZE*4, Tile.SIZE*2);
+
+        graphics.setColor(Color.green);
+        graphics.drawString("Type 2 Special Item:", Tile.SIZE*4, Tile.SIZE*2);
+        graphics.drawString(String.format("%2d", maze.getNumberOfType2Items()), Tile.SIZE*4, Tile.SIZE*2);
+
+        graphics.setColor(Color.red);
+        graphics.drawString("Type 3 Special Item:", Tile.SIZE*4, Tile.SIZE*2);
+        graphics.drawString(String.format("%2d", maze.getNumberOfType3Items()), Tile.SIZE*4, Tile.SIZE*2);
+    }
+
+    public void drawSpecialCollectableItem(Graphics2D graphics) {
+        if (this.maze.specialCollectableItemExists) {
+            (toPresenter(this.maze.getItem())).draw(graphics);
+        }
     }
 }

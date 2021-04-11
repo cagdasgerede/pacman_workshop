@@ -7,8 +7,14 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.SpecialCollectableItem;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
-public class PacmanTileVisitor implements TileVisitor<Void> {
+public class ClonePacmanTileVisitor implements TileVisitor<Void> {
 
+    public Void visit(SpecialCollectableItem specialCollectableItem)
+    {
+        specialCollectableItem.eat();
+        return null;
+    }
+    
     public Void visit(Dot dot) {
         dot.eat();
         return null;
@@ -23,11 +29,6 @@ public class PacmanTileVisitor implements TileVisitor<Void> {
     }
 
     public Void visit(Door door) {
-        return null;
-    }
-
-    public Void visit(SpecialCollectableItem specialCollectableItem) {
-        specialCollectableItem.eat();
         return null;
     }
 }
