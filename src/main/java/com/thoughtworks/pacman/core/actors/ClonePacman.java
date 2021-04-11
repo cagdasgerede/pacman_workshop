@@ -12,8 +12,16 @@ import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 public class ClonePacman extends Actor {
     private boolean dead = false;
 
+    public ClonePacman(Maze maze) {
+        this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
+    }
+
     public ClonePacman(Maze maze, SpacialCoordinate center, Direction direction, MovementStrategy movementStrategy) {
         super(maze, movementStrategy, center);
+    }
+
+    public ClonePacman(Maze maze, SpacialCoordinate center, Direction direction) {
+        super(maze, new RandomMovementStrategy(center, maze), center);
     }
 
     public void die() {
