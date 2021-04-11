@@ -26,7 +26,7 @@ public class Game {
     private boolean specialCollectableItemExists = false;
     private ClonePacman clonePacman;
     private ClonePacmanTileVisitor clonePacmanTileVisitor;
-    private int SpecialCollectableItemTimeBoundary = 100;
+    private int SpecialCollectableItemTimeBoundary = 200;
     private int ClonePacmanTimeBoundary = 200;
     private int SpecialCollectableItemTimePassed = 0;
     private int ClonePacmanTimePassed = 0;
@@ -64,8 +64,9 @@ public class Game {
             return;
         }
         else {
-            this.clonePacman = new ClonePacman1(maze, this.pacman.getCenter(), this.pacman.getDirection());
-            this.maze.useType1Item();
+            if (this.maze.useType1Item()) {
+                this.clonePacman = new ClonePacman1(maze, this.pacman.getCenter(), this.pacman.getDirection());
+            }
         }
     }
 
@@ -74,8 +75,9 @@ public class Game {
             return;
         }
         else {
-            this.clonePacman = new ClonePacman2(maze, this.pacman.getCenter(), this.pacman.getDirection());
-            this.maze.useType2Item();
+            if (this.maze.useType2Item()) {
+                this.clonePacman = new ClonePacman2(maze, this.pacman.getCenter(), this.pacman.getDirection());
+            }
         }
     }
 
@@ -84,8 +86,9 @@ public class Game {
             return;
         }
         else {
-            this.clonePacman = new ClonePacman3(maze, this.pacman.getCenter(), this.pacman.getDirection());
-            this.maze.useType3Item();
+            if (this.maze.useType3Item()) {
+                this.clonePacman = new ClonePacman3(maze, this.pacman.getCenter(), this.pacman.getDirection());
+            }
         }
     }
 

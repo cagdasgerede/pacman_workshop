@@ -104,30 +104,33 @@ public class Maze {
         }
     }
 
-    public void useType1Item() {
+    public boolean useType1Item() {
         if (this.numberOfType1Items == 0) {
-            return;
+            return false;
         }
         else {
             this.numberOfType1Items -= 1;
+            return true;
         }
     }
 
-    public void useType2Item() {
+    public boolean useType2Item() {
         if (this.numberOfType2Items == 0) {
-            return;
+            return false;
         }
         else {
             this.numberOfType2Items -= 1;
+            return true;
         }
     }
 
-    public void useType3Item() {
+    public boolean useType3Item() {
         if (this.numberOfType3Items == 0) {
-            return;
+            return false;
         }
         else {
             this.numberOfType3Items -= 1;
+            return true;
         }
     }
 
