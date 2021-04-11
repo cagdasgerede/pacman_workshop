@@ -15,8 +15,8 @@ public class ClonePacman extends Actor {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
     }
 
-    protected ClonePacman(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, new RandomMovementStrategy(center, maze), center);
+    public ClonePacman(Maze maze, SpacialCoordinate center, Direction direction, MovementStrategy movementStrategy) {
+        super(maze, movementStrategy, center);
     }
 
     public void die() {

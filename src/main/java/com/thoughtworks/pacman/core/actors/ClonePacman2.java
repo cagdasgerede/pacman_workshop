@@ -13,8 +13,8 @@ public class ClonePacman2 extends ClonePacman {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
     }
 
-    protected ClonePacman2(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, new RandomMovementStrategy(center, maze), center);
+    public ClonePacman2(Maze maze, SpacialCoordinate center, Direction direction) {
+        super(maze, center, direction, new RandomMovementStrategy(center, maze));
     }
 
     public int getKind() {
