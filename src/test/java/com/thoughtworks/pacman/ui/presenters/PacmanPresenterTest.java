@@ -42,7 +42,7 @@ public class PacmanPresenterTest {
         }
         assertThat(pacman.isMoving(), is(false));
 
-        assertThat(presenter.getStartAngle(), equalTo(Direction.LEFT.getStartAngle()));
+        assertThat(presenter.getStartAngle(), equalTo(Direction.RIGHT.getStartAngle()));
         assertThat(presenter.getArcAngle(), equalTo(PacmanPresenter.MOUTH_OPENED));
     }
 

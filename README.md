@@ -23,7 +23,7 @@ A complete and detailed explanation of the original game can be found in the
 
 ## Features
 
-Done:
+Done: 
 * ~~New game (splash screen)~~
 * ~~Draw the maze~~
 * ~~Pacman movement~~
@@ -33,7 +33,7 @@ Done:
 * ~~Teleport~~
 * ~~Detect win or lose (transition screens)~~
 * ~~Animations (chewing, ghost eyes, pacman dying)~~
-
+* ~~When it crushes to wall it changes the direction
 To do:
 * Managing lives (1)
 * Sounds
@@ -55,4 +55,4 @@ This implementation was written by Danilo Sato and Mariana Bravo for educational
 
 ```cd build\libs```
 
-```java -jar pacman_workshop.jar```
+```java -jar gradleintro.jar.jar```
