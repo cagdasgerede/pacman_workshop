@@ -5,10 +5,14 @@ import java.awt.Dimension;
 import java.util.Random;
 
 import com.thoughtworks.pacman.core.actors.ClonePacman;
+import com.thoughtworks.pacman.core.actors.ClonePacman1;
+import com.thoughtworks.pacman.core.actors.ClonePacman2;
+import com.thoughtworks.pacman.core.actors.ClonePacman3;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.SpecialCollectableItem;
 import com.thoughtworks.pacman.core.tiles.visitors.ClonePacmanTileVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
@@ -56,7 +60,7 @@ public class Game {
     }
 
     public void addClonePacman1() {
-        if (this.clonePacmanExists) {
+        if (this.clonePacmanExists()) {
             return;
         }
         else {
@@ -66,7 +70,7 @@ public class Game {
     }
 
     public void addClonePacman2() {
-        if (this.clonePacmanExists) {
+        if (this.clonePacmanExists()) {
             return;
         }
         else {
@@ -76,7 +80,7 @@ public class Game {
     }
 
     public void addClonePacman3() {
-        if (this.clonePacmanExists) {
+        if (this.clonePacmanExists()) {
             return;
         }
         else {

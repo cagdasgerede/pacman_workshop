@@ -55,7 +55,7 @@ public class MazePresenter implements Presenter {
     }
 
     public void drawSpecialCollectableItem(Graphics2D graphics) {
-        if (this.maze.specialCollectableItemExists) {
+        if (this.maze.itemExists()) {
             (toPresenter(this.maze.getItem())).draw(graphics);
         }
     }
