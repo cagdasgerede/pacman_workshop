@@ -13,6 +13,8 @@ public class Game {
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
+    private int left, rigth,up, down;
+    private long gameplayTime;
 
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
@@ -76,5 +78,49 @@ public class Game {
 
     public boolean lost() {
         return pacman.isDead();
+    }
+
+    public void incrementKeyPress(String type) {
+        if(type.equals("up"))
+            this.up += 1;
+        if(type.equals("down"))
+            this.down += 1;
+        if(type.equals("left"))
+            this.left += 1;
+        if(type.equals("right"))
+            this.rigth += 1;
+    }
+
+    public int getUpKeyPress() {
+        return this.up;
+    }
+    public int getDownKeyPress(){
+        return this.down;
+    }
+    public int getLeftKeyPress() {
+        return this.left;
+    }
+    public int getRigthKeyPress() { 
+        return this.rigth; 
+    }
+    public int totalPressNumber() {
+        return up + down + left + rigth;
+    }
+
+
+    public void setGameplayTime(long time) {
+        this.gameplayTime = time;
+    }
+
+    public long getGameplayTime() {
+        return this.gameplayTime;
+    }
+
+    public int getDotsLeft() {
+       return maze.getDotsLeft();
+    }
+
+    public int getScore() {
+        return maze. getScore();
     }
 }

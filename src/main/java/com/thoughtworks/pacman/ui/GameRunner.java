@@ -33,6 +33,7 @@ public class GameRunner {
         panel.setLayout(null);
 
         container.pack();
+        container.setLocationRelativeTo(null);
         container.setResizable(false);
         container.setVisible(true);
         open = true;

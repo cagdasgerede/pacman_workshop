@@ -31,7 +31,7 @@ public class IntroScreenTest {
     public void nextScreen_shouldReturnIntroScreen_whenKeyNotPressed() throws Exception {
         Game game = new Game();
         IntroScreen introScreen = new IntroScreen(game);
-
+        introScreen.setCloseDialogBox(true);
         assertThat(introScreen.getNextScreen(), instanceOf(IntroScreen.class));
     }
 
