@@ -4,15 +4,23 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
-public class Dot extends Tile {
+public class TeleporterItem extends Tile{
     private boolean eaten;
-
-    public Dot(TileCoordinate coordinate, String value) {
+    private final int teleportDistance;
+    private boolean isDropped;
+    
+    public TeleporterItem(TileCoordinate coordinate, int teleportDistance, boolean isDropped) {
         super(coordinate);
+        this.teleportDistance = teleportDistance;
+        this.isDropped = isDropped;
+    }
+    
+    public int getTeleportDistance() {
+        return this.teleportDistance;
     }
 
-    public Dot(TileCoordinate coordinate) {
-        super(coordinate);
+    public void setIsDropped(boolean isDropped) {
+        this.isDropped = isDropped; 
     }
 
     public boolean isEaten() {
@@ -20,17 +28,17 @@ public class Dot extends Tile {
     }
 
     public void eat() {
-        this.eaten = true;
+        this.eaten = true; 
     }
 
     @Override
     public boolean isMovable() {
         return true;
     }
-    
+
     @Override
     public boolean isDropped() {
-        return false;
+        return isDropped;
     }
 
     @Override
@@ -40,6 +48,6 @@ public class Dot extends Tile {
 
     @Override
     public String toString() {
-        return ".";
+        return "*";
     }
 }

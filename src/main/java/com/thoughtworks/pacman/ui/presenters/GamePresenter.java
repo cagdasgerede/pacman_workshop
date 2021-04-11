@@ -10,12 +10,14 @@ import java.util.List;
 
 public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;
+    private final ItemPresenter itemPresenter;
     private final PacmanPresenter pacmanPresenter;
     private final List<GhostPresenter> ghostPresenters;
 
     public GamePresenter(Game game) {
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
+        itemPresenter = new ItemPresenter(game.getTeleporterItemController());
         ghostPresenters = new LinkedList<GhostPresenter>();
         for (Ghost ghost : game.getGhosts()) {
             ghostPresenters.add(new GhostPresenter(ghost));
@@ -25,6 +27,7 @@ public class GamePresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
+        itemPresenter.draw(graphics);
         if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
                 ghostPresenter.draw(graphics);

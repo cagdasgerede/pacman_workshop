@@ -62,6 +62,10 @@ public class Maze {
         }
     }
 
+    public Map<TileCoordinate, Tile> getTiles() {
+        return tiles;
+    }
+
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();

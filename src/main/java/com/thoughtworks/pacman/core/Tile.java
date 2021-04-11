@@ -3,7 +3,7 @@ package com.thoughtworks.pacman.core;
 public abstract class Tile {
     public static int SIZE = 16;
 
-    private final TileCoordinate coordinate;
+    private  TileCoordinate coordinate;
 
     public Tile(TileCoordinate coordinate) {
         this.coordinate = coordinate;
@@ -13,7 +13,13 @@ public abstract class Tile {
         return coordinate.toSpacialCoordinate();
     }
 
+    public void setCenter(TileCoordinate tileCoordinate) {
+        this.coordinate = tileCoordinate;
+    }
+
     public abstract boolean isMovable();
+    
+    public abstract boolean isDropped();
 
     public abstract <T> T visit(TileVisitor<T> visitor);
 }

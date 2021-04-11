@@ -24,4 +24,9 @@ public class Door extends Tile {
     public String toString() {
         return "-";
     }
+
+    @Override
+    public boolean isDropped() {
+        return false;
+    }
 }

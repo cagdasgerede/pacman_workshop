@@ -26,6 +26,11 @@ public class Wall extends Tile {
     }
 
     @Override
+    public boolean isDropped() {
+        return false;
+    }
+
+    @Override
     public <T> T visit(TileVisitor<T> visitor) {
         return visitor.visit(this);
     }

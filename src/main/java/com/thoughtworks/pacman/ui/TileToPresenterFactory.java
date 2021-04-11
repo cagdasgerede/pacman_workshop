@@ -6,10 +6,12 @@ import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
+import com.thoughtworks.pacman.core.tiles.TeleporterItem;
 import com.thoughtworks.pacman.ui.presenters.DoorPresenter;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
 import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
+import com.thoughtworks.pacman.ui.presenters.TeleporterItemPresenter;
 
 public class TileToPresenterFactory implements TileVisitor<Presenter> {
     public static Presenter toPresenter(Tile tile) {
@@ -31,5 +33,9 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
 
     public Presenter visit(Door door) {
         return new DoorPresenter(door);
+    }
+
+    public Presenter visit(TeleporterItem teleporterItem) {
+        return new TeleporterItemPresenter(teleporterItem);
     }
 }

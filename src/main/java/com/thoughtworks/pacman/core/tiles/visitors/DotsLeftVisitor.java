@@ -5,10 +5,15 @@ import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
+import com.thoughtworks.pacman.core.tiles.TeleporterItem;
 
 public class DotsLeftVisitor implements TileVisitor<Integer> {
     public Integer visit(Dot dot) {
         return dot.isEaten() ? 0 : 1;
+    }
+
+    public Integer visit(TeleporterItem teleporterItem) {
+        return 0;
     }
 
     public Integer visit(Wall wall) {
