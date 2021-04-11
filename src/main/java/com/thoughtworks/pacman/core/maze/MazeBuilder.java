@@ -78,7 +78,7 @@ public class MazeBuilder {
     }
 
     private Tile createTile(char tileCharacter, TileCoordinate coordinate) throws Exception {
-        return mazeParser.get(tileCharacter).getConstructor(TileCoordinate.class, String.class)
-                .newInstance(coordinate, String.valueOf(tileCharacter));
+        return mazeParser.get(tileCharacter).getConstructor(TileCoordinate.class, String.class).newInstance(coordinate,
+                String.valueOf(tileCharacter));
     }
 }

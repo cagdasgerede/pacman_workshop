@@ -3,7 +3,6 @@ package com.thoughtworks.pacman.core;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.actors.Pacman;
-import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Ghosts {
     private Ghost blinky;
@@ -48,7 +47,7 @@ public class Ghosts {
             inky.free();
         } else if (clyde.isTrapped() && score > 600) {
             clyde.free();
-        }        
+        }
     }
 
     public void advance(long timeDeltaInMillis) {

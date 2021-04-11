@@ -20,7 +20,8 @@ public class SpacialCoordinate {
 
     public SpacialCoordinate remainder(Maze maze) {
         Dimension dimension = maze.getDimension();
-        return new SpacialCoordinate((x + dimension.width) % dimension.width, (y + dimension.height) % dimension.height);
+        return new SpacialCoordinate((x + dimension.width) % dimension.width,
+                (y + dimension.height) % dimension.height);
     }
 
     public SpacialCoordinate subtract(SpacialCoordinate spacialCoordinate) {

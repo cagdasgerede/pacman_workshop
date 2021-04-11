@@ -11,6 +11,14 @@ public class TileCoordinate {
         this.y = y;
     }
 
+    public int x() {
+        return x;
+    }
+
+    public int y() {
+        return y;
+    }
+
     public SpacialCoordinate toSpacialCoordinate() {
         return new SpacialCoordinate(transformToCenter(x), transformToCenter(y));
     }
@@ -46,13 +54,17 @@ public class TileCoordinate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         TileCoordinate tileCoordinate = (TileCoordinate) o;
 
-        if (x != tileCoordinate.x) return false;
-        if (y != tileCoordinate.y) return false;
+        if (x != tileCoordinate.x)
+            return false;
+        if (y != tileCoordinate.y)
+            return false;
 
         return true;
     }
@@ -67,7 +79,6 @@ public class TileCoordinate {
     public TileCoordinate times(int scale) {
         return new TileCoordinate(x * scale, y * scale);
     }
-
 
     public TileCoordinate unit() {
         return new TileCoordinate(unit(x), unit(y));
