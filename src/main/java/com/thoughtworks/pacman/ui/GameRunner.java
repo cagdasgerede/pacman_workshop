@@ -20,9 +20,11 @@ public class GameRunner {
     private boolean open;
     private GameCanvas canvas;
     private Game game;
+    private int level;//Added level counter.
 
     private void initialize() throws Exception {
         game = new Game();
+        level = 1;
         Dimension dimension = game.getDimension();
         canvas = new GameCanvas(dimension, game);
 
@@ -56,5 +58,13 @@ public class GameRunner {
             } catch (InterruptedException e) {
             }
         }
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public void LevelUp(){
+        level ++;
     }
 }

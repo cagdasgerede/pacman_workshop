@@ -5,7 +5,7 @@ import com.thoughtworks.pacman.core.Game;
 
 public class Ghost extends Actor {
     private final GhostType type;
-    private boolean free;
+    private boolean free = false;
 
     public Ghost(Game game, GhostType type) {
         super(game.getMaze(), type.getMovementStrategy(game) , type.getStartCoordinate());

@@ -39,6 +39,6 @@ public class MazePresenter implements Presenter {
     private void drawScore(Graphics2D graphics) {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
-        graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+        graphics.drawString(String.format("Score: %2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
     }
 }
