@@ -5,15 +5,12 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import com.thoughtworks.pacman.core.movement.RandomMovementStrategy;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
 public class ClonePacman extends Actor {
     private boolean dead = false;
-
-    public ClonePacman(Maze maze) {
-        this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
-    }
 
     public ClonePacman(Maze maze, SpacialCoordinate center, Direction direction, MovementStrategy movementStrategy) {
         super(maze, movementStrategy, center);
