@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.core.Ghosts;
@@ -77,6 +78,19 @@ public class GameScreenTest {
 
         assertThat(gameScreen.getNextScreen(), instanceOf(LostScreen.class));
     }
+/*
+    @Test
+    public void keyPressed_shouldPopUpGameOptions() throws Exception {
+        Pacman pacman = spy(new Pacman(maze));
+        Game game = new Game(maze, pacman, ghosts);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
+        Options option = new Options(game);
+
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_TAB);
+        gameScreen.keyPressed(keyEvent);
+        
+        assertThat(option.game, instanceOf(Game.class));
+    }*/
 
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {

@@ -21,13 +21,15 @@ public class PacmanPresenter implements Presenter {
     private final Pacman pacman;
     private long lastFrame;
     private int deadFrame;
+    private Color pacmanColor = Color.yellow;
+    private Color[] colorOptions = {Color.yellow,Color.red,Color.blue,Color.green,new Color(255,204,51),new Color(153,153,153),new Color(102,51,0),new Color(102,0,153)};
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
     }
 
     public void draw(Graphics2D graphics) {
-        graphics.setColor(Color.yellow);
+        graphics.setColor(pacmanColor);
         Rectangle bounds = getBounds();
         graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
     }

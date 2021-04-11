@@ -11,9 +11,9 @@ import com.thoughtworks.pacman.ui.Screen;
 
 public class IntroScreen implements Screen {
     static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "titleScreen.jpg");
-
     private final Dimension dimension;
     private boolean startGame;
+    boolean open = false;
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
@@ -33,6 +33,15 @@ public class IntroScreen implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        startGame = true;
+        if (e.getKeyCode() == KeyEvent.VK_A && !open){        
+                try {
+                    SettingsScreen settings = new SettingsScreen();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            }
+        else
+            startGame = true;
     }
 }

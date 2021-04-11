@@ -4,9 +4,9 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
-
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+
 
 public class GameScreen implements Screen {
     private final Game game;
@@ -45,8 +45,8 @@ public class GameScreen implements Screen {
         }
         return this;
     }
-
-    public void keyPressed(KeyEvent e) {
+    
+    public void keyPressed(KeyEvent e){
         switch (e.getKeyCode()) {
         case KeyEvent.VK_LEFT:
             game.getPacman().setNextDirection(Direction.LEFT);
