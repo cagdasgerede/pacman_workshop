@@ -23,7 +23,7 @@ public class SpecialCollectableItemPresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         if (!specialCollectableItem.isEaten()) {
             if (specialCollectableItem.getKind() == 1) {
-                graphics.setColor(Color.blue);
+                graphics.setColor(Color.cyan);
             }
             else if (specialCollectableItem.getKind() == 2) {
                 graphics.setColor(Color.green);

@@ -28,7 +28,7 @@ public class ClonePacmanPresenter implements Presenter {
 
     public void draw(Graphics2D graphics) {
         if (clonePacman.getKind() == 1) {
-            graphics.setColor(Color.blue);
+            graphics.setColor(Color.cyan);
         }
         else if (clonePacman.getKind() == 2) {
             graphics.setColor(Color.green);
