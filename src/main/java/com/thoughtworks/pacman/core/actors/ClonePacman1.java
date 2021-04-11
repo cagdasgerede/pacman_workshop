@@ -6,6 +6,7 @@ import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.RandomMovementStrategy;
+import com.thoughtworks.pacman.core.movement.UpDownRandomMovementStrategy;
 import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
 public class ClonePacman1 extends ClonePacman {
@@ -14,7 +15,7 @@ public class ClonePacman1 extends ClonePacman {
     }
 
     public ClonePacman1(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, center, direction, new RandomMovementStrategy(center, maze));
+        super(maze, center, direction, new UpDownRandomMovementStrategy(center, maze));
     }
 
     public int getKind() {
