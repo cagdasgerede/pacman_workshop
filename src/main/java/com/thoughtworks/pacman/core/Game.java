@@ -158,7 +158,18 @@ public class Game {
         pacman.advance(timeDeltaInMillis);
         ghosts.advance(timeDeltaInMillis);
         if (this.clonePacmanExists()) {
-            this.clonePacman.advance(timeDeltaInMillis);
+            if (clonePacman instanceof ClonePacman1) {
+                this.clonePacman.advance(timeDeltaInMillis);
+            }
+            else if (clonePacman instanceof ClonePacman2) {
+                this.clonePacman.advance(timeDeltaInMillis);
+                this.clonePacman.advance(timeDeltaInMillis);
+            }
+            else if (clonePacman instanceof ClonePacman3) {
+                this.clonePacman.advance(timeDeltaInMillis);
+                this.clonePacman.advance(timeDeltaInMillis);
+                this.clonePacman.advance(timeDeltaInMillis);
+            }
         }
 
         if (ghosts.killed(pacman)) {
