@@ -14,30 +14,41 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LostScreenTest {
+public class ScoreScreenTest {
     @Mock
     private Graphics2D graphics;
 
     @Test
     public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
         Game game = new Game();
-        LostScreen lostScreen = new LostScreen(game);
+        ScoreScreen scoreScreen = new ScoreScreen(game);
 
-        lostScreen.draw(graphics);
+        scoreScreen.draw(graphics);
 
-        verify(graphics).drawImage(LostScreen.LOST_SCREEN_IMAGE, 0, 0, 448, 448, null);
+        verify(graphics).drawImage(ScoreScreen.SCORE_SCREEN_IMAGE, 0, 0, 448, 448, null);
     }
 
     @Test
     public void nextScreen_shouldReturnLostScreen_whenKeyNotPressed() throws Exception {
         Game game = new Game();
-        LostScreen lostScreen = new LostScreen(game);
+        ScoreScreen scoreScreen = new ScoreScreen(game,true);
 
-        assertThat(lostScreen.getNextScreen(), instanceOf(LostScreen.class));
+        assertThat(scoreScreen.getNextScreen(), instanceOf(ScoreScreen.class));
     }
 
     @Test
     public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
+        Game game = new Game();
+        ScoreScreen lostScreen = new ScoreScreen(game);
+
+        lostScreen.keyPressed(null);
+
+        assertThat(lostScreen.getNextScreen(), instanceOf(IntroScreen.class));
         assertTrue(true);
+    }
+
+    @Test
+    public void listInitialization_ShouldEmptyScoresAndNames(){
+
     }
 }

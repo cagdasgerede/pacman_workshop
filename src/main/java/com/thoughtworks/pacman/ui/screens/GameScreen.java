@@ -7,6 +7,10 @@ import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
 public class GameScreen implements Screen {
     private final Game game;
@@ -33,7 +37,6 @@ public class GameScreen implements Screen {
 
         game.advance(timeDelta);
         gamePresenter.draw(graphics);
-
         lastFrameAt = currentFrameAt;
     }
 
@@ -41,9 +44,6 @@ public class GameScreen implements Screen {
         if (game.won()) {
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
-            if(game.newHighScore){
-                
-            }
             return new LostScreen(game);
         }
         return this;
