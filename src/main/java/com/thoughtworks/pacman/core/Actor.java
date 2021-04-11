@@ -1,5 +1,6 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
@@ -10,7 +11,7 @@ public abstract class Actor {
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
     private SpacialCoordinate center;
-
+    
     public Actor(Maze maze, MovementStrategy movementStrategy, SpacialCoordinate center) {
         this.maze = maze;
         this.movementStrategy = movementStrategy;
@@ -69,8 +70,8 @@ public abstract class Actor {
        while(maze.canMove(new TileCoordinate(coordinateX, coordinateY))){
            coordinateX=(int)(Math.random()*maze.getWidth());
            coordinateY=(int)(Math.random()*maze.getHeight());
-       }
-       
+       }               
+       jump (center);
        currentTile.add(new TileCoordinate(coordinateX, coordinateY));
        return currentTile;
    }
