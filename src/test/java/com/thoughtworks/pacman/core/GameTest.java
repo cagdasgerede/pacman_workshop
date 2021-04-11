@@ -6,6 +6,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -95,5 +96,65 @@ public class GameTest {
         game.advance(10);
 
         verify(pacman).die();
+    }
+
+    @Test
+    public void addingClonePacman1CreatesAClonePacmanIfThereAreType1Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType1Item()).thenReturn(true);
+        game.addClonePacman1();
+
+        assertThat(game.clonePacmanExists(), is(true));
+    }
+
+    @Test
+    public void addingClonePacman2CreatesAClonePacmanIfThereAreType2Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType2Item()).thenReturn(true);
+        game.addClonePacman2();
+
+        assertThat(game.clonePacmanExists(), is(true));
+    }
+
+    @Test
+    public void addingClonePacman3CreatesAClonePacmanIfThereAreType3Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType3Item()).thenReturn(true);
+        game.addClonePacman3();
+
+        assertThat(game.clonePacmanExists(), is(true));
+    }
+
+    @Test
+    public void addingClonePacman1ShouldNotCreateAClonePacmanIfThereAreNoType1Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType1Item()).thenReturn(false);
+        game.addClonePacman1();
+
+        assertThat(game.clonePacmanExists(), is(false));
+    }
+
+    @Test
+    public void addingClonePacman2ShouldNotCreateAClonePacmanIfThereAreNoType2Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType2Item()).thenReturn(false);
+        game.addClonePacman2();
+
+        assertThat(game.clonePacmanExists(), is(false));
+    }
+
+    @Test
+    public void addingClonePacman3ShouldNotCreateAClonePacmanIfThereAreNoType3Items() throws Exception {
+        Maze mockedMaze = mock(Maze.class);
+        Game game = new Game(mockedMaze, pacman, ghosts);
+        when(mockedMaze.useType3Item()).thenReturn(false);
+        game.addClonePacman3();
+
+        assertThat(game.clonePacmanExists(), is(false));
     }
 }

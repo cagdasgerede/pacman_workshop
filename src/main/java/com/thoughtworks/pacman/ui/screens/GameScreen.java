@@ -60,6 +60,15 @@ public class GameScreen implements Screen {
         case KeyEvent.VK_DOWN:
             game.getPacman().setNextDirection(Direction.DOWN);
             break;
+        case KeyEvent.VK_Q:
+            game.addClonePacman1();
+            break;
+        case KeyEvent.VK_W:
+            game.addClonePacman2();
+            break;
+        case KeyEvent.VK_E:
+            game.addClonePacman3();
+            break;
         }
     }
 }
