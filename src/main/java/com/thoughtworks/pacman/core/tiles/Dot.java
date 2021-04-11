@@ -37,4 +37,5 @@ public class Dot extends Tile {
     public String toString() {
         return ".";
     }
+
 }

@@ -49,7 +49,7 @@ public class Game {
     }
 
     public Ghost[] getGhosts() {
-        return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
+        return new Ghost[] { ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde() };
     }
 
     public void advance(long timeDeltaInMillis) {
