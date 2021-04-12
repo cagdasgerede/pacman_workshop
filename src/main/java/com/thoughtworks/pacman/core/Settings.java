@@ -1,23 +1,109 @@
 package com.thoughtworks.pacman.core;
 
-import java.awt.Dimension;
-import com.thoughtworks.pacman.core.actors.Ghost;
-import com.thoughtworks.pacman.core.actors.Pacman;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.awt.event.KeyEvent;
 public class Settings {
-    private final Game game;
-    private final Pacman pacman;
-    private final Ghost[] ghosts;
-    private final int cornerSize = 20;
-    private final int width = 15;
-    private final int height = 25;
-
-    public Settings() throws Exception{
-        this.game = new Game();
-        this.pacman=game.getPacman();
-        this.ghosts=game.getGhosts();
+    private int pacmanSpeed;
+    private int ghostSpeed;
+    private int pacmanColorIndex;
+    private int ghostColorIndex;
+    private int[] keyIndex = new int[4];
+    private int[] keyEventNumb = new int[4];
+    private Scanner scanner;
+    private boolean buildCorrect;
+    public Settings() {
+        getValuesFromFile();
     }
-    public Dimension getDimension() {
-        return new Dimension(width * cornerSize, height * cornerSize);
+    public void getValuesFromFile(){
+            try {
+                if(controlCRC()!=1)
+                    return;
+                scanner = new Scanner(new File("config.txt"));
+                if(scanner==null){
+                    buildCorrect=false;
+                    return;
+                }
+                else
+                    buildCorrect =true;
+                    
+                pacmanSpeed = scanner.nextInt();
+                ghostSpeed = scanner.nextInt();
+                pacmanColorIndex = scanner.nextInt();
+                keyIndex[0] = scanner.nextInt();
+                keyIndex[1] = scanner.nextInt();
+                keyIndex[2] = scanner.nextInt();
+                keyIndex[3] = scanner.nextInt();
+                keyEventNumb[0] = gKeyEvent(keyIndex[0]);
+                keyEventNumb[1] = gKeyEvent(keyIndex[1]);
+                keyEventNumb[2] = gKeyEvent(keyIndex[2]);
+                keyEventNumb[3] = gKeyEvent(keyIndex[3]);
+                scanner.close();
+            //  Window win = SwingUtilities.getWindowAncestor(components[0]);
+         //      win.dispose();
+            }
+            catch (IOException e) {
+               e.printStackTrace();  
+            }
+    }
+    public int gKeyEvent(int index){
+        switch(index){
+                case 0: return KeyEvent.VK_UP;
+                case 1: return KeyEvent.VK_DOWN;
+                case 2: return KeyEvent.VK_RIGHT;
+                case 3: return KeyEvent.VK_LEFT;
+                case 4: return KeyEvent.VK_W;
+                case 5: return KeyEvent.VK_S;
+                case 6: return KeyEvent.VK_A;
+                case 7: return KeyEvent.VK_D;
+                case 8: return KeyEvent.VK_X;
+                case 9: return KeyEvent.VK_C;
+                case 10: return KeyEvent.VK_V;
+                case 11: return KeyEvent.VK_NUMPAD8;
+                case 12: return KeyEvent.VK_NUMPAD4;
+                case 13: return KeyEvent.VK_NUMPAD2;
+                case 14: return KeyEvent.VK_NUMPAD6;
+            }
+            return 0;
+        }
+    public boolean buildCorrect() {
+        return buildCorrect;
+    }
+    public int controlCRC(){
+        return 1;
+    }
+    public void setGhostColorIndex(int ghostColorIndex) {
+        this.ghostColorIndex = ghostColorIndex;
+    }
+    public void setGhostSpeed(int ghostSpeed) {
+        this.ghostSpeed = ghostSpeed;
+    }
+    public void setKeyIndex(int[] keyIndex) {
+        this.keyIndex = keyIndex;
+    }
+    public void setPacmanColorIndex(int pacmanColorIndex) {
+        this.pacmanColorIndex = pacmanColorIndex;
+    }
+    public void setPacmanSpeed(int pacmanSpeed) {
+        this.pacmanSpeed = pacmanSpeed;
+    }
+    public int getGhostColorIndex() {
+        return ghostColorIndex;
+    }
+    public int getGhostSpeed() {
+        return ghostSpeed;
+    }
+    public int[] getKeyIndex() {
+        return keyIndex;
+    }
+    public int[] getKeyEventNumb() {
+        return keyEventNumb;
+    }
+    public int getPacmanColorIndex() {
+        return pacmanColorIndex;
+    }
+    public int getPacmanSpeed() {
+        return pacmanSpeed;
     }
 }

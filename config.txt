@@ -1,7 +1,1 @@
-low
-low
-yellow
-UP KEY
-UP KEY
-UP KEY
-UP KEY
+100 80 6 11 13 14 12 

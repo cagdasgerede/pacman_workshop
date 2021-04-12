@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.ui.screens;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 import java.awt.Graphics2D;
@@ -12,6 +13,9 @@ public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
+    private int[] keyEventIndex = new int[4];
+    private Settings settings = new Settings();
+
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -24,6 +28,7 @@ public class GameScreen implements Screen {
     GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
         this.gamePresenter = gamePresenter;
+        keyEventIndex=settings.getKeyEventNumb();
         this.lastFrameAt = System.currentTimeMillis();
     }
 
@@ -47,19 +52,14 @@ public class GameScreen implements Screen {
     }
     
     public void keyPressed(KeyEvent e){
-        switch (e.getKeyCode()) {
-        case KeyEvent.VK_LEFT:
-            game.getPacman().setNextDirection(Direction.LEFT);
-            break;
-        case KeyEvent.VK_RIGHT:
-            game.getPacman().setNextDirection(Direction.RIGHT);
-            break;
-        case KeyEvent.VK_UP:
+        System.out.println(e.getKeyCode()+" "+keyEventIndex[2]);
+        if(e.getKeyCode()== keyEventIndex[0])
             game.getPacman().setNextDirection(Direction.UP);
-            break;
-        case KeyEvent.VK_DOWN:
+        else if(e.getKeyCode()== keyEventIndex[1])
             game.getPacman().setNextDirection(Direction.DOWN);
-            break;
-        }
+        else if(e.getKeyCode()== keyEventIndex[2])   
+            game.getPacman().setNextDirection(Direction.RIGHT);
+        else if(e.getKeyCode()== keyEventIndex[3])
+            game.getPacman().setNextDirection(Direction.LEFT);
     }
 }

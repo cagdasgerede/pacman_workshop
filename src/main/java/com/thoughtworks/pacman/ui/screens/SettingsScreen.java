@@ -1,7 +1,6 @@
 package com.thoughtworks.pacman.ui.screens;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.TextArea;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -10,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.awt.event.KeyEvent;
+
+import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
 
@@ -17,6 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SettingsScreen extends JFrame implements ActionListener{
 
@@ -53,6 +58,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private static final String NEXT_PNG_PATH = "nextButton.png";
    private static final String PREVIOUS_PNG_PATH = "previousButton.png";
    private JPanel pacmPanel = new JPanel();
+   private Settings settings;
   // private Image pacmanCustom_Image = ImageLoader.loadImage(Screen.class, UP_PNG_PATH);
   // private Image ghostCustom_Image = ImageLoader.loadImage(Screen.class, UP_PNG_PATH);
    private JTextField pacmanSpeedInfo_Text,ghostSpeedInfo_Text,upKeyInfo_Text,downKeyInfo_Text,rightKeyInfo_Text,leftKeyInfo_Text,pacmanColorInfo_Text,ghostColorInfo_Text;
@@ -66,6 +72,9 @@ public class SettingsScreen extends JFrame implements ActionListener{
    SettingsScreen() {
     super("Settings Menu");
     setSize(WIDTH, HEIGHT);
+    settings = new Settings();
+    if(settings.buildCorrect())
+       buildSettings(settings);
     InfoTexts();
     this.add(pacmanSpeedInfo_Text);
     this.add(ghostSpeedInfo_Text);
@@ -79,14 +88,14 @@ public class SettingsScreen extends JFrame implements ActionListener{
     setButtons();
     this.add(pacmanSpeedUp_Button);
     this.add(pacmanSpeedDown_Button);
-    pacmanSpeed_Text = new JTextField(pacmanSpeed);
+    pacmanSpeed_Text = new JTextField(pacmanSpeed+"");
     pacmanSpeed_Text.setBounds(220,15,BUTTON_WIDTH,BUTTON_HEIGHT);
     pacmanSpeed_Text.setEditable(false);
     this.add(pacmanSpeed_Text);
 
     this.add(ghostSpeedUp_Button);
     this.add(ghostSpeedDown_Button);
-    ghostSpeed_Text = new JTextField(ghostSpeed);
+    ghostSpeed_Text = new JTextField(ghostSpeed+"");
     ghostSpeed_Text.setBounds(220,15+HIGH_LABEL_SPACE,BUTTON_WIDTH,BUTTON_HEIGHT);
     ghostSpeed_Text.setEditable(false);
     this.add(ghostSpeed_Text);
@@ -139,7 +148,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.addWindowListener(new WindowAdapter() {
         public void windowClosing(WindowEvent e) {
-       //     Board.setEditMenuActive(false);
+         
         }
     });
     setLayout(null);
@@ -228,12 +237,12 @@ private void setButtons() {
     ghostColorPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*3),BUTTON_WIDTH,BUTTON_HEIGHT);
 
     upKeyNext_Button.setBounds(130+(WEIGHT_LABEL_SPACE*2),15+(HIGH_LABEL_SPACE*4),BUTTON_WIDTH,BUTTON_HEIGHT);
-    upKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*4),BUTTON_WIDTH,BUTTON_HEIGHT);
     downKeyNext_Button.setBounds(130+(WEIGHT_LABEL_SPACE*2),15+(HIGH_LABEL_SPACE*5),BUTTON_WIDTH,BUTTON_HEIGHT);
-    downKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*5),BUTTON_WIDTH,BUTTON_HEIGHT);
     rightKeyNext_Button.setBounds(130+(WEIGHT_LABEL_SPACE*2),15+(HIGH_LABEL_SPACE*6),BUTTON_WIDTH,BUTTON_HEIGHT);
-    rightKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*6),BUTTON_WIDTH,BUTTON_HEIGHT);
     leftKeyNext_Button.setBounds(130+(WEIGHT_LABEL_SPACE*2),15+(HIGH_LABEL_SPACE*7),BUTTON_WIDTH,BUTTON_HEIGHT);
+    upKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*4),BUTTON_WIDTH,BUTTON_HEIGHT);
+    downKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*5),BUTTON_WIDTH,BUTTON_HEIGHT);
+    rightKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*6),BUTTON_WIDTH,BUTTON_HEIGHT);
     leftKeyPrevious_Button.setBounds(130,15+(HIGH_LABEL_SPACE*7),BUTTON_WIDTH,BUTTON_HEIGHT);
 
     apply_Button.setBounds(50, 400, 80, 50);
@@ -248,7 +257,7 @@ private void setButtons() {
     ghostColorNext_Button.addActionListener(this);
     ghostColorPrevious_Button.addActionListener(this);
     upKeyNext_Button.addActionListener(this);
-    upKeyNext_Button.addActionListener(this);
+    upKeyPrevious_Button.addActionListener(this);
     downKeyNext_Button.addActionListener(this);
     downKeyPrevious_Button.addActionListener(this);
     rightKeyNext_Button.addActionListener(this);
@@ -273,60 +282,112 @@ private void setButtonDefaults(JButton button,int buttonProperty,String name){
 }
    @Override
    public void actionPerformed(ActionEvent ae) {
+      System.out.println("ae "+ae.getActionCommand());
       String command = ae.getActionCommand();
-      if(command.equals(pacmanSpeedUp_Button) && pacmanSpeed+10<=100)
+      if(command.equals("pacmanSpeedUp_Button") && pacmanSpeed+10<=100)
          {
             pacmanSpeed+=10;
             pacmanSpeed_Text.setText(pacmanSpeed+"");
          }
-      else if(command.equals(pacmanSpeedDown_Button) && pacmanSpeed-10>=0)
+      else if(command.equals("pacmanSpeedDown_Button") && pacmanSpeed-10>=0)
          {
             pacmanSpeed-=10;
             pacmanSpeed_Text.setText(pacmanSpeed+"");
          }
-      else if(command.equals(ghostSpeedUp_Button) && ghostSpeed+10<=100)
+      else if(command.equals("ghostSpeedUp_Button") && ghostSpeed+10<=100)
          {
             ghostSpeed+=10;
             ghostSpeed_Text.setText(ghostSpeed+"");
          }
-      else if(command.equals(ghostSpeedDown_Button) && ghostSpeed-10>=0)
+      else if(command.equals("ghostSpeedDown_Button") && ghostSpeed-10>=0)
          {
             ghostSpeed-=10;
             ghostSpeed_Text.setText(ghostSpeed+"");
          }
-      else if(command.equals(pacmanColorNext_Button)){
+      else if(command.equals("pacmanColorNext_Button")){
          if(cursorColor==pacmanColorOptions.length-1)
                cursorColor=0;
          else cursorColor++;
             pacmPanel.setBackground(pacmanColorOptions[cursorColor]);
          }
-      else if(command.equals(pacmanColorPrevious_Button)){
+      else if(command.equals("pacmanColorPrevious_Button")){
             if(cursorColor==0)
                cursorColor=pacmanColorOptions.length-1;
             else cursorColor--;
             pacmPanel.setBackground(pacmanColorOptions[cursorColor]);
          }
-      else if(command.equals(upKeyNext_Button)){
-         if(upKeyCursor==gameKeyList.length-1)
-            upKeyCursor=0;
-         else upKeyCursor++;
-            upKey_Text.setText(gameKeyList[upKeyCursor]);
+      else if(command.equals("ghostColorNext_Button")){
+            //
          }
-      else if(command.equals(upKeyPrevious_Button)){
-            if(upKeyCursor==0)
-               upKeyCursor=gameKeyList.length-1;
-            else upKeyCursor--;
-            upKey_Text.setText(gameKeyList[upKeyCursor]);
+      else if(command.equals("ghostColorPrevious_Button")){
+            //
+         }
+      else if(command.equals("APPLY")){
+         try {
+               BufferedWriter writer = new BufferedWriter(new FileWriter("config.txt"));
+               writer.write(pacmanSpeed+" ");
+               writer.write(ghostSpeed+" ");
+               writer.write(cursorColor+" ");
+               writer.write((upKeyCursor)+" ");
+               writer.write((downKeyCursor)+" ");
+               writer.write((rightKeyCursor)+" ");
+               writer.write((leftKeyCursor)+" ");
+               writer.close();
+      
+            }catch (IOException e) {
+               e.printStackTrace();  
+            }
+      }
+      else if(command.equals("CANCEL")){
+            
+      }
+      else{
+            do{
+               if(command.equals("upKeyNext_Button"))
+                  if(upKeyCursor==gameKeyList.length-1) upKeyCursor=0;
+                  else upKeyCursor++;
+               else if(command.equals("downKeyNext_Button"))
+                  if(downKeyCursor==gameKeyList.length-1) downKeyCursor=0;
+                  else downKeyCursor++;
+               else if(command.equals("rightKeyNext_Button"))
+                  if(rightKeyCursor==gameKeyList.length-1) rightKeyCursor=0;
+                  else rightKeyCursor++;
+               else if(command.equals("leftKeyNext_Button"))
+                  if(leftKeyCursor==gameKeyList.length-1) leftKeyCursor=0;
+                  else leftKeyCursor++;
+               else if(command.equals("upKeyPrevious_Button"))
+                  if(upKeyCursor==0) upKeyCursor=gameKeyList.length-1;
+                  else upKeyCursor--;
+               else if(command.equals("downKeyPrevious_Button"))
+                  if(downKeyCursor==0) downKeyCursor=gameKeyList.length-1;
+                  else downKeyCursor--;
+               else if(command.equals("rightKeyPrevious_Button"))
+                  if(rightKeyCursor==0) rightKeyCursor=gameKeyList.length-1;
+                  else rightKeyCursor--;
+               else if(command.equals("leftKeyPrevious_Button"))
+                  if(leftKeyCursor==0) leftKeyCursor=gameKeyList.length-1;
+                  else leftKeyCursor--;
+
+            }while(upKeyCursor==downKeyCursor || upKeyCursor==rightKeyCursor || upKeyCursor==leftKeyCursor || rightKeyCursor==leftKeyCursor || downKeyCursor==leftKeyCursor || rightKeyCursor==downKeyCursor);
+            if(command.equals("upKeyNext_Button") || command.equals("upKeyPrevious_Button"))
+               upKey_Text.setText(gameKeyList[upKeyCursor]+"");
+            else if(command.equals("downKeyNext_Button") || command.equals("downKeyPrevious_Button"))
+               downKey_Text.setText(gameKeyList[downKeyCursor]+"");
+            else if(command.equals("rightKeyNext_Button") || command.equals("rightKeyPrevious_Button"))
+               rightKey_Text.setText(gameKeyList[rightKeyCursor]+"");
+            else if(command.equals("leftKeyNext_Button") || command.equals("leftKeyPrevious_Button"))
+               leftKey_Text.setText(gameKeyList[leftKeyCursor]+"");
          }
       }
-      /*
-      try {
-         BufferedWriter writer = new BufferedWriter(new FileWriter("config.txt"));
 
-         writer.close();
-
-      }catch (IOException e) {
-         e.printStackTrace();  
-         
-      }*/
+      public void buildSettings(Settings settings) {
+         ghostSpeed = settings.getGhostSpeed();
+         cursorColor = settings.getPacmanColorIndex();
+         pacmanSpeed = settings.getPacmanSpeed();
+         int[] keyIndex = settings.getKeyIndex();
+         upKeyCursor = keyIndex[0];
+         downKeyCursor = keyIndex[1];
+         rightKeyCursor = keyIndex[2];
+         leftKeyCursor = keyIndex[3];
+      }
    }

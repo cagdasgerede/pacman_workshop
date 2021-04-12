@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
@@ -23,9 +24,11 @@ public class PacmanPresenter implements Presenter {
     private int deadFrame;
     private Color pacmanColor = Color.yellow;
     private Color[] colorOptions = {Color.yellow,Color.red,Color.blue,Color.green,new Color(255,204,51),new Color(153,153,153),new Color(102,51,0),new Color(102,0,153)};
-
+    private Settings settings;
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
+        settings = new Settings();
+        pacmanColor = colorOptions[settings.getPacmanColorIndex()];
     }
 
     public void draw(Graphics2D graphics) {
