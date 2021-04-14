@@ -38,19 +38,7 @@ public class GameScreenTest {
     @Mock
     private Ghosts ghosts;
 
-    @Test
-    public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman, ghosts);
-        GameScreen gameScreen = new GameScreen(game, gamePresenter);
-
-        Thread.sleep(1); // Some time for pacman to move
-        gameScreen.draw(graphics);
-
-        verify(pacman).advance(gt(0L));
-    }
-
+    
     @Test
     public void nextScreen_shouldReturnGameScreen_whenGameNotOver() throws Exception {
         Game game = new Game();
@@ -58,6 +46,21 @@ public class GameScreenTest {
 
         assertThat(gameScreen.getNextScreen(), instanceOf(GameScreen.class));
     }
+    @Test
+    
+    public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        Pacman pacman = spy(new Pacman(maze));
+        Game game = new Game(maze, pacman, ghosts);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
+
+        Thread.sleep(1);
+    
+        gameScreen.draw(graphics);
+
+        verify(pacman).advance(gt(0L));
+    }
+
 
     @Test
     public void nextScreen_shouldReturnWinScreen_whenGameWon() throws Exception {
@@ -114,6 +117,7 @@ public class GameScreenTest {
         verify(pacman).setNextDirection(eq(Direction.UP));
     }
 
+
     @Test
     public void keyPressed_shouldMovePacmanDown() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
@@ -125,4 +129,5 @@ public class GameScreenTest {
 
         verify(pacman).setNextDirection(eq(Direction.DOWN));
     }
+  
 }
