@@ -72,7 +72,7 @@ public class ScoreScreen implements Screen {
         startGame = true;
     }
 
-    public boolean initializeList(){
+    public void initializeList(){
         scores.clear();
         names.clear();
         sortedScores.clear();
@@ -107,7 +107,6 @@ public class ScoreScreen implements Screen {
             names.remove(pointer);
             scores.remove(pointer);
         }
-        return (scores.isEmpty()&&names.isEmpty());
     }
 
 }

@@ -35,6 +35,11 @@ public class WinScreen implements Screen {
         this.game = game;
         this.startGame = false;
 
+        evaluateScores();
+        
+    }
+
+    private void evaluateScores(){
         try { 
             FileInputStream fis=new FileInputStream("scores.txt");       
             Scanner sc=new Scanner(fis);
@@ -91,7 +96,7 @@ public class WinScreen implements Screen {
             graphics.drawString("You Won!", 140, 350);
             graphics.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
             graphics.drawString("New Highscore! Enter your name below", 20, 430);
-            graphics.drawString("Press enter to confirm it", 120, 450);
+            graphics.drawString("Press enter to confirm it", 120, 455);
         }
         graphics.setColor(Color.YELLOW);
         graphics.setFont(new Font("TimesRoman", Font.PLAIN, 20));

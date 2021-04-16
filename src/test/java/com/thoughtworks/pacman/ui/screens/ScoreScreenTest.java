@@ -44,11 +44,6 @@ public class ScoreScreenTest {
         lostScreen.keyPressed(null);
 
         assertThat(lostScreen.getNextScreen(), instanceOf(IntroScreen.class));
-        assertTrue(true);
     }
-
-    @Test
-    public void listInitialization_ShouldEmptyScoresAndNames(){
-
-    }
+    
 }

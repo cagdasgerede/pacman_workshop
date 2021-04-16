@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import com.thoughtworks.pacman.core.Game;
@@ -37,7 +36,10 @@ public class LostScreen implements Screen {
         this.dimension = game.getDimension();
         this.game = game;
         this.startGame = false;
+        evaluateScores();
+    }
 
+    private void evaluateScores(){
         try { 
             FileInputStream fis=new FileInputStream("scores.txt");       
             Scanner sc=new Scanner(fis);
@@ -83,6 +85,7 @@ public class LostScreen implements Screen {
         }
     }
 
+
     public void draw(Graphics2D graphics) {
         int height = LOST_SCREEN_IMAGE.getHeight(null) * dimension.width / LOST_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(LOST_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
@@ -94,7 +97,7 @@ public class LostScreen implements Screen {
             graphics.drawString("Game Over", 120, 350);
             graphics.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
             graphics.drawString("New Highscore! Enter your name below", 20, 430);
-            graphics.drawString("Press enter to confirm it", 90, 450);
+            graphics.drawString("Press enter to confirm it", 90, 455);
         }
         graphics.setColor(Color.YELLOW);
         graphics.setFont(new Font("TimesRoman", Font.PLAIN, 20));
