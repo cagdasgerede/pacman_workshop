@@ -12,8 +12,9 @@ import java.awt.event.KeyEvent;
 public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
-    private long lastFrameAt;
     private int[] keyEventIndex = new int[4];
+    private int pacmanSpeed;
+    private int ghostSpeed;
     private Settings settings = new Settings();
 
 
@@ -29,17 +30,13 @@ public class GameScreen implements Screen {
         this.game = game;
         this.gamePresenter = gamePresenter;
         keyEventIndex=settings.getKeyEventNumb();
-        this.lastFrameAt = System.currentTimeMillis();
+        pacmanSpeed=settings.getPacmanSpeed();
+        ghostSpeed=settings.getGhostSpeed();
     }
 
     public void draw(Graphics2D graphics) {
-        long currentFrameAt = System.currentTimeMillis();
-        long timeDelta = currentFrameAt - lastFrameAt;
-
-        game.advance(timeDelta);
+        game.advance(pacmanSpeed,ghostSpeed);
         gamePresenter.draw(graphics);
-
-        lastFrameAt = currentFrameAt;
     }
 
     public Screen getNextScreen() {

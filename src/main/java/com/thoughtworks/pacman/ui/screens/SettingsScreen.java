@@ -1,15 +1,15 @@
 package com.thoughtworks.pacman.ui.screens;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.TextArea;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.event.KeyEvent;
 
 import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.ui.ImageLoader;
@@ -24,9 +24,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SettingsScreen extends JFrame implements ActionListener{
-
-   private static final int WIDTH = 300;
-   private static final int HEIGHT = 500;
+   static final Image SETTINGS_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "settingsScreen.jpg");
+   private static final int WIDTH = 425;
+   private static final int HEIGHT = 480;
 
    private static final int BUTTON_WIDTH = 25;
    private static final int BUTTON_HEIGHT = 25;
@@ -66,13 +66,14 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private Color[] pacmanColorOptions = {Color.yellow,Color.red,Color.blue,Color.green,new Color(255,204,51),new Color(153,153,153),new Color(102,51,0),new Color(102,0,153)};
    private String[] gameKeyList = {"UpArrow","DownArrow","RightArrow","LefttArrow","W","S","A","D","X","C","V","Num8","Num4","Num2","Num6"};
    private int cursorColor=0,upKeyCursor=0,downKeyCursor=1,rightKeyCursor=2,leftKeyCursor=3;
-   private int pacmanSpeed=0,ghostSpeed=0;
+   private int pacmanSpeed=20,ghostSpeed=20;
   // private ImageIcon ghostColor;
 
    SettingsScreen() {
     super("Settings Menu");
     setSize(WIDTH, HEIGHT);
     settings = new Settings();
+    this.setContentPane(new JLabel(new ImageIcon(SETTINGS_SCREEN_IMAGE)));
     if(settings.buildCorrect())
        buildSettings(settings);
     InfoTexts();
@@ -122,7 +123,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
     this.add(leftKeyNext_Button);
     this.add(leftKeyPrevious_Button);
     upKey_Text = new JTextField(gameKeyList[upKeyCursor]);
-    upKey_Text.setBounds(155,15+(HIGH_LABEL_SPACE*4),WEIGHT_LABEL_SPACE+20,BUTTON_HEIGHT);
+    upKey_Text.setBounds(250,15+(HIGH_LABEL_SPACE*4),WEIGHT_LABEL_SPACE+20,BUTTON_HEIGHT);
     upKey_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
     upKey_Text.setEditable(false);
     downKey_Text = new JTextField(gameKeyList[downKeyCursor]);
@@ -332,6 +333,8 @@ private void setButtonDefaults(JButton button,int buttonProperty,String name){
                writer.write((downKeyCursor)+" ");
                writer.write((rightKeyCursor)+" ");
                writer.write((leftKeyCursor)+" ");
+               settings.crateCRC(pacmanSpeed+ghostSpeed+cursorColor+upKeyCursor+downKeyCursor+rightKeyCursor+leftKeyCursor);
+               writer.write(settings.getCRC()+" ");
                writer.close();
       
             }catch (IOException e) {

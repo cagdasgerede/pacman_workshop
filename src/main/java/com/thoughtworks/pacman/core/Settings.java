@@ -11,6 +11,8 @@ public class Settings {
     private int ghostColorIndex;
     private int[] keyIndex = new int[4];
     private int[] keyEventNumb = new int[4];
+    private int CRC;
+    private int coefficient=17;
     private Scanner scanner;
     private boolean buildCorrect;
     public Settings() {
@@ -18,8 +20,6 @@ public class Settings {
     }
     public void getValuesFromFile(){
             try {
-                if(controlCRC()!=1)
-                    return;
                 scanner = new Scanner(new File("config.txt"));
                 if(scanner==null){
                     buildCorrect=false;
@@ -39,12 +39,24 @@ public class Settings {
                 keyEventNumb[1] = gKeyEvent(keyIndex[1]);
                 keyEventNumb[2] = gKeyEvent(keyIndex[2]);
                 keyEventNumb[3] = gKeyEvent(keyIndex[3]);
+                if(scanner.hasNextInt())
+                    CRC = scanner.nextInt();
                 scanner.close();
-            //  Window win = SwingUtilities.getWindowAncestor(components[0]);
-         //      win.dispose();
+                if(controlCRC()==0) System.out.println("ERROR");;
             }
             catch (IOException e) {
-               e.printStackTrace();  
+                pacmanSpeed = 20;
+                ghostSpeed = 20;
+                pacmanColorIndex = 0;
+                keyIndex[0] = 0;
+                keyIndex[1] = 1;
+                keyIndex[2] = 2;
+                keyIndex[3] = 3;
+                keyEventNumb[0] = gKeyEvent(keyIndex[0]);
+                keyEventNumb[1] = gKeyEvent(keyIndex[1]);
+                keyEventNumb[2] = gKeyEvent(keyIndex[2]);
+                keyEventNumb[3] = gKeyEvent(keyIndex[3]);
+                crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3]);
             }
     }
     public int gKeyEvent(int index){
@@ -70,9 +82,16 @@ public class Settings {
     public boolean buildCorrect() {
         return buildCorrect;
     }
-    public int controlCRC(){
-        return 1;
+    public void crateCRC(int sum){
+        CRC = sum-((sum/coefficient)*coefficient);
+        System.out.println("sum "+sum+" CRC "+CRC);
     }
+    public int controlCRC(){
+        int sum = pacmanSpeed+ghostSpeed+pacmanColorIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3];
+        System.out.println("Sum-CRC "+sum+" "+CRC);
+        if ((sum-CRC)%coefficient==0) return 1;
+        else return 0;
+        }
     public void setGhostColorIndex(int ghostColorIndex) {
         this.ghostColorIndex = ghostColorIndex;
     }
@@ -105,5 +124,8 @@ public class Settings {
     }
     public int getPacmanSpeed() {
         return pacmanSpeed;
+    }
+    public int getCRC() {
+        return CRC;
     }
 }
