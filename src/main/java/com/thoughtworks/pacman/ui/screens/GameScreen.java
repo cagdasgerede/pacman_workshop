@@ -33,7 +33,6 @@ public class GameScreen implements Screen {
 
         game.advance(timeDelta);
         gamePresenter.draw(graphics);
-
         lastFrameAt = currentFrameAt;
     }
 

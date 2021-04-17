@@ -1,6 +1,8 @@
 package com.thoughtworks.pacman.core.maze;
 
 import java.awt.Dimension;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 import com.thoughtworks.pacman.core.Tile;
@@ -13,6 +15,8 @@ public class Maze {
     private final Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
+
+    public int latestScore =  0;
 
     Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;
@@ -35,16 +39,29 @@ public class Maze {
     public Dimension getDimension() {
         return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
-
+    
     public int getScore() {
         ScoreTileVisitor scoreVisitor = new ScoreTileVisitor();
         int totalScore = 0;
         for (Tile tile : tiles.values()) {
             totalScore += tile.visit(scoreVisitor);
         }
+        
+        try {
+            FileWriter fw = new FileWriter("score.txt");
+            if(totalScore!=0){
+                latestScore = totalScore;
+                fw.write(""+totalScore);
+            }
+            fw.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        
+        latestScore = totalScore;
         return totalScore;
     }
-
+    
     public boolean hasDotsLeft() {
         DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
         int dotsLeft = 0;

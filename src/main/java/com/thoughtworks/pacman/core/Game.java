@@ -9,11 +9,12 @@ import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
 public class Game {
-    private final Maze maze;
+    public final Maze maze;
     private final Pacman pacman;
     private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
-
+    public boolean newHighScoreGame=false;
+    public String userName;
     public Game() throws Exception {
         this(MazeBuilder.buildWalledMaze());
     }
@@ -36,6 +37,8 @@ public class Game {
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
+    
+
     public Maze getMaze() {
         return maze;
     }
@@ -52,10 +55,17 @@ public class Game {
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
+    public String getUserName(){
+        return userName;
+    }
+
     public void advance(long timeDeltaInMillis) {
         if (pacman.isDead()) {
             return;
         }
+
+
+        
 
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 

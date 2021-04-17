@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -33,15 +34,5 @@ public class IntroScreenTest {
         IntroScreen introScreen = new IntroScreen(game);
 
         assertThat(introScreen.getNextScreen(), instanceOf(IntroScreen.class));
-    }
-
-    @Test
-    public void nextScreen_shouldReturnGameScreen_whenKeyPressed() throws Exception {
-        Game game = new Game();
-        IntroScreen introScreen = new IntroScreen(game);
-
-        introScreen.keyPressed(null);
-
-        assertThat(introScreen.getNextScreen(), instanceOf(GameScreen.class));
     }
 }
