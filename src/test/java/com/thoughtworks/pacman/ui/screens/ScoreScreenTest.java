@@ -31,7 +31,7 @@ public class ScoreScreenTest {
     @Test
     public void nextScreen_shouldReturnLostScreen_whenKeyNotPressed() throws Exception {
         Game game = new Game();
-        ScoreScreen scoreScreen = new ScoreScreen(game,true);
+        ScoreScreen scoreScreen = new ScoreScreen(game);
 
         assertThat(scoreScreen.getNextScreen(), instanceOf(ScoreScreen.class));
     }

@@ -32,14 +32,7 @@ public class ScoreScreen implements Screen {
         this.dimension = game.getDimension();
         this.game = game;
         this.startGame = false;
-    }
-    public ScoreScreen(Game game, boolean initialize) {
-        this.dimension = game.getDimension();
-        this.game = game;
-        this.startGame = false;
-        if(initialize){
-            initializeList();
-        }
+        initializeList();
     }
 
     public void draw(Graphics2D graphics) {

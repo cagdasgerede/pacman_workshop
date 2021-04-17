@@ -39,7 +39,7 @@ public class IntroScreen implements Screen {
             return new GameScreen();
         }
         else if(scoreListMenu){
-            return new ScoreScreen(game,true);
+            return new ScoreScreen(game);
         }
         return this;
     }

@@ -135,7 +135,6 @@ public class WinScreen implements Screen {
                 for(int i = 0 ; i<scores.size();i++){
                     fw.write(""+names.get(i)+", "+scores.get(i)+"\n");
                 }
-                //fw.write("");
                 fw.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
