@@ -2,8 +2,8 @@ package com.thoughtworks.pacman.ui.screens;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.ui.Screen;
+import com.thoughtworks.pacman.ui.Settings;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -49,7 +49,6 @@ public class GameScreen implements Screen {
     }
     
     public void keyPressed(KeyEvent e){
-        System.out.println(e.getKeyCode()+" "+keyEventIndex[2]);
         if(e.getKeyCode()== keyEventIndex[0])
             game.getPacman().setNextDirection(Direction.UP);
         else if(e.getKeyCode()== keyEventIndex[1])

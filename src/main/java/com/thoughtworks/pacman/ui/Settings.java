@@ -1,8 +1,13 @@
-package com.thoughtworks.pacman.core;
+package com.thoughtworks.pacman.ui;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.awt.event.KeyEvent;
 public class Settings {
     private int pacmanSpeed;
@@ -43,23 +48,48 @@ public class Settings {
                 if(scanner.hasNextInt())
                     CRC = scanner.nextInt();
                 scanner.close();
-                if(controlCRC()==0) System.out.println("ERROR");;
+                if(controlCRC()==0) {
+                    JOptionPane.showMessageDialog(null, "config.txt file was changed externally\nAll settings was changed as default back");
+                    setDefaultSettings();    
+                }
             }
             catch (IOException e) {
-                pacmanSpeed = 20;
-                ghostSpeed = 20;
-                pacmanColorIndex = 0;
-                pacmanShapeIndex = 0;
-                keyIndex[0] = 0;
-                keyIndex[1] = 1;
-                keyIndex[2] = 2;
-                keyIndex[3] = 3;
-                keyEventNumb[0] = gKeyEvent(keyIndex[0]);
-                keyEventNumb[1] = gKeyEvent(keyIndex[1]);
-                keyEventNumb[2] = gKeyEvent(keyIndex[2]);
-                keyEventNumb[3] = gKeyEvent(keyIndex[3]);
-                crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3]);
+                JOptionPane.showMessageDialog(null, "config.txt file was not founded\nAll settings was changed as default back");
+                setDefaultSettings();
             }
+    }
+    public void setDefaultSettings(){
+        pacmanSpeed = 20;
+        ghostSpeed = 20;
+        pacmanColorIndex = 0;
+        pacmanShapeIndex = 0;
+        keyIndex[0] = 0;
+        keyIndex[1] = 1;
+        keyIndex[2] = 2;
+        keyIndex[3] = 3;
+        keyEventNumb[0] = gKeyEvent(keyIndex[0]);
+        keyEventNumb[1] = gKeyEvent(keyIndex[1]);
+        keyEventNumb[2] = gKeyEvent(keyIndex[2]);
+        keyEventNumb[3] = gKeyEvent(keyIndex[3]);
+        saveSettings(pacmanSpeed,ghostSpeed,pacmanColorIndex,pacmanShapeIndex,keyIndex[0],keyIndex[1],keyIndex[2],keyIndex[3]);
+    }
+    public void saveSettings(int pacmanSpeed,int ghostSpeed,int pacmanColorIndex,int pacmanShapeIndex,int upKeyCursor,int downKeyCursor,int rightKeyCursor,int leftKeyCursor){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("config.txt"));
+            writer.write(pacmanSpeed+" ");
+            writer.write(ghostSpeed+" ");
+            writer.write(pacmanColorIndex+" ");
+            writer.write(pacmanShapeIndex+" ");
+            writer.write((upKeyCursor)+" ");
+            writer.write((downKeyCursor)+" ");
+            writer.write((rightKeyCursor)+" ");
+            writer.write((leftKeyCursor)+" ");
+            crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+upKeyCursor+downKeyCursor+rightKeyCursor+leftKeyCursor);
+            writer.write(getCRC()+" ");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public int gKeyEvent(int index){
         switch(index){
@@ -86,11 +116,9 @@ public class Settings {
     }
     public void crateCRC(int sum){
         CRC = sum-((sum/coefficient)*coefficient);
-        System.out.println("sum "+sum+" CRC "+CRC);
     }
     public int controlCRC(){
         int sum = pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3];
-        System.out.println("Sum-CRC "+sum+" "+CRC);
         if ((sum-CRC)%coefficient==0) return 1;
         else return 0;
         }

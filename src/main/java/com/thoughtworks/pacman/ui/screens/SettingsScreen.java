@@ -11,17 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.thoughtworks.pacman.core.Settings;
 import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Screen;
+import com.thoughtworks.pacman.ui.Settings;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class SettingsScreen extends JFrame implements ActionListener{
    private static final Image SETTINGS_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "settingsScreen.png");
@@ -200,7 +197,6 @@ public class SettingsScreen extends JFrame implements ActionListener{
    
    @Override
    public void actionPerformed(ActionEvent ae) {
-      System.out.println("ae "+ae.getActionCommand());
       String command = ae.getActionCommand();
       if(command.equals("pacmanSpeedUp_Button") && pacmanSpeed+10<=100)
          {
@@ -247,26 +243,11 @@ public class SettingsScreen extends JFrame implements ActionListener{
             pacmanShape_Text.setText(pacmanShapeList[pacmanShapeIndex]);
          }
       else if(command.equals("APPLY")){
-         try {
-               BufferedWriter writer = new BufferedWriter(new FileWriter("config.txt"));
-               writer.write(pacmanSpeed+" ");
-               writer.write(ghostSpeed+" ");
-               writer.write(pacmanColorIndex+" ");
-               writer.write(pacmanShapeIndex+" ");
-               writer.write((upKeyCursor)+" ");
-               writer.write((downKeyCursor)+" ");
-               writer.write((rightKeyCursor)+" ");
-               writer.write((leftKeyCursor)+" ");
-               settings.crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+upKeyCursor+downKeyCursor+rightKeyCursor+leftKeyCursor);
-               writer.write(settings.getCRC()+" ");
-               writer.close();
-            
-            }catch (IOException e) {
-               e.printStackTrace();  
-            }
+            settings.saveSettings(pacmanSpeed,ghostSpeed,pacmanColorIndex,pacmanShapeIndex,upKeyCursor,downKeyCursor,rightKeyCursor,leftKeyCursor);      
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
       }
       else if(command.equals("CANCEL")){
-            
+         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
       }
       else{
             do{
