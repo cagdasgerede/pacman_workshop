@@ -57,8 +57,8 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private JButton ghostSpeedDown_Button = new JButton();
    private JButton pacmanColorNext_Button = new JButton();
    private JButton pacmanColorPrevious_Button = new JButton();
-   private JButton ghostColorNext_Button = new JButton();
-   private JButton ghostColorPrevious_Button = new JButton();
+   private JButton pacmanShapeNext_Button = new JButton();
+   private JButton pacmanShapePrevious_Button = new JButton();
    private JButton upKeyNext_Button = new JButton();
    private JButton upKeyPrevious_Button = new JButton();
    private JButton downKeyNext_Button = new JButton();
@@ -70,14 +70,14 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private JButton apply_Button = new JButton("APPLY");
    private JButton cancel_Button = new JButton("CANCEL");
    private JPanel pacmPanel = new JPanel();
-  // private Image pacmanCustom_Image = ImageLoader.loadImage(Screen.class, UP_PNG_PATH);
-  // private Image ghostCustom_Image = ImageLoader.loadImage(Screen.class, UP_PNG_PATH);
+
    private Settings settings;
-   private JTextField pacmanSpeedInfo_Text,ghostSpeedInfo_Text,upKeyInfo_Text,downKeyInfo_Text,rightKeyInfo_Text,leftKeyInfo_Text,pacmanColorInfo_Text,ghostColorInfo_Text;
-   private JTextField pacmanSpeed_Text,ghostSpeed_Text,upKey_Text,downKey_Text,rightKey_Text,leftKey_Text;
+   private JTextField pacmanSpeedInfo_Text,ghostSpeedInfo_Text,upKeyInfo_Text,downKeyInfo_Text,rightKeyInfo_Text,leftKeyInfo_Text,pacmanColorInfo_Text,pacmanShapeInfo_Text;
+   private JTextField pacmanSpeed_Text,ghostSpeed_Text,pacmanShape_Text,upKey_Text,downKey_Text,rightKey_Text,leftKey_Text;
    private Color[] pacmanColorOptions = {Color.yellow,Color.red,Color.blue,Color.green,new Color(255,204,51),new Color(153,153,153),new Color(102,51,0),new Color(102,0,153)};
    private String[] gameKeyList = {"UpArrow","DownArrow","RightArrow","LefttArrow","W","S","A","D","X","C","V","Num8","Num4","Num2","Num6"};
-   private int cursorColor=0,upKeyCursor=0,downKeyCursor=1,rightKeyCursor=2,leftKeyCursor=3;
+   private String[] pacmanShapeList = {"Circle","Square","Triangle","Oval"};
+   private int pacmanShapeIndex=0,pacmanColorIndex=0,upKeyCursor=0,downKeyCursor=1,rightKeyCursor=2,leftKeyCursor=3;
    private int pacmanSpeed=20,ghostSpeed=20;
 
    SettingsScreen() {
@@ -92,7 +92,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
     this.add(pacmanSpeedInfo_Text);
     this.add(ghostSpeedInfo_Text);
     this.add(pacmanColorInfo_Text);
-    this.add(ghostColorInfo_Text);
+    this.add(pacmanShapeInfo_Text);
     this.add(upKeyInfo_Text);
     this.add(downKeyInfo_Text);
     this.add(rightKeyInfo_Text);
@@ -105,8 +105,8 @@ public class SettingsScreen extends JFrame implements ActionListener{
     this.add(ghostSpeedDown_Button);
     this.add(pacmanColorNext_Button);
     this.add(pacmanColorPrevious_Button);
-    this.add(ghostColorNext_Button);
-    this.add(ghostColorPrevious_Button);
+    this.add(pacmanShapeNext_Button);
+    this.add(pacmanShapePrevious_Button);
     this.add(upKeyNext_Button);
     this.add(upKeyPrevious_Button);
     this.add(downKeyNext_Button);
@@ -122,7 +122,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
     pacmanSpeed_Text.setBounds(MARGIN_WIDTH_TEXT+WIDTH_BUTTON,(MARGIN_HEIGHT_SCREEN),WIDTH_BUTTON,HEIGHT_BUTTON);
     ghostSpeed_Text.setBounds(MARGIN_WIDTH_TEXT+WIDTH_BUTTON,(MARGIN_HEIGHT_SCREEN+HEIGHT_LABEL_SPACE),WIDTH_BUTTON,HEIGHT_BUTTON);
     pacmPanel.setBounds(MARGIN_WIDTH_TEXT+(WIDTH_BUTTON-(WIDTH_SPACE/2)),(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*2)),WIDTH_BUTTON,HEIGHT_BUTTON);
-    pacmPanel.setBackground(pacmanColorOptions[cursorColor]);
+    pacmPanel.setBackground(pacmanColorOptions[pacmanColorIndex]);
 
     pacmanSpeed_Text.setEditable(false);
     ghostSpeed_Text.setEditable(false);
@@ -137,40 +137,45 @@ public class SettingsScreen extends JFrame implements ActionListener{
     this.add(ghostSpeed_Text);
     this.add(pacmPanel);
 
-   /*pacmanColor = new ImageIcon("0000000");*/
-   /*ghostColor = new ImageIcon("0000000");*/
-
     upKey_Text = new JTextField(gameKeyList[upKeyCursor]);
     downKey_Text = new JTextField(gameKeyList[downKeyCursor]);
     rightKey_Text = new JTextField(gameKeyList[rightKeyCursor]);
     leftKey_Text = new JTextField(gameKeyList[leftKeyCursor]);
+    pacmanShape_Text = new JTextField(pacmanShapeList[pacmanShapeIndex]);
 
+    pacmanShape_Text.setBounds(MARGIN_WIDTH_TEXT,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*3)),WIDTH_TEXT,HEIGHT_TEXT);
     upKey_Text.setBounds(MARGIN_WIDTH_TEXT,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*4)),WIDTH_TEXT,HEIGHT_TEXT);
     downKey_Text.setBounds(MARGIN_WIDTH_TEXT,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*5)),WIDTH_TEXT,HEIGHT_TEXT);
     rightKey_Text.setBounds(MARGIN_WIDTH_TEXT,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*6)),WIDTH_TEXT,HEIGHT_TEXT);
     leftKey_Text.setBounds(MARGIN_WIDTH_TEXT,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*7)),WIDTH_TEXT,HEIGHT_TEXT);
 
+    pacmanShape_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
     upKey_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
     downKey_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
     rightKey_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
     leftKey_Text.setAlignmentX(TextArea.CENTER_ALIGNMENT);
+    pacmanShape_Text.setBorder(null);
     upKey_Text.setBorder(null);
     downKey_Text.setBorder(null);
     rightKey_Text.setBorder(null);
     leftKey_Text.setBorder(null);
+    pacmanShape_Text.setForeground(Color.WHITE);
     upKey_Text.setForeground(Color.WHITE);
     downKey_Text.setForeground(Color.WHITE);
     rightKey_Text.setForeground(Color.WHITE);
     leftKey_Text.setForeground(Color.WHITE);
+    pacmanShape_Text.setEditable(false);
     upKey_Text.setEditable(false);
     downKey_Text.setEditable(false);
     rightKey_Text.setEditable(false);
     leftKey_Text.setEditable(false);
+    pacmanShape_Text.setOpaque(false);
     upKey_Text.setOpaque(false);
     downKey_Text.setOpaque(false);
     rightKey_Text.setOpaque(false);
     leftKey_Text.setOpaque(false);
 
+    this.add(pacmanShape_Text);
     this.add(upKey_Text);
     this.add(downKey_Text);
     this.add(rightKey_Text);
@@ -218,34 +223,41 @@ public class SettingsScreen extends JFrame implements ActionListener{
             ghostSpeed_Text.setText(ghostSpeed+"");
          }
       else if(command.equals("pacmanColorNext_Button")){
-         if(cursorColor==pacmanColorOptions.length-1)
-            cursorColor=0;
-         else cursorColor++;
-            pacmPanel.setBackground(pacmanColorOptions[cursorColor]);
+         if(pacmanColorIndex==pacmanColorOptions.length-1)
+            pacmanColorIndex=0;
+         else pacmanColorIndex++;
+            pacmPanel.setBackground(pacmanColorOptions[pacmanColorIndex]);
          }
       else if(command.equals("pacmanColorPrevious_Button")){
-         if(cursorColor==0)
-            cursorColor=pacmanColorOptions.length-1;
-         else cursorColor--;
-            pacmPanel.setBackground(pacmanColorOptions[cursorColor]);
+         if(pacmanColorIndex==0)
+            pacmanColorIndex=pacmanColorOptions.length-1;
+         else pacmanColorIndex--;
+            pacmPanel.setBackground(pacmanColorOptions[pacmanColorIndex]);
          }
-      else if(command.equals("ghostColorNext_Button")){
-            //
+      else if(command.equals("pacmanShapeNext_Button")){
+         if(pacmanShapeIndex==pacmanShapeList.length-1)
+            pacmanShapeIndex=0;
+         else pacmanShapeIndex++;
+            pacmanShape_Text.setText(pacmanShapeList[pacmanShapeIndex]);
          }
-      else if(command.equals("ghostColorPrevious_Button")){
-            //
+      else if(command.equals("pacmanShapePrevious_Button")){       
+            if(pacmanShapeIndex==0)
+            pacmanShapeIndex=pacmanShapeList.length-1;
+            else pacmanShapeIndex--;
+            pacmanShape_Text.setText(pacmanShapeList[pacmanShapeIndex]);
          }
       else if(command.equals("APPLY")){
          try {
                BufferedWriter writer = new BufferedWriter(new FileWriter("config.txt"));
                writer.write(pacmanSpeed+" ");
                writer.write(ghostSpeed+" ");
-               writer.write(cursorColor+" ");
+               writer.write(pacmanColorIndex+" ");
+               writer.write(pacmanShapeIndex+" ");
                writer.write((upKeyCursor)+" ");
                writer.write((downKeyCursor)+" ");
                writer.write((rightKeyCursor)+" ");
                writer.write((leftKeyCursor)+" ");
-               settings.crateCRC(pacmanSpeed+ghostSpeed+cursorColor+upKeyCursor+downKeyCursor+rightKeyCursor+leftKeyCursor);
+               settings.crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+upKeyCursor+downKeyCursor+rightKeyCursor+leftKeyCursor);
                writer.write(settings.getCRC()+" ");
                writer.close();
             
@@ -300,7 +312,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
       pacmanSpeedInfo_Text = new JTextField("Pacman Speed");
       ghostSpeedInfo_Text = new JTextField("Ghost Speed");
       pacmanColorInfo_Text = new JTextField("Pacman Color");
-      ghostColorInfo_Text = new JTextField("Ghost Color");
+      pacmanShapeInfo_Text = new JTextField("Pacman Shape");
       upKeyInfo_Text = new JTextField("Up Key");
       downKeyInfo_Text = new JTextField("Down Key");
       rightKeyInfo_Text = new JTextField("Right Key");
@@ -309,7 +321,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
       pacmanSpeedInfo_Text.setBounds(MARGIN_WIDTH_INFOTEXT,MARGIN_HEIGHT_INFOTEXT,WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
       ghostSpeedInfo_Text .setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+HEIGHT_LABEL_SPACE),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
       pacmanColorInfo_Text.setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*2)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
-      ghostColorInfo_Text .setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*3)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
+      pacmanShapeInfo_Text .setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*3)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
       upKeyInfo_Text.setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*4)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
       downKeyInfo_Text.setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*5)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
       rightKeyInfo_Text.setBounds(MARGIN_WIDTH_INFOTEXT,(MARGIN_HEIGHT_INFOTEXT+(HEIGHT_LABEL_SPACE*6)),WIDTH_INFOTEXT,HEIGHT_INFOTEXT);
@@ -318,7 +330,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
       pacmanSpeedInfo_Text.setEditable(false);
       ghostSpeedInfo_Text.setEditable(false);
       pacmanColorInfo_Text.setEditable(false);
-      ghostColorInfo_Text.setEditable(false);
+      pacmanShapeInfo_Text.setEditable(false);
       upKeyInfo_Text.setEditable(false);
       downKeyInfo_Text.setEditable(false);
       rightKeyInfo_Text.setEditable(false);
@@ -327,7 +339,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
       pacmanSpeedInfo_Text.setBorder(null);
       ghostSpeedInfo_Text.setBorder(null);
       pacmanColorInfo_Text.setBorder(null);
-      ghostColorInfo_Text.setBorder(null);
+      pacmanShapeInfo_Text.setBorder(null);
       upKeyInfo_Text.setBorder(null);
       downKeyInfo_Text.setBorder(null);
       rightKeyInfo_Text.setBorder(null);
@@ -339,8 +351,8 @@ public class SettingsScreen extends JFrame implements ActionListener{
       ghostSpeedInfo_Text.setOpaque(false);
       pacmanColorInfo_Text.setForeground(Color.WHITE);
       pacmanColorInfo_Text.setOpaque(false);
-      ghostColorInfo_Text.setForeground(Color.WHITE);
-      ghostColorInfo_Text.setOpaque(false);
+      pacmanShapeInfo_Text.setForeground(Color.WHITE);
+      pacmanShapeInfo_Text.setOpaque(false);
       upKeyInfo_Text.setForeground(Color.WHITE);
       upKeyInfo_Text.setOpaque(false);
       downKeyInfo_Text.setForeground(Color.WHITE);
@@ -352,7 +364,6 @@ public class SettingsScreen extends JFrame implements ActionListener{
    }
 
 private void setButtons() {
-    //String upButtonPNG = this.getClass().getClassLoader().getResource(UP_PNG_PATH).getFile();
     setButtonDefaults(pacmanSpeedUp_Button,0,"pacmanSpeedUp_Button");
     setButtonDefaults(ghostSpeedUp_Button, 0,"ghostSpeedUp_Button");
 
@@ -371,9 +382,9 @@ private void setButtons() {
     cancel_Button.setFocusable(false);
 
     setButtonDefaults(pacmanColorNext_Button, 2,"pacmanColorNext_Button");
-    setButtonDefaults(ghostColorNext_Button, 2,"ghostColorNext_Button");
+    setButtonDefaults(pacmanShapeNext_Button, 2,"pacmanShapeNext_Button");
     setButtonDefaults(pacmanColorPrevious_Button, 3,"pacmanColorPrevious_Button");
-    setButtonDefaults(ghostColorPrevious_Button, 3,"ghostColorPrevious_Button");
+    setButtonDefaults(pacmanShapePrevious_Button, 3,"pacmanShapePrevious_Button");
 
     setButtonDefaults(upKeyNext_Button, 2,"upKeyNext_Button");
     setButtonDefaults(downKeyNext_Button, 2,"downKeyNext_Button");
@@ -388,7 +399,7 @@ private void setButtons() {
     pacmanSpeedUp_Button.setBounds(MARGIN_WIDTH_PREBUTTON, MARGIN_HEIGHT_SCREEN, WIDTH_BUTTON, HEIGHT_BUTTON);
     ghostSpeedUp_Button.setBounds(MARGIN_WIDTH_PREBUTTON, MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE), WIDTH_BUTTON, HEIGHT_BUTTON);
     pacmanColorPrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*2),WIDTH_BUTTON,HEIGHT_BUTTON);
-    ghostColorPrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*3),WIDTH_BUTTON,HEIGHT_BUTTON);
+    pacmanShapePrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*3),WIDTH_BUTTON,HEIGHT_BUTTON);
     upKeyPrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*4),WIDTH_BUTTON,HEIGHT_BUTTON);
     downKeyPrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*5),WIDTH_BUTTON,HEIGHT_BUTTON);
     rightKeyPrevious_Button.setBounds(MARGIN_WIDTH_PREBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*6),WIDTH_BUTTON,HEIGHT_BUTTON);
@@ -397,7 +408,7 @@ private void setButtons() {
     pacmanSpeedDown_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,MARGIN_HEIGHT_SCREEN,WIDTH_BUTTON,HEIGHT_BUTTON);
     ghostSpeedDown_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE),WIDTH_BUTTON,HEIGHT_BUTTON);
     pacmanColorNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*2)),WIDTH_BUTTON,HEIGHT_BUTTON);
-    ghostColorNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*3)),WIDTH_BUTTON,HEIGHT_BUTTON);
+    pacmanShapeNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*3)),WIDTH_BUTTON,HEIGHT_BUTTON);
     upKeyNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*4)),WIDTH_BUTTON,HEIGHT_BUTTON);
     downKeyNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*5)),WIDTH_BUTTON,HEIGHT_BUTTON);
     rightKeyNext_Button.setBounds(MARGIN_WIDTH_NEXTBUTTON,(MARGIN_HEIGHT_SCREEN+(HEIGHT_LABEL_SPACE*6)),WIDTH_BUTTON,HEIGHT_BUTTON);
@@ -412,8 +423,8 @@ private void setButtons() {
     ghostSpeedDown_Button.addActionListener(this);
     pacmanColorNext_Button.addActionListener(this);
     pacmanColorPrevious_Button.addActionListener(this);
-    ghostColorNext_Button.addActionListener(this);
-    ghostColorPrevious_Button.addActionListener(this);
+    pacmanShapeNext_Button.addActionListener(this);
+    pacmanShapePrevious_Button.addActionListener(this);
     upKeyNext_Button.addActionListener(this);
     upKeyPrevious_Button.addActionListener(this);
     downKeyNext_Button.addActionListener(this);
@@ -442,8 +453,9 @@ private void setButtonDefaults(JButton button,int buttonProperty,String name){
 
       public void buildSettings(Settings settings) {
          ghostSpeed = settings.getGhostSpeed();
-         cursorColor = settings.getPacmanColorIndex();
+         pacmanColorIndex = settings.getPacmanColorIndex();
          pacmanSpeed = settings.getPacmanSpeed();
+         pacmanShapeIndex = settings.getPacmanShapeIndex();
          int[] keyIndex = settings.getKeyIndex();
          upKeyCursor = keyIndex[0];
          downKeyCursor = keyIndex[1];

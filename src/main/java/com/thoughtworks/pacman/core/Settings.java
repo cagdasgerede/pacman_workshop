@@ -8,7 +8,7 @@ public class Settings {
     private int pacmanSpeed;
     private int ghostSpeed;
     private int pacmanColorIndex;
-    private int ghostColorIndex;
+    private int pacmanShapeIndex;
     private int[] keyIndex = new int[4];
     private int[] keyEventNumb = new int[4];
     private int CRC;
@@ -31,6 +31,7 @@ public class Settings {
                 pacmanSpeed = scanner.nextInt();
                 ghostSpeed = scanner.nextInt();
                 pacmanColorIndex = scanner.nextInt();
+                pacmanShapeIndex = scanner.nextInt();
                 keyIndex[0] = scanner.nextInt();
                 keyIndex[1] = scanner.nextInt();
                 keyIndex[2] = scanner.nextInt();
@@ -48,6 +49,7 @@ public class Settings {
                 pacmanSpeed = 20;
                 ghostSpeed = 20;
                 pacmanColorIndex = 0;
+                pacmanShapeIndex = 0;
                 keyIndex[0] = 0;
                 keyIndex[1] = 1;
                 keyIndex[2] = 2;
@@ -56,7 +58,7 @@ public class Settings {
                 keyEventNumb[1] = gKeyEvent(keyIndex[1]);
                 keyEventNumb[2] = gKeyEvent(keyIndex[2]);
                 keyEventNumb[3] = gKeyEvent(keyIndex[3]);
-                crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3]);
+                crateCRC(pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3]);
             }
     }
     public int gKeyEvent(int index){
@@ -87,13 +89,13 @@ public class Settings {
         System.out.println("sum "+sum+" CRC "+CRC);
     }
     public int controlCRC(){
-        int sum = pacmanSpeed+ghostSpeed+pacmanColorIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3];
+        int sum = pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3];
         System.out.println("Sum-CRC "+sum+" "+CRC);
         if ((sum-CRC)%coefficient==0) return 1;
         else return 0;
         }
-    public void setGhostColorIndex(int ghostColorIndex) {
-        this.ghostColorIndex = ghostColorIndex;
+    public void setPacmanShapeIndex(int pacmanShapeIndex) {
+        this.pacmanShapeIndex = pacmanShapeIndex;
     }
     public void setGhostSpeed(int ghostSpeed) {
         this.ghostSpeed = ghostSpeed;
@@ -107,8 +109,8 @@ public class Settings {
     public void setPacmanSpeed(int pacmanSpeed) {
         this.pacmanSpeed = pacmanSpeed;
     }
-    public int getGhostColorIndex() {
-        return ghostColorIndex;
+    public int getPacmanShapeIndex() {
+        return pacmanShapeIndex;
     }
     public int getGhostSpeed() {
         return ghostSpeed;
