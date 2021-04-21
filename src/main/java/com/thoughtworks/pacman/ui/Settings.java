@@ -59,7 +59,7 @@ public class Settings {
             }
     }
     public void setDefaultSettings(){
-        pacmanSpeed = 20;
+        pacmanSpeed = 40;
         ghostSpeed = 20;
         pacmanColorIndex = 0;
         pacmanShapeIndex = 0;
