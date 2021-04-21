@@ -74,7 +74,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private Color[] pacmanColorOptions = {Color.yellow,Color.red,Color.blue,Color.green,new Color(255,204,51),new Color(153,153,153),new Color(102,51,0),new Color(102,0,153)};
    private String[] gameKeyList = {"UpArrow","DownArrow","RightArrow","LefttArrow","W","S","A","D","X","C","V","Num8","Num4","Num2","Num6"};
    private String[] pacmanShapeList = {"Circle","Square","Triangle","Oval"};
-   private int pacmanShapeIndex=0,pacmanColorIndex=0,upKeyCursor=0,downKeyCursor=1,rightKeyCursor=2,leftKeyCursor=3;
+   private int pacmanShapeIndex,pacmanColorIndex,upKeyCursor,downKeyCursor,rightKeyCursor,leftKeyCursor;
    private int pacmanSpeed,ghostSpeed;
 
    SettingsScreen() {
