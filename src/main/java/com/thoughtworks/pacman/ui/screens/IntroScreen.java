@@ -13,8 +13,6 @@ public class IntroScreen implements Screen {
     static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "titleScreen.jpg");
     private final Dimension dimension;
     private boolean startGame;
-    private boolean open = false;
-
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
@@ -33,15 +31,18 @@ public class IntroScreen implements Screen {
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_A && !open){        
+        if (e.getKeyCode() == KeyEvent.VK_A){    
                 try {
                     new SettingsScreen();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+                startGame = false;
             }
         else
             startGame = true;
+    }
+    public boolean getStartGame(){
+        return startGame;
     }
 }

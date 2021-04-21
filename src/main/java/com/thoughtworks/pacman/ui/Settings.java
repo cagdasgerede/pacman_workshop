@@ -30,8 +30,6 @@ public class Settings {
                     buildCorrect=false;
                     return;
                 }
-                else
-                    buildCorrect =true;
                     
                 pacmanSpeed = scanner.nextInt();
                 ghostSpeed = scanner.nextInt();
@@ -50,12 +48,14 @@ public class Settings {
                 scanner.close();
                 if(controlCRC()==0) {
                     JOptionPane.showMessageDialog(null, "config.txt file was changed externally\nAll settings was changed as default back");
-                    setDefaultSettings();    
+                    setDefaultSettings();
+                    buildCorrect =true;
                 }
             }
             catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "config.txt file was not founded\nAll settings was changed as default back");
                 setDefaultSettings();
+                buildCorrect =true;
             }
     }
     public void setDefaultSettings(){
@@ -111,17 +111,17 @@ public class Settings {
             }
             return 0;
         }
-    public boolean buildCorrect() {
+    public boolean getBuildCorrect() {
         return buildCorrect;
     }
-    public void crateCRC(int sum){
-        CRC = sum-((sum/coefficient)*coefficient);
+    public int crateCRC(int sum){
+        return CRC = sum-((sum/coefficient)*coefficient);
     }
     public int controlCRC(){
         int sum = pacmanSpeed+ghostSpeed+pacmanColorIndex+pacmanShapeIndex+keyIndex[0]+keyIndex[1]+keyIndex[2]+keyIndex[3];
         if ((sum-CRC)%coefficient==0) return 1;
         else return 0;
-        }
+    }
     public void setPacmanShapeIndex(int pacmanShapeIndex) {
         this.pacmanShapeIndex = pacmanShapeIndex;
     }
@@ -157,5 +157,8 @@ public class Settings {
     }
     public int getCRC() {
         return CRC;
+    }
+    public int getCoefficient() {
+        return coefficient;
     }
 }

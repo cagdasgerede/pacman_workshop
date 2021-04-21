@@ -82,7 +82,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
     setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
     settings = new Settings();
     this.setContentPane(new JLabel(new ImageIcon(SETTINGS_SCREEN_IMAGE)));
-    if(settings.buildCorrect())
+    if(settings.getBuildCorrect())
        buildSettings(settings);
        
     InfoTexts();
@@ -238,8 +238,9 @@ public class SettingsScreen extends JFrame implements ActionListener{
          }
       else if(command.equals("pacmanShapePrevious_Button")){       
             if(pacmanShapeIndex==0)
-            pacmanShapeIndex=pacmanShapeList.length-1;
-            else pacmanShapeIndex--;
+               pacmanShapeIndex=pacmanShapeList.length-1;
+            else 
+               pacmanShapeIndex--;
             pacmanShape_Text.setText(pacmanShapeList[pacmanShapeIndex]);
          }
       else if(command.equals("APPLY")){
