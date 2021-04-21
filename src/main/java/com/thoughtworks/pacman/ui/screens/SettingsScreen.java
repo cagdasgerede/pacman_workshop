@@ -75,7 +75,7 @@ public class SettingsScreen extends JFrame implements ActionListener{
    private String[] gameKeyList = {"UpArrow","DownArrow","RightArrow","LefttArrow","W","S","A","D","X","C","V","Num8","Num4","Num2","Num6"};
    private String[] pacmanShapeList = {"Circle","Square","Triangle","Oval"};
    private int pacmanShapeIndex=0,pacmanColorIndex=0,upKeyCursor=0,downKeyCursor=1,rightKeyCursor=2,leftKeyCursor=3;
-   private int pacmanSpeed=20,ghostSpeed=20;
+   private int pacmanSpeed,ghostSpeed;
 
    SettingsScreen() {
     super("Settings Menu");
