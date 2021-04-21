@@ -49,8 +49,8 @@ public class Settings {
                 if(controlCRC()==0) {
                     JOptionPane.showMessageDialog(null, "config.txt file was changed externally\nAll settings was changed as default back");
                     setDefaultSettings();
-                    buildCorrect =true;
                 }
+                buildCorrect =true;
             }
             catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "config.txt file was not founded\nAll settings was changed as default back");
