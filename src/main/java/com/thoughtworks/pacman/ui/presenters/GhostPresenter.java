@@ -20,7 +20,7 @@ public class GhostPresenter implements Presenter {
     public GhostPresenter(Ghost ghost) {
         this.ghost = ghost;
         this.images = new Image[] { ImageLoader.loadImage(Presenter.class, ghost.getType().getImageOne()),
-                ImageLoader.loadImage(Presenter.class, ghost.getType().getImageTwo()) };
+        ImageLoader.loadImage(Presenter.class, ghost.getType().getImageTwo()) };
     }
 
     public void draw(Graphics2D graphics) {
